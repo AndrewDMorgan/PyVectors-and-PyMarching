@@ -1,6 +1,6 @@
 # Vector-Types-in-Python3-More
 
-This python3 code adds vector types and more to make your code easier and quicker to write.
+This python3 code adds vector types and more to make your code easier and quicker to write. Also, anyone can use this code as long as they give credit where credit is due. Do   from vectors import *   to get the functions and classes in a different python file.
 
 
 The first and in my opinion the best functions/classes are the vector classes containing vec2, vec3, and vec4 classes that have on a basic level store a tuple. The fancy thing about the vector classes is that it overloads the math operators meaning you can do the following:
