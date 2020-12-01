@@ -1,5 +1,5 @@
 import math as Math  # imports the math library to add cos, sin, sqrt, ect...
- 
+
 
 def divide(value1, value2):  # divides and returns 0 on division by zero error
     try:
@@ -7,7 +7,7 @@ def divide(value1, value2):  # divides and returns 0 on division by zero error
     except ZeroDivisionError:
         return 0
 
- 
+
 class vec4:  # this function stores and operates an a tuple/list containing four items (class functions gone over in the vec2 class)
     def __init__(self, x=None, y=None, z=None, w=None):
         if None in [x, y, z, w]:
@@ -138,8 +138,8 @@ class vec4:  # this function stores and operates an a tuple/list containing four
         return 4
     def __getitem__(self, key):
         return self.xyzw[key]
- 
- 
+
+
 class vec3:  # this function stores and operates an a tuple/list containing three items (class functions gone over in the vec2 class)
     def __init__(self, x=None, y=None, z=None):
         if None in [x, y, z]:
@@ -270,8 +270,8 @@ class vec3:  # this function stores and operates an a tuple/list containing thre
         return 3
     def __getitem__(self, key):
         return self.xyz[key]
- 
- 
+
+
 class vec2:  # this function stores and operates an a tuple/list containing two items
     def __init__(self, x=None, y=None):  # initializing the tuple/list
         if None in [x, y]:  # filling in the empty places of the vector
