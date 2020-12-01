@@ -112,10 +112,6 @@ class vec4:  # this function stores and operates an a tuple/list containing four
         return vec4(-self.x, -self.y, -self.z, -self.w)
     def __pos__(self, other):
         return vec4(+self.x, +self.y, +self.z, +self.w)
-    def __float__(self):
-        return vec4(float(self.x), float(self.y), float(self.z), float(self.w))
-    def __int__(self):
-        return vec4(int(self.x), int(self.y), int(self.z), int(self.w))
     def __abs__(self):
         return vec4(abs(self.x), abs(self.y), abs(self.z), abs(self.w))
     def __str__(self):
@@ -135,11 +131,13 @@ class vec4:  # this function stores and operates an a tuple/list containing four
     def length(self):
         return lengthOfList(self.xyzw)
     def floor(self):
-        return vec2(math.floor(self.x), math.floor(self.y), math.floor(self.z), math.floor(self.w))
+        return vec4(math.floor(self.x), math.floor(self.y), math.floor(self.z), math.floor(self.w))
     def fract(self):
         return vec4(math.fract(self.x), math.fract(self.y), math.fract(self.z), math.fract(self.w))
     def __len__(self):
         return 4
+    def __getitem__(self, key):
+        return self.xyzw[key]
  
  
 class vec3:  # this function stores and operates an a tuple/list containing three items (class functions gone over in the vec2 class)
@@ -241,10 +239,6 @@ class vec3:  # this function stores and operates an a tuple/list containing thre
         return vec3(-self.x, -self.y, -self.z)
     def __pos__(self, other):
         return vec3(+self.x, +self.y, +self.z)
-    def __float__(self):
-        return vec3(float(self.x), float(self.y), float(self.z))
-    def __int__(self):
-        return vec3(int(self.x), int(self.y), int(self.z))
     def __abs__(self):
         return vec3(abs(self.x), abs(self.y), abs(self.z))
     def __str__(self):
@@ -269,11 +263,13 @@ class vec3:  # this function stores and operates an a tuple/list containing thre
     def length(self):
         return lengthOfList(self.xyz)
     def floor(self):
-        return vec2(math.floor(self.x), math.floor(self.y), math.floor(self.z))
+        return vec3(math.floor(self.x), math.floor(self.y), math.floor(self.z))
     def fract(self):
         return vec3(math.fract(self.x), math.fract(self.y), math.fract(self.z))
     def __len__(self):
         return 3
+    def __getitem__(self, key):
+        return self.xyz[key]
  
  
 class vec2:  # this function stores and operates an a tuple/list containing two items
@@ -371,10 +367,6 @@ class vec2:  # this function stores and operates an a tuple/list containing two 
         return vec2(-self.x, -self.y)
     def __pos__(self, other):  # makes the vector positive when you use +vector
         return vec2(+self.x, +self.y)
-    def __float__(self):  # returns the float of the vector when you use float()
-        return vec2(float(self.x), float(self.y))
-    def __int__(self):  # returns the integer of the vector when you use int()
-        return vec2(int(self.x), int(self.y))
     def __abs__(self):  # returns the absolute value of the vector when you use abs()
         return vec2(abs(self.x), abs(self.y))
     def __str__(self):  # this function makes it return the position as a string when printing (using the print("text") in python) the vector
@@ -399,6 +391,20 @@ class vec2:  # this function stores and operates an a tuple/list containing two 
         return vec2(math.fract(self.x), math.fract(self.y))
     def __len__(self):  # returns the length of the vector when you use the len() function
         return 2
+    def __getitem__(self, key):
+        return self.xy[key]
+
+
+def getPos(vector, indexes):
+    new_list = []
+    for i in indexes:
+        new_list.append(vector[i])
+    
+    return new_list
+
+
+def Int(vector):
+    return floor(vector)
 
 
 def clamp(vector, min_, max_):
@@ -527,5 +533,4 @@ class march:
         min_dist = min(dist_to_objects)
         col = object_colors[dist_to_objects.index(min_dist)]
         return vec2(min_dist, col)
-
 
