@@ -1,4 +1,4 @@
-# Vector-Types-in-Python3-More
+# Vector Types in Python3 + More
 
 This python3 code adds vector types and more to make your code easier and quicker to write. Also, anyone can use this code as long as they give credit where credit is due. Do   from vectors import *   to get the functions and classes in a different python file.
 
