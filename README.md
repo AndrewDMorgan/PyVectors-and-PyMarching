@@ -16,9 +16,9 @@ To import and use this package, you want to do the following:
 
 The functions are as following with their descriptions:
 
-# *vec2*
+> *vec2*
 Stores an x and y position
-# *vec3*
+> *vec3*
 Stores an x, y and z position
 # *vec4*
 Stores an x, y, z and w position
