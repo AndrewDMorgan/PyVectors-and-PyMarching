@@ -65,7 +65,7 @@ normalizes a list
 > returns the floor of a number
 > ## *sqrt*
 > returns the square root of a number
-> ## *dists*
+## *dists*
 > ## *distToCircularPoint*
 > returns the distance to a circle/sphere/hypersphere
 > ## *distToPoint*
