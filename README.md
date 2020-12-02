@@ -16,57 +16,57 @@ To import and use this package, you want to do the following:
 
 The functions are as following with their descriptions:
 
-> *vec2*
+## *vec2*
 Stores an x and y position
-> *vec3*
+## *vec3*
 Stores an x, y and z position
-# *vec4*
+## *vec4*
 Stores an x, y, z and w position
-# *cos*
+## *cos*
 returns the cosine of a vector
-# *sin*
+## *sin*
 returns the sin of a vector
-# *tan*
+## *tan*
 returns the tangent of a vector
-# *clamp*
+## *clamp*
 clamps a vector between a minimum and maximum
-# *normalize*
+## *normalize*
 normalizes a vector
-# *mix*
+## *mix*
 mixes two vectors based on a float
-# *Int*
+## *Int*
 makes the numebrs of a vector whole
-# *floor*
+## *floor*
 returns the floor of a vector
-# *fract*
+## *fract*
 returns the decimal value of a vector
-# *dot*
+## *dot*
 returns the dot product of a vector
-# *length*
+## *length*
 returns the length/distance of a vector
-# *lengthOfList*
+## *lengthOfList*
 returns the length/dist of a list
-# *normalizeList*
+## *normalizeList*
 normalizes a list
-# *math*
-    # *cos*
-    returns te cosine of a number
-    # *sin*
-    returns the sin of a number
-    # *tan*
-    returns the tangent of a number
-    # *mix*
-    mixes two numbers based on a float
-    # *clamp*
-    clamps a number between a minimum and maximum
-    # *fract*
-    returns the decimal value of number
-    # *floor*
-    returns the floor of a number
-    # *sqrt*
-    returns the square root of a number
-> *dists*
-    # *distToCircularPoint*
-    returns the distance to a circle/sphere/hypersphere
-    # *distToPoint*
-    returns the distance to a point
+## *math*
+> ## *cos*
+> returns te cosine of a number
+> ## *sin*
+> returns the sin of a number
+> ## *tan*
+> returns the tangent of a number
+> ## *mix*
+> mixes two numbers based on a float
+> ## *clamp*
+> clamps a number between a minimum and maximum
+> ## *fract*
+> returns the decimal value of number
+> ## *floor*
+> returns the floor of a number
+> ## *sqrt*
+> returns the square root of a number
+> ## *dists*
+> ## *distToCircularPoint*
+> returns the distance to a circle/sphere/hypersphere
+> ## *distToPoint*
+> returns the distance to a point
