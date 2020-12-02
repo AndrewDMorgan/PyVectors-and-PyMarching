@@ -14,7 +14,7 @@ To import and use this package, you want to do the following:
 
     from PyVectors import *
 
-The functions are as following with their descriptions:
+The functions and classes are as following with their descriptions:
 
  ## *vec2*
  Stores an x and y position. Takes an input of x or x and y
@@ -48,7 +48,7 @@ The functions are as following with their descriptions:
  returns the length/dist of a list. Takes an input of a list
  ## *normalizeList*
  normalizes a list. Takes an input of a list
- ## *math*
+ ## *math.*
    > ## *cos*
    > returns te cosine of a number. Takes an input of a number
    > ## *sin*
@@ -65,7 +65,7 @@ The functions are as following with their descriptions:
    > returns the floor of a number. Takes an input of a number
    > ## *sqrt*
    > returns the square root of a number. Takes an input of a number
- ## *dists*
+ ## *dists.*
    > ## *distToCircularPoint*
    > returns the distance to a circle/sphere/hypersphere. Takes an input of two vectors and a radius
    > ## *distToPoint*
