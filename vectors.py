@@ -396,7 +396,7 @@ class vec2:  # this function stores and operates an a tuple/list containing two 
         return self.xy[key]
 
 
-class Vec4:  # this function stores and operates an a tuple/list containing four items (class functions gone over in the Vec2 class)
+class Vec4:  # this class dosent use the smart fill in making it slightly faster
     def __init__(self, x, y, z, w):
         self.x = x
         self.y = y
@@ -516,7 +516,7 @@ class Vec4:  # this function stores and operates an a tuple/list containing four
         return self.xyzw[key]
 
 
-class Vec3:  # this function stores and operates an a tuple/list containing three items (class functions gone over in the Vec2 class)
+class Vec3:  # this class dosent use the smart fill in making it slightly faster
     def __init__(self, x, y, z):
         self.x = x
         self.y = y
@@ -640,9 +640,8 @@ class Vec3:  # this function stores and operates an a tuple/list containing thre
         return self.xyz[key]
 
 
-class Vec2:  # this function stores and operates an a tuple/list containing two items
-    def __init__(self, x, y):  # initializing the tuple/list
-        # defining the values of the Vector
+class Vec2:  # this class dosent use the smart fill in making it slightly faster
+    def __init__(self, x, y):
         self.x = x
         self.y = y
         self.z = 0
@@ -652,107 +651,107 @@ class Vec2:  # this function stores and operates an a tuple/list containing two 
         self.r = x
         self.g = y
         self.rg = [x, y]
-    def __add__(self, other):  # adding two list like Vector1 + Vector2
+    def __add__(self, other):
         return Vec2(self.x + other.x, self.y + other.y)
-    def __sub__(self, other):  # subtracting two Vectors like Vector1 - Vector2
+    def __sub__(self, other):
         return Vec2(self.x - other.x, self.y - other.y)
-    def __mul__(self, other):  # multiplying two Vectors like Vector1 * Vector2
+    def __mul__(self, other):
         return Vec2(self.x * other.x, self.y * other.y)
-    def __truediv__(self, other):  # divides two Vectors like Vector1 / Vector2
+    def __truediv__(self, other):
         return Vec2(divide(self.x, other.x), divide(self.y, other.y))
-    def __floordiv__(self, other):  # divides two Vectors and returns the int of the division like Vector1 // Vector2
+    def __floordiv__(self, other): Vector1 // Vector2
         return Vec2(self.x//other.x, self.y//other.y)
-    def __mod__(self, other):  # gets the mod of two Vectors like Vector1 % Vector2
+    def __mod__(self, other):
         return Vec2(self.x%other.x, self.y%other.y)
-    def __pow__(self, other):  # gets the power of two Vectors like Vector1 ** Vector2
+    def __pow__(self, other):
         return Vec2(self.x**other.x, self.y**other.y)
-    def __rshift__(self, other):  # bit shifts to the right like Vector1 >> Vector2
+    def __rshift__(self, other):
         return Vec2(self.x>>other.x, self.y>>other.y)
-    def __lshift__(self, other):  # bit shifts to the left like Vector1 << Vector2
+    def __lshift__(self, other):
         return Vec2(self.x<<other.x, self.y<<other.y)
-    def __lt__(self, other):  # compares two Vectors magnitudes/dot products like Vector1 < Vector2
+    def __lt__(self, other):
         dot1 = (self.x * self.x) + (self.y * self.y)
         dot2 = (other.x * other.x) + (other.y * other.y)
         if dot1 < dot2:
             return True
         else:
             return False
-    def __gt__(self, other):  # compares two Vectors magnitudes/dot products like Vector1 > Vector2
+    def __gt__(self, other):
         dot1 = (self.x * self.x) + (self.y * self.y)
         dot2 = (other.x * other.x) + (other.y * other.y)
         if dot1 > dot2:
             return True
         else:
             return False
-    def __le__(self, other):  # compares two Vectors magnitudes/dot products like Vector1 <= Vector2
+    def __le__(self, other):
         dot1 = (self.x * self.x) + (self.y * self.y)
         dot2 = (other.x * other.x) + (other.y * other.y)
         if dot1 <= dot2:
             return True
         else:
             return False
-    def __ge__(self, other):  # compares two Vectors magnitudes/dot products like Vector1 >= Vector2
+    def __ge__(self, other):
         dot1 = (self.x * self.x) + (self.y * self.y)
         dot2 = (other.x * other.x) + (other.y * other.y)
         if dot1 >= dot2:
             return True
         else:
             return False
-    def __eq__(self, other):  # checks if two Vectors are equal like Vector1 == Vector2
+    def __eq__(self, other):
         if self.x == other.x and self.y == other.y:
             return True
         else:
             return False
     def __ne__(self, other):
-        if self.x != other.x and self.y != other.y:  # checks if the Vectors are not equal like Vector1 != Vector2
+        if self.x != other.x and self.y != other.y:
             return True
         else:
             return False
-    def __isub__(self, other):  # subtracts a Vector from another Vector by using Vector1 -= Vector2
+    def __isub__(self, other):
         return Vec2(self.x - other.x, self.y - other.y)
-    def __iadd__(self, other):  # adds two Vectors by using Vector1 += Vector2
+    def __iadd__(self, other):
         return Vec2(self.x + other.x, self.y + other.y)
-    def __imult__(self, other):  # multiples the Vector by another Vector by putting Vector1 *= Vector2
+    def __imult__(self, other):
         return Vec2(self.x * other.x, self.y * other.y)
-    def __idiv__(self, other):  # returns the Vector divided by another Vector by puting Vector1 /= Vector2
+    def __idiv__(self, other):
         return Vec2(divide(self.x, other.x), divide(self.y, other.y))
-    def __ifloordiv__(self, other):  # gets the int of the divided product by using Vector1 //= Vector2
+    def __ifloordiv__(self, other):
         return Vec2(self.x//other.x, self.y//other.y)
-    def __imod__(self, other):  # gets the mod of the Vector and another Vector using Vector1 %= Vector2
+    def __imod__(self, other):
         return Vec2(self.x%other.x, self.y%other.y)
-    def __ipow__(self, other):  # puts the Vector to the power of another Vector using Vector1 **= Vector2
+    def __ipow__(self, other):
         return Vec2(self.x**other.x, self.y**other.y)
-    def __irshift__(self, other):  # bit shifts to the right by using >>=
+    def __irshift__(self, other):
         return Vec2(self.x >> other.x, self.y >> other.y)
-    def __ilshift__(self, other):  # bit shifts to the left by using <<=
+    def __ilshift__(self, other):
         return Vec2(self.x << other.x, self.y << other.y)
-    def __neg__(self):  # makes the Vector negative when you use -Vector
+    def __neg__(self):
         return Vec2(-self.x, -self.y)
-    def __pos__(self, other):  # makes the Vector positive when you use +Vector
+    def __pos__(self, other):
         return Vec2(+self.x, +self.y)
-    def __abs__(self):  # returns the absolute value of the Vector when you use abs()
+    def __abs__(self):
         return Vec2(abs(self.x), abs(self.y))
-    def __str__(self):  # this function makes it return the position as a string when printing (using the print("text") in python) the Vector
+    def __str__(self):
         return 'Vec2(' + str(self.x) + ', ' + str(self.y) + ')'
-    def mix(self, other, percentage):  # mixes the Vector with another Vector based on a percentage
+    def mix(self, other, percentage):
         return Vec2(math.mix(self.x, other.x, percentage), math.mix(self.y, other.y, percentage))
-    def clamp(self, min_, max_):  # clamps the Vector
+    def clamp(self, min_, max_):
         return Vec2(math.clamp(self.x, min_, max_), math.clamp(self.y, min_, max_))
-    def sqrt(self):  # returns the square root of the Vector
+    def sqrt(self):
         return Vec2(math.sqrt(self.x), math.sqrt(self.y))
-    def tan(self):  # returns the tangent of the Vector
+    def tan(self):
         return Vec2(math.tan(self.x), math.tan(self.y))
-    def sin(self):  # returns the sign of the Vector
+    def sin(self):
         return Vec2(math.sin(self.x), math.sin(self.y))
-    def cos(self):  # returns the cosine of the Vector
+    def cos(self):
         return Vec2(math.cos(self.x), math.cos(self.y))
-    def length(self):  # gets the length of the Vector (length(Vector) also works)
+    def length(self):
         return lengthOfList(self.xy)
-    def floor(self):  # gets the floor of the Vector
+    def floor(self):
         return Vec2(math.floor(self.x), math.floor(self.y))
-    def fract(self):  # gets the decimal value of the number
+    def fract(self):
         return Vec2(math.fract(self.x), math.fract(self.y))
-    def __len__(self):  # returns the length of the Vector when you use the len() function
+    def __len__(self):
         return 2
     def __getitem__(self, key):
         return self.xy[key]
