@@ -824,10 +824,7 @@ class math:
     def clamp(val, min_, max_):  # sets the max and min of a number
         return min(max(val, min_), max_)
     def sqrt(value):  # square root
-        try:
-            return Math.sqrt(value)
-        except ValueError:
-            return value
+        return Math.sqrt(value)
 
 
 def lengthOfList(poses):  # gets the distance of the imputed values (using the pythagorean theorem)
