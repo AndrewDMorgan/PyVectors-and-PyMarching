@@ -1,14 +1,72 @@
 # Vector Types in Python3 + More
 
-This python3 code adds vector types and more to make your code easier and quicker to write. Also, anyone can use this code as long as they give credit where credit is due. Do   from vectors import *   to get the functions and classes in a different python file.
+The first package, PyVectors allows for vec2, vec3 and vec4 types in python3. It also overloads the math operators to allow easy math show as the following:
 
+    vector1,vector2,vector3 = vec3(1, 3, 5),vec3(2, 8, 3),vec3(1, 5, 3)
+    vector1 += vector2 / vector3
 
-The first and in my opinion the best functions/classes are the vector classes containing vec2, vec3, and vec4 classes that have on a basic level store a tuple. The fancy thing about the vector classes is that it overloads the math operators meaning you can do the following:
+Instead of:
 
-    Vector1 += vector2 / vector3
-
-This makes writing 2D an 3D programs easier as otherwise you would have to do the following:
-
+    vector1,vector2,vector3 = [1, 3, 5],[2, 8, 3],[1, 5, 3]
     vector1 = [vector1[0] + (vector2[0] / vector3[0]), vector1[1] + (vector2[1] / vector3[1]), vector1[2] + (vector2[2] / vector3[2])]
 
-Now that we went over the bulk of the program lets go over some of the rest of it. For starters, it also has a few functions such as cos, sin, normalize, mix, clamp, ect... for vector types. All of those functions except normalize also exsist in the math class but for none vector types which you call with math.function. The final two classes are march and object and work together. These two function allow you to cast a ray using ray marching which is just a faster way of ray tracing. To do that you need to do march.ray(ray_direction, ray_orgin) and that casts a ray. The ray_direction and ray_orgin virables do have to be vector types. The object class adds objects to the scene. It currently only has two shapes but that will be changing. Those two functions are addSphere(pos, r, color) and addInfFlatPlain(height, color).
+To import and use this package, you want to do the following:
+
+    from PyVectors import *
+
+The functions are as following with their descriptions:
+
+> *vec2*
+> Stores an x and y position
+> *vec3*
+> Stores an x, y and z position
+> *vec4*
+> Stores an x, y, z and w position
+> *cos*
+returns the cosine of a vector
+> *sin*
+returns the sin of a vector
+> *tan*
+returns the tangent of a vector
+> *clamp*
+clamps a vector between a minimum and maximum
+> *normalize*
+normalizes a vector
+> *mix*
+mixes two vectors based on a float
+> *Int*
+makes the numebrs of a vector whole
+> *floor*
+returns the floor of a vector
+> *fract*
+returns the decimal value of a vector
+> *dot*
+returns the dot product of a vector
+> *length*
+returns the length/distance of a vector
+> *lengthOfList*
+returns the length/dist of a list
+> *normalizeList*
+normalizes a list
+> *math*
+    > *cos*
+    > returns te cosine of a number
+    > *sin*
+    > returns the sin of a number
+    > *tan*
+    > returns the tangent of a number
+    > *mix*
+    > mixes two numbers based on a float
+    > *clamp*
+    > clamps a number between a minimum and maximum
+    > *fract*
+    > returns the decimal value of number
+    > *floor*
+    > returns the floor of a number
+    > *sqrt*
+    > returns the square root of a number
+> *dists*
+    > *distToCircularPoint*
+    > returns the distance to a circle/sphere/hypersphere
+    > *distToPoint*
+    > returns the distance to a point
