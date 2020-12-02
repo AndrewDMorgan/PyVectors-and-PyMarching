@@ -19,15 +19,19 @@ The functions are as following with their descriptions:
 ## *vec2*
 Stores an x and y position
 Takes an input of x or x and y
+
 ## *vec3*
 Stores an x, y and z position
 takes an inout of x or x, y and z
+
 ## *vec4*
 Stores an x, y, z and w position
 takes an input of x or x and y or x, y, z, and w
+
 ## *cos*
 returns the cosine of a vector
 takes an input of a vector
+
 ## *sin*
 returns the sin of a vector
 takes an input of a vector
