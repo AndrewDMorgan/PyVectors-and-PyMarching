@@ -73,7 +73,7 @@ The functions and classes are as following with their descriptions:
 
 More will be coming to this package even possibly a vec5 type. I'm also working on making it as quick and easy to write and complie/run. For more information, go to [repl.it](https://repl.it/talk/share/Vector-Types-in-Python3/83032) to see an example of PyVectors in use and how to use it.
 
-**_______________________________________________________________________________________________________________________________________________________________**
+**_____________________________________________________________________________________________________________**
 
 The second package is PyMarching. PyMarching is a sub package of PyVectors meaning you need PyVectors to run PyMarching. PyMarching is a basic ray marcher that allows you to cast a ray and return information on the collition. It currently only allows for flat infinite planes and sphere but more shapes are being added. It also is very basic but is going to be improved to be a much more advanced ray marcher. To import it you want to do the following:
 
