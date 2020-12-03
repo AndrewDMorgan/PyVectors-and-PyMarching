@@ -659,7 +659,7 @@ class Vec2:  # this class dosent use the smart fill in making it slightly faster
         return Vec2(self.x * other.x, self.y * other.y)
     def __truediv__(self, other):
         return Vec2(divide(self.x, other.x), divide(self.y, other.y))
-    def __floordiv__(self, other): Vector1 // Vector2
+    def __floordiv__(self, other):
         return Vec2(self.x//other.x, self.y//other.y)
     def __mod__(self, other):
         return Vec2(self.x%other.x, self.y%other.y)
