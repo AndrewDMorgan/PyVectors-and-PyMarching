@@ -1,6 +1,7 @@
 import math as Math  # imports the math library to add cos, sin, sqrt, ect...
+import random
 
-small_num = 0.00000000000000001
+small_num = 0.00000000000000001  # an incredibly small number
 
 
 def divide(value1, value2):  # divides and avoids divition by zero errors
@@ -30,10 +31,16 @@ class vec4:  # this function stores and operates an a tuple/list containing four
         self.xyz = [x, y, z]
         self.xyzw = [x, y, z, w]
         
+        self.yz = [y, z]
+        self.xy = [x, y]
+        self.xz = [x, z]
+        
         self.r = x
         self.g = y
         self.b = z
+        self.a = w
         self.rgb = [x, y, z]
+        self.rgba = [x, y, z, w]
     def __add__(self, other):
         return Vec4(self.x + other.x, self.y + other.y, self.z + other.z, self.w + other.w)
     def __sub__(self, other):
@@ -161,6 +168,10 @@ class vec3:  # this function stores and operates an a tuple/list containing thre
         self.w = 0
         self.xy = [x, y]
         self.xyz = [x, y, z]
+        
+        self.yz = [y, z]
+        self.xy = [x, y]
+        self.xz = [x, z]
         
         self.r = x
         self.g = y
@@ -418,10 +429,16 @@ class Vec4:  # this class dosent use the smart fill in making it slightly faster
         self.xyz = [x, y, z]
         self.xyzw = [x, y, z, w]
         
+        self.yz = [y, z]
+        self.xy = [x, y]
+        self.xz = [x, z]
+        
         self.r = x
         self.g = y
         self.b = z
+        self.a = w
         self.rgb = [x, y, z]
+        self.rgba = [x, y, z, w]
     def __add__(self, other):
         return Vec4(self.x + other.x, self.y + other.y, self.z + other.z, self.w + other.w)
     def __sub__(self, other):
@@ -540,6 +557,10 @@ class Vec3:  # this class dosent use the smart fill in making it slightly faster
         self.w = 0
         self.xy = [x, y]
         self.xyz = [x, y, z]
+        
+        self.yz = [y, z]
+        self.xy = [x, y]
+        self.xz = [x, z]
         
         self.r = x
         self.g = y
@@ -848,7 +869,7 @@ class math:
         return min(max(val, min_), max_)
     def sqrt(value):  # square root
         return Math.sqrt(value)
-    def map2D(list, fromMin, fromMax, toMax):  # add a toMin
+    def map2D(list, fromMin, fromMax, toMax):  # add a toMin     maps a range of numbers to a new range of numbers
         min_height = fromMin
         max_height = fromMax - min_height
         scaler = (toMax / max_height)
@@ -857,17 +878,7 @@ class math:
                 list[x][y] -= min_height
                 list[x][y] *= scaler
         return list
-    def minOf2D(list):
-        mins = []
-        for x in list:
-            mins.append(min(x))
-        return min(mins)
-    def maxOf2D(list):
-        maxs = []
-        for x in list:
-            maxs.append(max(x))
-        return max(maxs)
-    def smooth(heights, smoothing = 100):
+    def smooth(heights, smoothing = 100):  # smooths a list of numbers making them more uniform/reducing spikes in numbers
         for s in range(smoothing):
             for i in range(len(heights)):
                 if i not in [0, len(heights) - 1]:
@@ -875,7 +886,9 @@ class math:
                     height3 = heights[i + 1]
                     heights[i] = (heights[i] * 0.1) + (height1 * 0.45) + (height3 * 0.45)
         return heights
-    def interpalate3(h, x, list):
+    def interpalate2(h, x, points):  # interpolates linearly between 2 points (use the math.smooth function for further smoothing)
+        return ((list[1].y - list[0].y) / h) * x
+    def interpalate3(h, x, list):  # interpolates smoothly between 3 points (use the math.smooth function to fixs small glitches)
         index2 = int(x / h)
         index1 = index2 - 1
         index3 = index2 + 1
@@ -895,7 +908,7 @@ class math:
         height_out = a0 + a1 * (x - x2) + a2 * (x - x2) ** 2
         
         return height_out
-    def interpalate5(h, x, list):
+    def interpalate5(h, x, list):  # interpolates smoothly between 5 points (use the math.smooth function to fix glitches)
         middle_index = int(x / h)  #int((x / (h * 5)) * 5)
         index1 = middle_index - 2
         index2 = middle_index - 1
@@ -923,7 +936,7 @@ class math:
         height = a0 + a1 * (x - x3) + a2 * (x - x3) ** 2 + a3 * (x - x3) ** 3
         
         return height
-    def smoothstep(x, p1, p2):
+    def smoothstep(x, p1, p2):  # a function to smoothly step
         t = min(max((x - p1) / (p2 - p1), 0), 1)
         return t * t * (3 - 2 * t)
     def lengthOfList(poses):  # gets the distance of the imputed values (using the pythagorean theorem)
@@ -937,54 +950,65 @@ class math:
         for old_value in values:
             new_values.append(divide(old_value, mag))  # changes the values by the magnitude
         return new_values
-    def spline1D(noise, x, h):
+    def spline1D(noise, x, h):  # smoothly interpolates at a point between other points on a 1D list
         nx = x / h
-        p1 = int(nx)
+        p1 = math.floor(nx)
         p2 = p1 + 1
-        p3 = p1 + 2
+        p3 = p2 + 1
         p0 = p1 - 1
+        
         t = nx - p1
         tt = t * t
         ttt = tt * t
+        ttt3 = ttt * 3
+        
         q1 = -ttt + 2*tt - t
-        q2 = 3*ttt - 5*tt + 2
-        q3 = -3*ttt + 4*tt + t
+        q2 = ttt3 - 5*tt + 2
+        q3 = -ttt3 + 4*tt + t
         q4 = ttt - tt
         ty = 0.5 * (noise[p0] * q1 + noise[p1] * q2 + noise[p2] * q3 + noise[p3] * q4)
         return ty
-    def spline2D(noise, x, y, h):
+    def spline2D(noise, x, y, h):  # smoothly interpolates at a point between other points on a 2D list
         nx = x / h
-        i = int(nx)
+        i = math.floor(nx)
         ty1 = math.spline1D(noise[i - 1], y, h)
         ty2 = math.spline1D(noise[i    ], y, h)
         ty3 = math.spline1D(noise[i + 1], y, h)
         ty4 = math.spline1D(noise[i + 2], y, h)
         return math.spline1D([ty1, ty2, ty3, ty4], (nx - i) * h + h, h)
-    def spline3D(noise, x, y, z, h):
+    def spline3D(noise, x, y, z, h):  # smoothly interpolates at a point between other points on a 3D list
         nx = x / h
-        i = int(nx)
+        i = math.floor(nx)
         ty1 = math.spline2D(noise[i - 1], y, z, h)
         ty2 = math.spline2D(noise[i    ], y, z, h)
         ty3 = math.spline2D(noise[i + 1], y, z, h)
         ty4 = math.spline2D(noise[i + 2], y, z, h)
         return math.spline1D([ty1, ty2, ty3, ty4], (nx - i) * h + h, h)
+    def spline4D(noise, x, y, z, w, h):  # this is untested but should work and smoothly interpolates at a point between other points on a 4D list
+        nx = x / h
+        i = math.floor(nx)
+        ty1 = math.spline3D(noise[i - 1], y, z, w, h)
+        ty2 = math.spline3D(noise[i    ], y, z, w, h)
+        ty3 = math.spline3D(noise[i + 1], y, z, w, h)
+        ty4 = math.spline3D(noise[i + 2], y, z, w, h)
+        return math.spline1D([ty1, ty2, ty3, ty4], (nx - i) * h + h, h)
 
 
-class dists:
+class dists:  # multipl distance functions for different shapes
     def distToCircularPoint(pos, center, r):  # gets the distance to a sphere/circle/hypershpere from a point (negitive when in the circle)
         return length(pos - center) - r
     def distToPoint(pos, point_pos):  # gets the distance to a point from a point
         return length(pos - point_pos)
 
 
-class colorGradient:
+class colorGradient:  # improve
     def __init__(self):
         self.grades = []
         self.grade_points = []
     def addPoint(self, point, color):
         self.grades.append(color)
         self.grade_points.append(point)
-    def gradeAt(self, point):  # imporve this so the colors dont hve a harsh cutoff
+    def gradeAt(self, point):
         closest1 = 10000000
         closest2 = 10000000
         index1 = -1
@@ -1007,11 +1031,181 @@ class colorGradient:
         return mix(self.grades[index2], self.grades[index1], percent)
 
 
-class noise:
+class noise:  # contains perlin noise functions that take in a list of random numbers thats the same dimention as the function, than the x, y, z, and w (only put the one that belong there for the demention of the function) and finaly the distance between points
     def perlin1D(randNoise, h, x):
         return math.spline(randNoise, x, h)
     def perlin2D(randNoise, h, x, y):  # add this to PyVectors (change to be 3d)
         return math.spline2D(randNoise, x, y, h)
     def perlin3D(randNoise, h, x, y, z):
         return math.spline3D(randNoise, x, y, z, h)
+    def perlin4D(randNoise, h, x, y, z, w):
+        return math.spline4D(randNoise, x, y, z, w, h)
+
+
+def array(size, type, number):  # atomticaly fills in and array with numbers, the types are as following with the next input in brackets: constant (number), random int ([min number, max number]), random float ([min number, max number]), linear ([y intercept, slope])   the demention of the array is determind by the len of size which can be a list or vector type.
+    dem = len(size)
+    if dem == 1:
+        if type == 'constant':
+            list = []
+            for x in range(size[0]):
+                list.append(number)
+            return list
+        elif type == 'random int':
+            list = []
+            for x in range(size[0]):
+                list.append(random.randint(number[0], number[1]))
+            return list
+        elif type == 'random float':
+            list = []
+            for x in range(size[0]):
+                list.append(random.uniform(number[0], number[1]))
+            return list
+        elif type == 'linear':
+            list = []
+            for x in range(size[0]):
+                list.append(number[1] * x + number[0])
+            return list
+        else:
+            raise TypeError("Invalid Fill Type")
+    elif dem == 2:
+        if type == 'constant':
+            list = []
+            for x in range(size[0]):
+                layer = []
+                for y in range(size[1]):
+                    layer.append(number)
+                list.append(layer)
+            return list
+        elif type == 'random int':
+            list = []
+            for x in range(size[0]):
+                layer = []
+                for y in range(size[1]):
+                    layer.append(random.randint(number[0], number[1]))
+                list.append(layer)
+            return list
+        elif type == 'random float':
+            list = []
+            for x in range(size[0]):
+                layer = []
+                for y in range(size[1]):
+                    layer.append(random.uniform(number[0], number[1]))
+                list.append(layer)
+            return list
+        elif type == 'linear':
+            list = []
+            for x in range(size[0]):
+                layer = []
+                for y in range(size[1]):
+                    layer.append(number[1] * x + number[0])
+                list.append(layer)
+            return list
+        else:
+            raise TypeError("Invalid Fill Type")
+    elif dem == 3:
+        if type == 'constant':
+            list = []
+            for x in range(size[0]):
+                layer = []
+                for y in range(size[1]):
+                    layer2 = []
+                    for z in range(size[2]):
+                        layer2.append(number)
+                    layer.append(layer2)
+                list.append(layer)
+            return list
+        elif type == 'random int':
+            list = []
+            for x in range(size[0]):
+                layer = []
+                for y in range(size[1]):
+                    layer2 = []
+                    for z in range(size[2]):
+                        layer2.append(random.randint(number[0], number[1]))
+                    layer.append(layer2)
+                list.append(layer)
+            return list
+        elif type == 'random float':
+            list = []
+            for x in range(size[0]):
+                layer = []
+                for y in range(size[1]):
+                    layer2 = []
+                    for z in range(size[2]):
+                        layer2.append(random.uniform(number[0], number[1]))
+                    layer.append(layer2)
+                list.append(layer)
+            return list
+        elif type == 'linear':
+            list = []
+            for x in range(size[0]):
+                layer = []
+                for y in range(size[1]):
+                    layer2 = []
+                    for z in range(size[2]):
+                        layer2.append(number[1] * x + number[0])
+                    layer.append(layer2)
+                list.append(layer)
+            return list
+        else:
+            raise TypeError("Invalid Fill Type")
+    elif dem == 4:
+        if type == 'constant':
+            list = []
+            for x in range(size[0]):
+                layer = []
+                for y in range(size[1]):
+                    layer2 = []
+                    for z in range(size[2]):
+                        layer3 = []
+                        for w in range(size[3]):
+                            layer3.append(number)
+                        layer2.append(layer3)
+                    layer.append(layer2)
+                list.append(layer)
+            return list
+        elif type == 'random int':
+            list = []
+            for x in range(size[0]):
+                layer = []
+                for y in range(size[1]):
+                    layer2 = []
+                    for z in range(size[2]):
+                        layer3 = []
+                        for w in range(size[3]):
+                            layer3.append(random.randint(number[0], number[1]))
+                        layer2.append(layer3)
+                    layer.append(layer2)
+                list.append(layer)
+            return list
+        elif type == 'random float':
+            list = []
+            for x in range(size[0]):
+                layer = []
+                for y in range(size[1]):
+                    layer2 = []
+                    for z in range(size[2]):
+                        layer3 = []
+                        for w in range(size[3]):
+                            layer3.append(random.uniform(number[0], number[1]))
+                        layer2.append(layer3)
+                    layer.append(layer2)
+                list.append(layer)
+            return list
+        elif type == 'linear':
+            list = []
+            for x in range(size[0]):
+                layer = []
+                for y in range(size[1]):
+                    layer2 = []
+                    for z in range(size[2]):
+                        layer3 = []
+                        for w in range(size[3]):
+                            layer3.append(number[1] * x + number[0])
+                        layer2.append(layer3)
+                    layer.append(layer2)
+                list.append(layer)
+            return list
+        else:
+            raise TypeError("Invalid Fill Type")
 
