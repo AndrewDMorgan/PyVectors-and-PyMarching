@@ -129,7 +129,7 @@ class vec4:  # this function stores and operates an a tuple/list containing four
     def cos(self):
         return Vec4(math.cos(self.x), math.cos(self.y), math.cos(self.z), math.cos(self.w))
     def length(self):
-        return lengthOfList(self.xyzw)
+        return math.lengthOfList(self.xyzw)
     def floor(self):
         return Vec4(math.floor(self.x), math.floor(self.y), math.floor(self.z), math.floor(self.w))
     def fract(self):
@@ -138,6 +138,10 @@ class vec4:  # this function stores and operates an a tuple/list containing four
         return 4
     def __getitem__(self, key):
         return self.xyzw[key]
+    def dot(self, other):
+        return (self.x * other.x + self.y * other.y + self.z * other.z + self.w * other.w)
+    def __round__(self):
+        return Vec4(round(self.x), round(self.y), round(self.z), round(self.w))
 
 
 class vec3:  # this function stores and operates an a tuple/list containing three items (class functions gone over in the Vec2 class)
@@ -262,7 +266,7 @@ class vec3:  # this function stores and operates an a tuple/list containing thre
     def cos(self):
         return Vec3(math.cos(self.x), math.cos(self.y), math.cos(self.z))
     def length(self):
-        return lengthOfList(self.xyz)
+        return math.lengthOfList(self.xyz)
     def floor(self):
         return Vec3(math.floor(self.x), math.floor(self.y), math.floor(self.z))
     def fract(self):
@@ -271,6 +275,10 @@ class vec3:  # this function stores and operates an a tuple/list containing thre
         return 3
     def __getitem__(self, key):
         return self.xyz[key]
+    def dot(self, other):
+        return (self.x * other.x + self.y * other.y + self.z * other.z)
+    def __round__(self):
+        return Vec3(round(self.x), round(self.y), round(self.z))
 
 
 class vec2:  # this function stores and operates an a tuple/list containing two items
@@ -385,7 +393,7 @@ class vec2:  # this function stores and operates an a tuple/list containing two 
     def cos(self):  # returns the cosine of the Vector
         return Vec2(math.cos(self.x), math.cos(self.y))
     def length(self):  # gets the length of the Vector (length(Vector) also works)
-        return lengthOfList(self.xy)
+        return math.lengthOfList(self.xy)
     def floor(self):  # gets the floor of the Vector
         return Vec2(math.floor(self.x), math.floor(self.y))
     def fract(self):  # gets the decimal value of the number
@@ -394,6 +402,10 @@ class vec2:  # this function stores and operates an a tuple/list containing two 
         return 2
     def __getitem__(self, key):
         return self.xy[key]
+    def dot(self, other):
+        return (self.x * other.x + self.y * other.y)
+    def __round__(self):
+        return Vec2(round(self.x), round(self.y))
 
 
 class Vec4:  # this class dosent use the smart fill in making it slightly faster
@@ -505,7 +517,7 @@ class Vec4:  # this class dosent use the smart fill in making it slightly faster
     def cos(self):
         return Vec4(math.cos(self.x), math.cos(self.y), math.cos(self.z), math.cos(self.w))
     def length(self):
-        return lengthOfList(self.xyzw)
+        return math.lengthOfList(self.xyzw)
     def floor(self):
         return Vec4(math.floor(self.x), math.floor(self.y), math.floor(self.z), math.floor(self.w))
     def fract(self):
@@ -514,6 +526,10 @@ class Vec4:  # this class dosent use the smart fill in making it slightly faster
         return 4
     def __getitem__(self, key):
         return self.xyzw[key]
+    def dot(self, other):
+        return (self.x * other.x + self.y * other.y + self.z * other.z + self.w * other.w)
+    def __round__(self):
+        return Vec4(round(self.x), round(self.y), round(self.z), round(self.w))
 
 
 class Vec3:  # this class dosent use the smart fill in making it slightly faster
@@ -629,7 +645,7 @@ class Vec3:  # this class dosent use the smart fill in making it slightly faster
     def cos(self):
         return Vec3(math.cos(self.x), math.cos(self.y), math.cos(self.z))
     def length(self):
-        return lengthOfList(self.xyz)
+        return math.lengthOfList(self.xyz)
     def floor(self):
         return Vec3(math.floor(self.x), math.floor(self.y), math.floor(self.z))
     def fract(self):
@@ -638,6 +654,10 @@ class Vec3:  # this class dosent use the smart fill in making it slightly faster
         return 3
     def __getitem__(self, key):
         return self.xyz[key]
+    def dot(self, other):
+        return (self.x * other.x + self.y * other.y + self.z * other.z)
+    def __round__(self):
+        return Vec3(round(self.x), round(self.y), round(self.z))
 
 
 class Vec2:  # this class dosent use the smart fill in making it slightly faster
@@ -746,7 +766,7 @@ class Vec2:  # this class dosent use the smart fill in making it slightly faster
     def cos(self):
         return Vec2(math.cos(self.x), math.cos(self.y))
     def length(self):
-        return lengthOfList(self.xy)
+        return math.lengthOfList(self.xy)
     def floor(self):
         return Vec2(math.floor(self.x), math.floor(self.y))
     def fract(self):
@@ -755,14 +775,14 @@ class Vec2:  # this class dosent use the smart fill in making it slightly faster
         return 2
     def __getitem__(self, key):
         return self.xy[key]
+    def dot(self, other):
+        return (self.x * other.x + self.y * other.y)
+    def __round__(self):
+        return Vec2(round(self.x), round(self.y))
 
 
-def getPos(Vector, indexes):
-    new_list = []
-    for i in indexes:
-        new_list.append(Vector[i])
-    
-    return new_list
+def mix(vector1, vector2, percentage):
+    return vector1.mix(vector2, percentage)
 
 
 def Int(Vector):
@@ -797,9 +817,13 @@ def tan(Vector):
     return Vector.tan()
 
 
+def dot(vector1, vector2):
+    return vector1.dot(vector2)
+
+
 def normalize(Vector):
-    mag = length(Vector)
-    return Vector / Vec4(mag)
+    mag = length(Vector)  # this may need to be the dot product
+    return Vector / Vec4(mag, mag, mag, mag)
 
 
 def length(Vector):  # gets the length of a Vector (using the pythagorean theorem)
@@ -809,7 +833,7 @@ def length(Vector):  # gets the length of a Vector (using the pythagorean theore
 class math:
     def mix(value1, value2, percentage):  # mixes two numbers based on a number ranging from 1 - 0
         percentage = math.clamp(percentage, 0, 1)
-        return (value1*percentage)+(value2*percentage)
+        return (value1*(1 - percentage))+(value2*percentage)
     def tan(value):  # returns the tangent of a number
         return Math.tan(value)
     def sin(value):  # returns the sign of a number
@@ -824,21 +848,126 @@ class math:
         return min(max(val, min_), max_)
     def sqrt(value):  # square root
         return Math.sqrt(value)
-
-
-def lengthOfList(poses):  # gets the distance of the imputed values (using the pythagorean theorem)
-    dist = poses[0]
-    for Vector in poses:
-        dist = math.sqrt((dist * dist) + (Vector * Vector))
-    return dist
-
-
-def normalizeList(values):  # normalizes a list of values (for this function you need to put in the .xyz value of the Vector, the functions above do this for you)
-    mag = lengthOfList(values)  # gets the magnitude
-    new_values = []
-    for old_value in values:
-        new_values.append(divide(old_value, mag))  # changes the values by the magnitude
-    return new_values
+    def map2D(list, fromMin, fromMax, toMax):  # add a toMin
+        min_height = fromMin
+        max_height = fromMax - min_height
+        scaler = (toMax / max_height)
+        for x in range(len(list)):
+            for y in range(len(list[x])):
+                list[x][y] -= min_height
+                list[x][y] *= scaler
+        return list
+    def minOf2D(list):
+        mins = []
+        for x in list:
+            mins.append(min(x))
+        return min(mins)
+    def maxOf2D(list):
+        maxs = []
+        for x in list:
+            maxs.append(max(x))
+        return max(maxs)
+    def smooth(heights, smoothing = 100):
+        for s in range(smoothing):
+            for i in range(len(heights)):
+                if i not in [0, len(heights) - 1]:
+                    height1 = heights[i - 1]
+                    height3 = heights[i + 1]
+                    heights[i] = (heights[i] * 0.1) + (height1 * 0.45) + (height3 * 0.45)
+        return heights
+    def interpalate3(h, x, list):
+        index2 = int(x / h)
+        index1 = index2 - 1
+        index3 = index2 + 1
+        
+        height1 = list[index1]
+        height2 = list[index2]
+        height3 = list[index3]
+        
+        x1 = index1 * h
+        x2 = index2 * h
+        x3 = index3 * h
+        
+        a0 = height2
+        a1 = (height3 - height1) / (h * 2)
+        a2 = (height1 - 2 * height2 + height3) / ((h ** 2) * 2)
+        
+        height_out = a0 + a1 * (x - x2) + a2 * (x - x2) ** 2
+        
+        return height_out
+    def interpalate5(h, x, list):
+        middle_index = int(x / h)  #int((x / (h * 5)) * 5)
+        index1 = middle_index - 2
+        index2 = middle_index - 1
+        index3 = middle_index
+        index4 = middle_index + 1
+        index5 = middle_index + 2
+        
+        height1 = list[index1]
+        height2 = list[index2]
+        height3 = list[index3]
+        height4 = list[index4]
+        height5 = list[index5]
+        
+        x1 = index1 * h
+        x2 = index2 * h
+        x3 = index3 * h
+        x4 = index4 * h
+        x5 = index5 * h
+        
+        a0 = height3
+        a1 = (height4 - height2) / (h * 2)
+        a2 = (-height5 + 16 * height4 - 30 * height3 + 16 * height2 - height1) / (24 * (h ** 2))
+        a3 = (height5 - 2 * height4 + 2 * height2 - height1) / (12 * (h ** 3))
+        
+        height = a0 + a1 * (x - x3) + a2 * (x - x3) ** 2 + a3 * (x - x3) ** 3
+        
+        return height
+    def smoothstep(x, p1, p2):
+        t = min(max((x - p1) / (p2 - p1), 0), 1)
+        return t * t * (3 - 2 * t)
+    def lengthOfList(poses):  # gets the distance of the imputed values (using the pythagorean theorem)
+        dist = poses[0]
+        for Vector in poses:
+            dist = math.sqrt((dist * dist) + (Vector * Vector))
+        return dist
+    def normalizeList(values):  # normalizes a list of values (for this function you need to put in the .xyz value of the Vector, the functions above do this for you)
+        mag = lengthOfList(values)  # gets the magnitude
+        new_values = []
+        for old_value in values:
+            new_values.append(divide(old_value, mag))  # changes the values by the magnitude
+        return new_values
+    def spline1D(noise, x, h):
+        nx = x / h
+        p1 = int(nx)
+        p2 = p1 + 1
+        p3 = p1 + 2
+        p0 = p1 - 1
+        t = nx - p1
+        tt = t * t
+        ttt = tt * t
+        q1 = -ttt + 2*tt - t
+        q2 = 3*ttt - 5*tt + 2
+        q3 = -3*ttt + 4*tt + t
+        q4 = ttt - tt
+        ty = 0.5 * (noise[p0] * q1 + noise[p1] * q2 + noise[p2] * q3 + noise[p3] * q4)
+        return ty
+    def spline2D(noise, x, y, h):
+        nx = x / h
+        i = int(nx)
+        ty1 = math.spline1D(noise[i - 1], y, h)
+        ty2 = math.spline1D(noise[i    ], y, h)
+        ty3 = math.spline1D(noise[i + 1], y, h)
+        ty4 = math.spline1D(noise[i + 2], y, h)
+        return math.spline1D([ty1, ty2, ty3, ty4], (nx - i) * h + h, h)
+    def spline3D(noise, x, y, z, h):
+        nx = x / h
+        i = int(nx)
+        ty1 = math.spline2D(noise[i - 1], y, z, h)
+        ty2 = math.spline2D(noise[i    ], y, z, h)
+        ty3 = math.spline2D(noise[i + 1], y, z, h)
+        ty4 = math.spline2D(noise[i + 2], y, z, h)
+        return math.spline1D([ty1, ty2, ty3, ty4], (nx - i) * h + h, h)
 
 
 class dists:
@@ -846,4 +975,43 @@ class dists:
         return length(pos - center) - r
     def distToPoint(pos, point_pos):  # gets the distance to a point from a point
         return length(pos - point_pos)
+
+
+class colorGradient:
+    def __init__(self):
+        self.grades = []
+        self.grade_points = []
+    def addPoint(self, point, color):
+        self.grades.append(color)
+        self.grade_points.append(point)
+    def gradeAt(self, point):  # imporve this so the colors dont hve a harsh cutoff
+        closest1 = 10000000
+        closest2 = 10000000
+        index1 = -1
+        index2 = -1
+        i = 0
+        for grade in self.grade_points:
+            dist_to_grade = abs(point - grade)
+            if dist_to_grade < closest1:
+                closest1 = dist_to_grade
+                index1 = i
+            elif dist_to_grade < closest2:
+                closest2 = dist_to_grade
+                index2 = i
+            i += 1
+        
+        max_dist = closest1 + closest2
+        
+        percent = 1 - (closest1 / max_dist)
+        
+        return mix(self.grades[index2], self.grades[index1], percent)
+
+
+class noise:
+    def perlin1D(randNoise, h, x):
+        return math.spline(randNoise, x, h)
+    def perlin2D(randNoise, h, x, y):  # add this to PyVectors (change to be 3d)
+        return math.spline2D(randNoise, x, y, h)
+    def perlin3D(randNoise, h, x, y, z):
+        return math.spline3D(randNoise, x, y, z, h)
 
