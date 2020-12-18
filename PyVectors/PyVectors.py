@@ -888,7 +888,7 @@ class math:
         for x in range(len(list)):
             for y in range(len(list[x])):
                 list[x][y] -= fromMin
-            maxOfList.append(list[x])
+            maxOfList.append(max(list[x]))
         
         maxOfList = max(maxOfList)
         scaler = (toMax - toMin) / maxOfList
@@ -1213,7 +1213,7 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                 if octave[3] == 'add':
                     for x in range(size[0]):
                         for y in range(size[1]):
-                            list[x][y] = noise.perlin2D(rNoise, octave[2], x, y) + list[x]
+                            list[x][y] = noise.perlin2D(rNoise, octave[2], x, y) + list[x][y]
                 if octave[3] == 'sub':
                     for x in range(size[0]):
                         for y in range(size[1]):
@@ -1230,7 +1230,7 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                 if octave[3] == 'add':
                     for x in range(size[0]):
                         for y in range(size[1]):
-                            list[x][y] = noise.ridge2D(rNoise, octave[2], x, y) + list[x]
+                            list[x][y] = noise.ridge2D(rNoise, octave[2], x, y) + list[x][y]
                 if octave[3] == 'sub':
                     for x in range(size[0]):
                         for y in range(size[1]):
