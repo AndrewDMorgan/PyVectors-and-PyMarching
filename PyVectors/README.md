@@ -110,7 +110,15 @@ The functions and classes are as following with their descriptions:
    > gives a height based on a 3D list of noise and based on a position. Takes and input of random noise, distance between points and the x, y, z position
    > ## *perlin4D*
    > gives a height based on a 4D list of noise and based on a position (The 4D noise hasnt been tested but should work). Takes and input of random noise, distance between points and the x, y, z, w position
+   > ## *ridge1D*
+   > gives a height based on a 1D list of noise and based on a position and generates with noticable ridges. Takes and input of random noise, distance between points and the x position
+   > ## *ridge2D*
+   > gives a height based on a 2D list of noise and based on a position and generates with noticable ridges. Takes and input of random noise, distance between points and the x, y position
+   > ## *ridge3D*
+   > gives a height based on a 3D list of noise and based on a position and generates with noticable ridges. Takes and input of random noise, distance between points and the x, y, z position
+   > ## *ridge4D*
+   > gives a height based on a 4D list of noise and based on a position and generates with noticable ridges (The 4D noise hasnt been tested but should work). Takes and input of random noise, distance between points and the x, y, z, w position
 ## *array*
-returns a filled in array that can be constant, random int, random float or perlin. Takes in a size (vec2, vec3, vec4, tuple and lists work), the type of fill (constant, random int, random float or perlin) and the data for the type in a list, vector or tuple (constant; number (not in list), random int; min, max, random float; min, max, perlin; list of octaves (min 1 octave max inf octaves) each being the following; min, max, distance between points, type (add, sub or mix), if using mix then add the percentage (0 - 1) to mix by).
+returns a filled in array that can be constant, random int, random float or perlin. Takes in a size (vec2, vec3, vec4, tuple and lists work), the type of fill (constant, random int, random float or perlin) and the data for the type in a list, vector or tuple (constant; number (not in list), random int; min, max, random float; min, max, perlin; list of octaves (min 1 octave max inf octaves) each being the following; min, max, distance between points, type (add, sub or mix), if using mix then add the percentage (0 - 1) to mix by, ridge; same as perlin but is ridge noise meaning theres a buch of ridges but still veriation (abs(perlin noise) * -1 = ridge noise))
 
 More will be coming to this package even possibly a vec5 type. I'm also working on making it as quick and easy to write and complie/run. For more information, go to [repl.it](https://repl.it/talk/share/Vector-Types-in-Python3/83032) to see an example of PyVectors in use and how to use it. Just note that the example dose not have all the new functions and classes.
