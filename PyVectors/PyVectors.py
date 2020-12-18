@@ -869,14 +869,81 @@ class math:
         return min(max(val, min_), max_)
     def sqrt(value):  # square root
         return Math.sqrt(value)
-    def map2D(list, fromMin, fromMax, toMax):  # add a toMin     maps a range of numbers to a new range of numbers
-        min_height = fromMin
-        max_height = fromMax - min_height
-        scaler = (toMax / max_height)
+    def map1D(list, fromMin, fromMax, toMin, toMax):  # scales a list of data
+        for x in range(len(list)):
+            list[x] -= fromMin
+        
+        scaler = (toMax - toMin) / max(list)
+        for x in range(len(list)):
+            list[x] *= scaler
+            list[x] += toMin
+        
+        return list
+    def map2D(list, fromMin, fromMax, toMin, toMax):
+        maxOfList = []
         for x in range(len(list)):
             for y in range(len(list[x])):
-                list[x][y] -= min_height
+                list[x][y] -= fromMin
+            maxOfList.append(list[x])
+        
+        maxOfList = max(maxOfList)
+        scaler = (toMax - toMin) / maxOfList
+        for x in range(len(list)):
+            for y in range(len(list[x])):
                 list[x][y] *= scaler
+                list[x][y] += toMin
+        
+        return list
+    def map3D(list, fromMin, fromMax, toMin, toMax):
+        maxOfList = []
+        for x in range(len(list)):
+            for y in range(len(list[x])):
+                for z in range(len(list[x][y])):
+                    list[x][y][z] -= fromMin
+        
+        maxOfList = []
+        for x in list:
+            layer = []
+            for y in x:
+                layer.append(max(y))
+            maxOfList.append(max(layer))
+        maxOfList = max(maxOfList)
+        
+        scaler = (toMax - toMin) / maxOfList
+        for x in range(len(list)):
+            for y in range(len(list[x])):
+                for z in range(len(list[x][y])):
+                    list[x][y][z] *= scaler
+                    list[x][y][z] += toMin
+        
+        return list
+    def map4D(list, fromMin, fromMax, toMin, toMax):
+        maxOfList = []
+        for x in range(len(list)):
+            for y in range(len(list[x])):
+                for z in range(len(list[x][y])):
+                    for w in range(len(list[x][y][z])):
+                        list[x][y][z][w] -= fromMin
+        
+        maxOfList = []
+        for x in list:
+            layer = []
+            for y in x:
+                layer2 = []
+                for z in y:
+                    layer2.append(max(z))
+                layer.append(max(layer2))
+            maxOfList.append(max(layer))
+        maxOfList = max(maxOfList)
+        
+        scaler = (toMax - toMin) / maxOfList
+        for x in range(len(list)):
+            for y in range(len(list[x])):
+                for z in range(len(list[x][y])):
+                    for w in range(len(list[x][y][z])):
+                        list[x][y][z][w] *= scaler
+                        list[x][y][z][w] += toMin
+        
         return list
     def smooth(heights, smoothing = 100):  # smooths a list of numbers making them more uniform/reducing spikes in numbers
         for s in range(smoothing):
@@ -1042,7 +1109,7 @@ class noise:  # contains perlin noise functions that take in a list of random nu
         return math.spline4D(randNoise, x, y, z, w, h)
 
 
-def array(size, type, number):  # atomticaly fills in and array with numbers, the types are as following with the next input in brackets: constant (number), random int ([min number, max number]), random float ([min number, max number]), linear ([y intercept, slope])   the demention of the array is determind by the len of size which can be a list or vector type.
+def array(size, type, number):  # atomticaly fills in and array with numbers, the types are as following with the next input in brackets: constant (number), random int ([min number, max number]), random float ([min number, max number]), perlin ([[min height, max height, distance between points, height alteration method, (this paramiter is only if using mix) percentage (0 - 1)], more octaves that are same as last])   the demention of the array is determind by the len of size which can be a list or vector type.
     dem = len(size)
     if dem == 1:
         if type == 'constant':
@@ -1060,10 +1127,19 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
             for x in range(size[0]):
                 list.append(random.uniform(number[0], number[1]))
             return list
-        elif type == 'linear':
-            list = []
-            for x in range(size[0]):
-                list.append(number[1] * x + number[0])
+        elif type == 'perlin':
+            list = array(size, 'constant', 0)
+            for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
+                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                if octave[3] == 'add':
+                    for x in range(size[0]):
+                        list[x] = noise.perlin1D(rNoise, octave[2], x) + list[x]
+                if octave[3] == 'sub':
+                    for x in range(size[0]):
+                        list[x] = noise.perlin1D(rNoise, octave[2], x) - list[x]
+                if octave[3] == 'mix':
+                    for x in range(size[0]):
+                        list[x] = math.mix(noise.perlin1D(rNoise, octave[2], x), list[x], octave[4])
             return list
         else:
             raise TypeError("Invalid Fill Type")
@@ -1092,13 +1168,22 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                     layer.append(random.uniform(number[0], number[1]))
                 list.append(layer)
             return list
-        elif type == 'linear':
-            list = []
-            for x in range(size[0]):
-                layer = []
-                for y in range(size[1]):
-                    layer.append(number[1] * x + number[0])
-                list.append(layer)
+        elif type == 'perlin':
+            list = array(size, 'constant', 0)
+            for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
+                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                if octave[3] == 'add':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            list[x][y] = noise.perlin2D(rNoise, octave[2], x, y) + list[x]
+                if octave[3] == 'sub':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            list[x][y] = noise.perlin2D(rNoise, octave[2], x, y) - list[x][y]
+                if octave[3] == 'mix':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            list[x][y] = math.mix(noise.perlin2D(rNoise, octave[2], x, y), list[x][y], octave[4])
             return list
         else:
             raise TypeError("Invalid Fill Type")
@@ -1136,16 +1221,25 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                     layer.append(layer2)
                 list.append(layer)
             return list
-        elif type == 'linear':
-            list = []
-            for x in range(size[0]):
-                layer = []
-                for y in range(size[1]):
-                    layer2 = []
-                    for z in range(size[2]):
-                        layer2.append(number[1] * x + number[0])
-                    layer.append(layer2)
-                list.append(layer)
+        elif type == 'perlin':
+            list = array(size, 'constant', 0)
+            for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
+                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                if octave[3] == 'add':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            for z in range(size[2]):
+                                list[x][y][z] = noise.perlin3D(rNoise, octave[2], x, y, z) + list[x][y][z]
+                if octave[3] == 'sub':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            for z in range(size[2]):
+                                list[x][y][z] = noise.perlin3D(rNoise, octave[2], x, y, z) - list[x][y][z]
+                if octave[3] == 'mix':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            for z in range(size[2]):
+                                list[x][y][z] = math.mix(noise.perlin3D(rNoise, octave[2], x, y, z), list[x][y][z], octave[4])
             return list
         else:
             raise TypeError("Invalid Fill Type")
@@ -1192,19 +1286,28 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                     layer.append(layer2)
                 list.append(layer)
             return list
-        elif type == 'linear':
-            list = []
-            for x in range(size[0]):
-                layer = []
-                for y in range(size[1]):
-                    layer2 = []
-                    for z in range(size[2]):
-                        layer3 = []
-                        for w in range(size[3]):
-                            layer3.append(number[1] * x + number[0])
-                        layer2.append(layer3)
-                    layer.append(layer2)
-                list.append(layer)
+        elif type == 'perlin':
+            list = array(size, 'constant', 0)
+            for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
+                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                if octave[3] == 'add':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            for z in range(size[2]):
+                                for w in range(size[3]):
+                                    list[x][y][z][w] = noise.perlin4D(rNoise, octave[2], x, y, z, w) + list[x][y][z][w]
+                if octave[3] == 'sub':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            for z in range(size[2]):
+                                for w in range(size[3]):
+                                    list[x][y][z][w] = noise.perlin4D(rNoise, octave[2], x, y, z, w) - list[x][y][z][w]
+                if octave[3] == 'mix':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            for z in range(size[2]):
+                                for w in range(size[3]):
+                                    list[x][y][z][w] = math.mix(noise.perlin4D(rNoise, octave[2], x, y, z, w), list[x][y][z][w], octave[4])
             return list
         else:
             raise TypeError("Invalid Fill Type")
