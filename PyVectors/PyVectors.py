@@ -842,6 +842,10 @@ def dot(vector1, vector2):
     return vector1.dot(vector2)
 
 
+def cross(vector1, vector2):
+    return vector1.cross(vector2)
+
+
 def normalize(Vector):
     mag = length(Vector)  # this may need to be the dot product
     return Vector / Vec4(mag, mag, mag, mag)
@@ -1107,6 +1111,26 @@ class noise:  # contains perlin noise functions that take in a list of random nu
         return math.spline3D(randNoise, x, y, z, h)
     def perlin4D(randNoise, h, x, y, z, w):
         return math.spline4D(randNoise, x, y, z, w, h)
+    def ridge1D(randNoise, h, x):
+        noise = math.spline(randNoise, x, h)
+        noise = abs(noise)
+        noise *= -1
+        return noise
+    def ridge2D(randNoise, h, x, y):  # add this to PyVectors (change to be 3d)
+        noise = math.spline2D(randNoise, x, y, h)
+        noise = abs(noise)
+        noise *= -1
+        return noise
+    def ridge3D(randNoise, h, x, y, z):
+        noise = math.spline3D(randNoise, x, y, z, h)
+        noise = abs(noise)
+        noise *= -1
+        return noise
+    def ridge4D(randNoise, h, x, y, z, w):
+        noise = math.spline4D(randNoise, x, y, z, w, h)
+        noise = abs(noise)
+        noise *= -1
+        return noise
 
 
 def array(size, type, number):  # atomticaly fills in and array with numbers, the types are as following with the next input in brackets: constant (number), random int ([min number, max number]), random float ([min number, max number]), perlin ([[min height, max height, distance between points, height alteration method, (this paramiter is only if using mix) percentage (0 - 1)], more octaves that are same as last])   the demention of the array is determind by the len of size which can be a list or vector type.
@@ -1140,6 +1164,20 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                 if octave[3] == 'mix':
                     for x in range(size[0]):
                         list[x] = math.mix(noise.perlin1D(rNoise, octave[2], x), list[x], octave[4])
+            return list
+        elif type == 'ridge':
+            list = array(size, 'constant', 0)
+            for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
+                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                if octave[3] == 'add':
+                    for x in range(size[0]):
+                        list[x] = noise.ridge1D(rNoise, octave[2], x) + list[x]
+                if octave[3] == 'sub':
+                    for x in range(size[0]):
+                        list[x] = noise.ridge1D(rNoise, octave[2], x) - list[x]
+                if octave[3] == 'mix':
+                    for x in range(size[0]):
+                        list[x] = math.mix(noise.ridge1D(rNoise, octave[2], x), list[x], octave[4])
             return list
         else:
             raise TypeError("Invalid Fill Type")
@@ -1184,6 +1222,23 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                     for x in range(size[0]):
                         for y in range(size[1]):
                             list[x][y] = math.mix(noise.perlin2D(rNoise, octave[2], x, y), list[x][y], octave[4])
+            return list
+        elif type == 'ridge':
+            list = array(size, 'constant', 0)
+            for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
+                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                if octave[3] == 'add':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            list[x][y] = noise.ridge2D(rNoise, octave[2], x, y) + list[x]
+                if octave[3] == 'sub':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            list[x][y] = noise.ridge2D(rNoise, octave[2], x, y) - list[x][y]
+                if octave[3] == 'mix':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            list[x][y] = math.mix(noise.ridge2D(rNoise, octave[2], x, y), list[x][y], octave[4])
             return list
         else:
             raise TypeError("Invalid Fill Type")
@@ -1240,6 +1295,26 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                         for y in range(size[1]):
                             for z in range(size[2]):
                                 list[x][y][z] = math.mix(noise.perlin3D(rNoise, octave[2], x, y, z), list[x][y][z], octave[4])
+            return list
+        elif type == 'ridge':
+            list = array(size, 'constant', 0)
+            for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
+                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                if octave[3] == 'add':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            for z in range(size[2]):
+                                list[x][y][z] = noise.ridge3D(rNoise, octave[2], x, y, z) + list[x][y][z]
+                if octave[3] == 'sub':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            for z in range(size[2]):
+                                list[x][y][z] = noise.ridge3D(rNoise, octave[2], x, y, z) - list[x][y][z]
+                if octave[3] == 'mix':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            for z in range(size[2]):
+                                list[x][y][z] = math.mix(noise.ridge3D(rNoise, octave[2], x, y, z), list[x][y][z], octave[4])
             return list
         else:
             raise TypeError("Invalid Fill Type")
@@ -1308,6 +1383,29 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                             for z in range(size[2]):
                                 for w in range(size[3]):
                                     list[x][y][z][w] = math.mix(noise.perlin4D(rNoise, octave[2], x, y, z, w), list[x][y][z][w], octave[4])
+            return list
+        elif type == 'ridge':
+            list = array(size, 'constant', 0)
+            for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
+                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                if octave[3] == 'add':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            for z in range(size[2]):
+                                for w in range(size[3]):
+                                    list[x][y][z][w] = noise.ridge4D(rNoise, octave[2], x, y, z, w) + list[x][y][z][w]
+                if octave[3] == 'sub':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            for z in range(size[2]):
+                                for w in range(size[3]):
+                                    list[x][y][z][w] = noise.ridge4D(rNoise, octave[2], x, y, z, w) - list[x][y][z][w]
+                if octave[3] == 'mix':
+                    for x in range(size[0]):
+                        for y in range(size[1]):
+                            for z in range(size[2]):
+                                for w in range(size[3]):
+                                    list[x][y][z][w] = math.mix(noise.ridge4D(rNoise, octave[2], x, y, z, w), list[x][y][z][w], octave[4])
             return list
         else:
             raise TypeError("Invalid Fill Type")
