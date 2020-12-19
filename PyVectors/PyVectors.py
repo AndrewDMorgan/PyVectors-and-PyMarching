@@ -1063,6 +1063,58 @@ class math:
         ty3 = math.spline3D(noise[i + 1], y, z, w, h)
         ty4 = math.spline3D(noise[i + 2], y, z, w, h)
         return math.spline1D([ty1, ty2, ty3, ty4], (nx - i) * h + h, h)
+    def min1D(list):  # gets the min of a list thats dimetion is stated
+        return min(list)
+    def min2D(list):
+        layers = []
+        for x in list:
+            layers.append(min(x))
+        return min(layers)
+    def min3D(list):
+        layers = []
+        for x in list:
+            newLayer = []
+            for y in x:
+                newLayer.append(min(y))
+            layers.append(min(newLayer))
+        return min(layers)
+    def min4D(list):
+        layers = []
+        for x in list:
+            newLayer = []
+            for y in x:
+                layers2 = []
+                for z in y:
+                    layers2.append(min(z))
+                newLayer.append(min(layers2))
+            layers.append(min(newLayer))
+        return min(layers)
+    def max1D(list):  # gets the max of a list thats dimetion is stated
+        return max(list)
+    def max2D(list):
+        layers = []
+        for x in list:
+            layers.append(max(x))
+        return max(layers)
+    def max3D(list):
+        layers = []
+        for x in list:
+            newLayer = []
+            for y in x:
+                newLayer.append(max(y))
+            layers.append(max(newLayer))
+        return max(layers)
+    def max4D(list):
+        layers = []
+        for x in list:
+            newLayer = []
+            for y in x:
+                layers2 = []
+                for z in y:
+                    layers2.append(max(z))
+                newLayer.append(max(layers2))
+            layers.append(max(newLayer))
+        return max(layers)
 
 
 class dists:  # multipl distance functions for different shapes
@@ -1090,7 +1142,7 @@ class colorGradient:  # improve
             if dist_to_grade < closest1:
                 closest1 = dist_to_grade
                 index1 = i
-            elif dist_to_grade < closest2:
+            elif dist_to_grade < closest2:  # remove this and calculate the other based on this to avoid baises based on dists. Also change the method of finding the closest
                 closest2 = dist_to_grade
                 index2 = i
             i += 1
@@ -1103,20 +1155,20 @@ class colorGradient:  # improve
 
 
 class noise:  # contains perlin noise functions that take in a list of random numbers thats the same dimention as the function, than the x, y, z, and w (only put the one that belong there for the demention of the function) and finaly the distance between points
-    def perlin1D(randNoise, h, x):
+    def perlin1D(randNoise, h, x):  # perlin noise at the dimention stated
         return math.spline(randNoise, x, h)
-    def perlin2D(randNoise, h, x, y):  # add this to PyVectors (change to be 3d)
+    def perlin2D(randNoise, h, x, y):
         return math.spline2D(randNoise, x, y, h)
     def perlin3D(randNoise, h, x, y, z):
         return math.spline3D(randNoise, x, y, z, h)
     def perlin4D(randNoise, h, x, y, z, w):
         return math.spline4D(randNoise, x, y, z, w, h)
-    def ridge1D(randNoise, h, x):
+    def ridge1D(randNoise, h, x):  # ridge noise aka perlin noise with abrupt ridges
         noise = math.spline(randNoise, x, h)
         noise = abs(noise)
         noise *= -1
         return noise
-    def ridge2D(randNoise, h, x, y):  # add this to PyVectors (change to be 3d)
+    def ridge2D(randNoise, h, x, y):  #
         noise = math.spline2D(randNoise, x, y, h)
         noise = abs(noise)
         noise *= -1
