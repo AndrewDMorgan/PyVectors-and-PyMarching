@@ -91,6 +91,22 @@ The functions and classes are as following with their descriptions:
    > splines on a 3D level between two points in a list that surround the given position. Takes an input of a list of values to spline, the position between points (x, y, z) and the distance between points
    > ## *spline4D*
    > splines on a 4D level between two points in a list that surround the given position. Takes an input of a list of values to spline, the position between points (x, y, z, w) and the distance between points
+   > ## *min1D*
+   > gets the min of a 1D array. Takes in a list
+   > ## *min2D*
+   > gets the min of a 2D array. Takes in a list
+   > ## *min3D*
+   > gets the min of a 3D array. Takes in a list
+   > ## *min4D*
+   > gets the min of a 4D array. Takes in a list
+   > ## *max1D*
+   > gets the max of a 1D array. Takes in a list
+   > ## *max2D*
+   > gets the max of a 2D array. Takes in a list
+   > ## *max3D*
+   > gets the max of a 3D array. Takes in a list
+   > ## *max4D*
+   > gets the max of a 4D array. Takes in a list
  ## *dists.*
    > ## *distToCircularPoint*
    > Returns the distance to a circle/sphere/hypersphere. Takes an input of two vectors and a radius
