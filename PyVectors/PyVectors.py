@@ -1609,7 +1609,7 @@ class png:
         
         return img
     def getArray(imageFile):
-        surf = pygame.Surface(size)
+        surf = pygame.Surface(Vec2(5000, 3000))
         image = surf.blit(pygame.image.load(imageFile), Vec2(0, 0))
         size = Vec2(image.size[0], image.size[1])
         newList = array(size, 'constant', None)
