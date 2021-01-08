@@ -112,10 +112,22 @@ The functions and classes are as following with their descriptions:
    > Returns the distance to a circle/sphere/hypersphere. Takes an input of two vectors and a radius
    > ## *distToPoint*
    > Returns the distance to a point. Takes an input of two vectors
-## *colorGradient (work in progess)*
-   > ## *addPoint*
+## *gradient*
+   > ## *color*
+   > returns a color gradient. Can take ina max gap (the defult is 50)
+   > ## *number*
+   > returns a number gradient. Can take ina max gap (the defult is 50)
+   > ## *vector*
+   > returns a vector gradient. Can take ina max gap (the defult is 50)
+## *numberGradient*
+   > ## *add*
+   > adds a point to the gradient. Takes in a point and number
+   > ## *grade*
+   > returns the value at the inputed position. Takes in a point
+## *colorGradient*
+   > ## *add*
    > adds a point of color to the gradient. Takes in a point and color
-   > ## *gradeAt*
+   > ## *grade*
    > returns the color at a position (not working perfectly yet). Takes in a position in the gradient
 ## *noise*
    > ## *perlin1D*
@@ -136,5 +148,10 @@ The functions and classes are as following with their descriptions:
    > gives a height based on a 4D list of noise and based on a position and generates with noticable ridges (The 4D noise hasnt been tested but should work). Takes and input of random noise, distance between points and the x, y, z, w position
 ## *array*
 returns a filled in array that can be constant, random int, random float or perlin. Takes in a size (vec2, vec3, vec4, tuple and lists work), the type of fill (constant, random int, random float or perlin) and the data for the type in a list, vector or tuple (constant; number (not in list), random int; min, max, random float; min, max, perlin; list of octaves (min 1 octave max inf octaves) each being the following; min, max, distance between points, type (add, sub or mix), if using mix then add the percentage (0 - 1) to mix by, ridge; same as perlin but is ridge noise meaning theres a buch of ridges but still veriation (abs(perlin noise) * -1 = ridge noise))
+## *png*
+   > ## *fromArray*
+   > creates a png from a 2D list of rgb values (a vec3). Takes in a 2d list of vec3's (or vec4's) and an image name (with .png at the end)
+   > ## *getArray*
+   > returns an array of vec4's (rgba) from a png image. Takes in an image (with .png)
 
 More will be coming to this package even possibly a vec5 type. I'm also working on making it as quick and easy to write and complie/run. For more information, go to [repl.it](https://repl.it/talk/share/Vector-Types-in-Python3/83032) to see an example of PyVectors in use and how to use it. Just note that the example dose not have all the new functions and classes.
