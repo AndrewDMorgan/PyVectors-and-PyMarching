@@ -1,11 +1,20 @@
+import numpy as np
+from PIL import Image as im
 import math as Math  # imports the math library to add cos, sin, sqrt, ect...
-import random
+import random, pygame
 
 small_num = 0.00000000000000001  # an incredibly small number
 
 
 def divide(value1, value2):  # divides and avoids divition by zero errors
     return (value1 + small_num) / (value2 + small_num)
+
+
+def divideT(value1, value2):  # to divide using the try;except method
+    try:
+        return value1 / value2
+    except ZeroDivisionError:
+        return 0
 
 
 class vec4:  # this function stores and operates an a tuple/list containing four items (class functions gone over in the Vec2 class)
@@ -27,6 +36,7 @@ class vec4:  # this function stores and operates an a tuple/list containing four
         self.y = y
         self.z = z
         self.w = w
+        
         self.xy = [x, y]
         self.xyz = [x, y, z]
         self.xyzw = [x, y, z, w]
@@ -223,7 +233,7 @@ class vec3:  # this function stores and operates an a tuple/list containing thre
             return True
         else:
             return False
-    def __eq__(self, other):
+    def __eq__(self, other):  # idk but this may not be working correctly
         if self.x == other.x and self.y == other.y and self.z == other.z:
             return True
         else:
@@ -432,6 +442,8 @@ class Vec4:  # this class dosent use the smart fill in making it slightly faster
         self.yz = [y, z]
         self.xy = [x, y]
         self.xz = [x, z]
+        
+        self.xyw = [x, y, w]
         
         self.r = x
         self.g = y
@@ -802,52 +814,52 @@ class Vec2:  # this class dosent use the smart fill in making it slightly faster
         return Vec2(round(self.x), round(self.y))
 
 
-def mix(vector1, vector2, percentage):
+def mix(vector1, vector2, percentage):  # mixes two vectors based on a percentage
     return vector1.mix(vector2, percentage)
 
 
-def Int(Vector):
+def Int(Vector):  # gets the floor/int of a vector
     return floor(Vector)
 
 
-def clamp(Vector, min_, max_):
+def clamp(Vector, min_, max_):  # clamps a vector between two values
     return Vector.clamp(min_, max_)
 
 
-def fract(Vector):
+def fract(Vector):  # gets the fract of a vector (vector - int(vector))
     return Vector.fract()
 
 
-def sqrt(Vector):
+def sqrt(Vector):  # gets the square root of a vector
     return Vector.sqrt()
 
 
-def floor(Vector):
+def floor(Vector):  # gets the floor of a vector
     return Vector.floor()
 
 
-def cos(Vector):
+def cos(Vector):  # gets the cosine of a vector
     return Vector.cos()
 
 
-def sin(Vector):
+def sin(Vector):  # gets the sin of a vector
     return Vector.sin()
 
 
-def tan(Vector):
+def tan(Vector):  # gets the tangint of a vector
     return Vector.tan()
 
 
-def dot(vector1, vector2):
+def dot(vector1, vector2):  # gets the dot product of two vectors
     return vector1.dot(vector2)
 
 
-def cross(vector1, vector2):
+def cross(vector1, vector2):  # gets the cross product of two vectors
     return vector1.cross(vector2)
 
 
-def normalize(Vector):
-    mag = length(Vector)  # this may need to be the dot product
+def normalize(Vector):  # normalizes a vector
+    mag = length(Vector)
     return Vector / Vec4(mag, mag, mag, mag)
 
 
@@ -873,17 +885,33 @@ class math:
         return min(max(val, min_), max_)
     def sqrt(value):  # square root
         return Math.sqrt(value)
-    def map1D(list, fromMin, fromMax, toMin, toMax):  # scales a list of data
+    def map1D(list, fromMin, fromMax, toMin = None, toMax = None):  # scales a list of data aka stretching and shifting the data set to change its range
+        if None in [toMin, toMax]:
+            if toMin == None and toMax == None:
+                toMin = fromMin
+                toMax = fromMax
+                fromMin = math.min1D(list)
+                fromMax = math.max1D(list)
+            else:
+                raise SyntaxError("Invalid Input")
         for x in range(len(list)):
             list[x] -= fromMin
         
-        scaler = (toMax - toMin) / max(list)
+        scaler = divideT((toMax - toMin), max(list))
         for x in range(len(list)):
             list[x] *= scaler
             list[x] += toMin
         
         return list
-    def map2D(list, fromMin, fromMax, toMin, toMax):
+    def map2D(list, fromMin, fromMax, toMin = None, toMax = None):
+        if None in [toMin, toMax]:
+            if toMin == None and toMax == None:
+                toMin = fromMin
+                toMax = fromMax
+                fromMin = math.min2D(list)
+                fromMax = math.max2D(list)
+            else:
+                raise SyntaxError("Invalid Input")
         maxOfList = []
         for x in range(len(list)):
             for y in range(len(list[x])):
@@ -898,7 +926,15 @@ class math:
                 list[x][y] += toMin
         
         return list
-    def map3D(list, fromMin, fromMax, toMin, toMax):
+    def map3D(list, fromMin, fromMax, toMin = None, toMax = None):
+        if None in [toMin, toMax]:
+            if toMin == None and toMax == None:
+                toMin = fromMin
+                toMax = fromMax
+                fromMin = math.min3D(list)
+                fromMax = math.max3D(list)
+            else:
+                raise SyntaxError("Invalid Input")
         maxOfList = []
         for x in range(len(list)):
             for y in range(len(list[x])):
@@ -921,7 +957,15 @@ class math:
                     list[x][y][z] += toMin
         
         return list
-    def map4D(list, fromMin, fromMax, toMin, toMax):
+    def map4D(list, fromMin, fromMax, toMin = None, toMax = None):
+        if None in [toMin, toMax]:
+            if toMin == None and toMax == None:
+                toMin = fromMin
+                toMax = fromMax
+                fromMin = math.min4D(list)
+                fromMax = math.max4D(list)
+            else:
+                raise SyntaxError("Invalid Input")
         maxOfList = []
         for x in range(len(list)):
             for y in range(len(list[x])):
@@ -949,7 +993,7 @@ class math:
                         list[x][y][z][w] += toMin
         
         return list
-    def smooth(heights, smoothing = 100):  # smooths a list of numbers making them more uniform/reducing spikes in numbers
+    def smooth1D(heights, smoothing = 100):  # smooths a list of numbers making them more uniform/reducing spikes in numbers
         for s in range(smoothing):
             for i in range(len(heights)):
                 if i not in [0, len(heights) - 1]:
@@ -1007,9 +1051,9 @@ class math:
         height = a0 + a1 * (x - x3) + a2 * (x - x3) ** 2 + a3 * (x - x3) ** 3
         
         return height
-    def smoothstep(x, p1, p2):  # a function to smoothly step
-        t = min(max((x - p1) / (p2 - p1), 0), 1)
-        return t * t * (3 - 2 * t)
+    def smoothstep(x, e0 = 1, e1 = 1, e2 = 0):  # a function to smoothly step between 0 and 1
+        X = math.clamp((x - e0) / (e1 - e2), 0, 1)
+        return X * X * (3 - 2 * X)
     def lengthOfList(poses):  # gets the distance of the imputed values (using the pythagorean theorem)
         dist = poses[0]
         for Vector in poses:
@@ -1115,6 +1159,32 @@ class math:
                 newLayer.append(max(layers2))
             layers.append(max(newLayer))
         return max(layers)
+    def RGBtoKCMY(color):  # converts rgb to kcmy(paint colors format)
+        """
+        R' = R/255
+        G' = G/255
+        B' = B/255
+        The black key (K) color is calculated from the red (R'), green (G') and blue (B') colors:
+        K = 1-max(R', G', B')
+        The cyan color (C) is calculated from the red (R') and black (K) colors:
+        C = (1-R'-K) / (1-K)
+        The magenta color (M) is calculated from the green (G') and black (K) colors:
+        M = (1-G'-K) / (1-K)
+        The yellow color (Y) is calculated from the blue (B') and black (K) colors:
+        Y = (1-B'-K) / (1-K)
+        
+        https://www.rapidtables.com/convert/color/rgb-to-cmyk.html
+        """
+        R = divideT(color.r, 255)
+        G = divideT(color.g, 255)
+        B = divideT(color.b, 255)
+        
+        k = 1 - max([R, G, B])
+        c = divideT((1 - R - k), (1 - k))
+        m = divideT((1 - G - k), (1 - k))
+        y = divideT((1 - B - k), (1 - k))
+        
+        return Vec4(k, c, m, y)
 
 
 class dists:  # multipl distance functions for different shapes
@@ -1124,34 +1194,89 @@ class dists:  # multipl distance functions for different shapes
         return length(pos - point_pos)
 
 
-class colorGradient:  # improve
-    def __init__(self):
-        self.grades = []
-        self.grade_points = []
-    def addPoint(self, point, color):
-        self.grades.append(color)
-        self.grade_points.append(point)
-    def gradeAt(self, point):
-        closest1 = 10000000
-        closest2 = 10000000
-        index1 = -1
-        index2 = -1
-        i = 0
-        for grade in self.grade_points:
-            dist_to_grade = abs(point - grade)
-            if dist_to_grade < closest1:
-                closest1 = dist_to_grade
-                index1 = i
-            elif dist_to_grade < closest2:  # remove this and calculate the other based on this to avoid baises based on dists. Also change the method of finding the closest
-                closest2 = dist_to_grade
-                index2 = i
-            i += 1
+class gradient:
+    def color(maxGap = 50):
+        return colorGradient(maxGap)
+    def number(maxGap = 50):
+        return numberGradient(maxGap)
+    def vector(maxGap = 50):
+        return colorGradient(maxGap)
+
+
+class numberGradient:  # test this
+    def __init__(self, maxGap = 50):
+        self.points = {}
+        self.maxGap = maxGap
+    def add(self, point, number):
+        self.points[str(point)] = number
+    def grade(self, point):
+        point = int(point)
+        p = point
+        for x in range(self.maxGap):
+            try:
+                color1 = self.points[str(p)]
+                break
+            except KeyError:
+                p -= 1
         
-        max_dist = closest1 + closest2
+        if abs(point - p) == self.maxGap - 1:
+            raise SyntaxError("Invalid Postion")
         
-        percent = 1 - (closest1 / max_dist)
+        distBetweenPoints = abs(point - p)
         
-        return mix(self.grades[index2], self.grades[index1], percent)
+        color2 = None
+        p2 = point
+        for x in range(self.maxGap):
+            try:
+                color2 = self.points[str(p2)]
+                break
+            except KeyError:
+                p2 += 1
+        
+        if color2 == None:
+            raise SyntaxError("Invalid Postion")
+        
+        distBetweenPoints += abs(point - p2)
+        
+        return math.mix(color1, color2, divideT((point - p), distBetweenPoints))
+
+
+class colorGradient:  # you can add points (only works in 1D) and then sample at points to craete a smooth color transition with multiple colors each with different distances apart
+    def __init__(self, maxGap = 50):
+        self.points = {}
+        self.maxGap = maxGap
+    def add(self, point, color):
+        self.points[str(point)] = color
+    def grade(self, point):
+        point = int(point)
+        p = point
+        for x in range(self.maxGap):
+            try:
+                color1 = self.points[str(p)]
+                break
+            except KeyError:
+                p -= 1
+        
+        if abs(point - p) == self.maxGap - 1:
+            raise SyntaxError("Invalid Postion")
+        
+        distBetweenPoints = abs(point - p)
+        
+        color2 = Vec3(None, None, None)
+        p2 = point
+        for x in range(self.maxGap):
+            try:
+                color2 = self.points[str(p2)]
+                break
+            except KeyError:
+                p2 += 1
+        
+        if color2 == Vec3(None, None, None):
+            raise SyntaxError("Invalid Postion")
+        
+        distBetweenPoints += abs(point - p2)
+        
+        return mix(color1, color2, divideT((point - p), distBetweenPoints))
 
 
 class noise:  # contains perlin noise functions that take in a list of random numbers thats the same dimention as the function, than the x, y, z, and w (only put the one that belong there for the demention of the function) and finaly the distance between points
@@ -1232,7 +1357,7 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                         list[x] = math.mix(noise.ridge1D(rNoise, octave[2], x), list[x], octave[4])
             return list
         else:
-            raise TypeError("Invalid Fill Type")
+            raise TypeError("Invalid Fill Type. Please use \"constant\", \"random int\", \"random float\", \"perlin\" or \"ridge\"")
     elif dem == 2:
         if type == 'constant':
             list = []
@@ -1293,7 +1418,7 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                             list[x][y] = math.mix(noise.ridge2D(rNoise, octave[2], x, y), list[x][y], octave[4])
             return list
         else:
-            raise TypeError("Invalid Fill Type")
+            raise TypeError("Invalid Fill Type. Please use \"constant\", \"random int\", \"random float\", \"perlin\" or \"ridge\"")
     elif dem == 3:
         if type == 'constant':
             list = []
@@ -1369,7 +1494,7 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                                 list[x][y][z] = math.mix(noise.ridge3D(rNoise, octave[2], x, y, z), list[x][y][z], octave[4])
             return list
         else:
-            raise TypeError("Invalid Fill Type")
+            raise TypeError("Invalid Fill Type. Please use \"constant\", \"random int\", \"random float\", \"perlin\" or \"ridge\"")
     elif dem == 4:
         if type == 'constant':
             list = []
@@ -1460,5 +1585,36 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                                     list[x][y][z][w] = math.mix(noise.ridge4D(rNoise, octave[2], x, y, z, w), list[x][y][z][w], octave[4])
             return list
         else:
-            raise TypeError("Invalid Fill Type")
+            raise TypeError("Invalid Fill Type. Please use \"constant\", \"random int\", \"random float\", \"perlin\" or \"ridge\"")
+
+
+class png:
+    def fromArray(list, name):
+        img_w, img_h = [len(list), len(list[0])]
+        data = np.zeros((img_h, img_w, 3), dtype=np.uint8)
+        data[100, 100] = [255, 0, 0]  # dont know if this line is needed
+        
+        try:
+            list[0][0].rgb
+            for x in range(img_w):
+                for y in range(img_h):
+                    data[y][x] = list[x][y].rgb
+        except AttributeError:
+            for x in range(img_w):
+                for y in range(img_h):
+                    data[y][x] = list[x][y]
+        
+        img = im.fromarray(data, 'RGB')
+        img.save(name)
+        
+        return img
+    def getArray(imageFile, size):
+        newList = array(size, 'constant', None)
+        surf = pygame.Surface(size)
+        image = surf.blit(pygame.image.load(imageFile), Vec2(0, 0))
+        for x in range(size.x):
+            for y in range(size.y):
+                newList[x][y] = surf.get_at((x, y))
+                newList[x][y] = Vec4(newList[x][y][0], newList[x][y][1], newList[x][y][2], newList[x][y][3])
+        return newList
 
