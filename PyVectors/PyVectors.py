@@ -1608,10 +1608,11 @@ class png:
         img.save(name)
         
         return img
-    def getArray(imageFile, size):
-        newList = array(size, 'constant', None)
+    def getArray(imageFile):
         surf = pygame.Surface(size)
         image = surf.blit(pygame.image.load(imageFile), Vec2(0, 0))
+        size = Vec2(image.size[0], image.size[1])
+        newList = array(size, 'constant', None)
         for x in range(size.x):
             for y in range(size.y):
                 newList[x][y] = surf.get_at((x, y))
