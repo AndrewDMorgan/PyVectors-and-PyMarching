@@ -24,6 +24,13 @@ instead of:
 
 This example lickely will work in other packages as the vector is treated as if its a list. The len() function returns the length of the tupple it represents and the vectors also suport the use of brakets to get at an index. The vectors were designed to be like this so existing code will work using it as if its a list but still allowing for easy use of math on the vectors.
 
+PyVectors also allows math to be done with combinations of vector type shown as the following (all the vector types can do this with any of the other vector types):
+
+    v1 = vec2(5)
+    v2 = vec4(2)
+    v3 = v2 + v1  # creates a vec4 of v2.xyzw + vec4(v1.x, v1.y, 0, 0)
+    v4 = v1 + v2  # creates a vec2 of v1.xy + v2.xy
+
 To import and use this package, you want to do the following (to do this, have the PyVectors python file in the same directory as the current script your using is):
 
     from PyVectors import *
