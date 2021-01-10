@@ -96,8 +96,6 @@ class vec4:  # this class stores and operates an a tuple/list containing four it
             z = self.z
             w = self.w
 
-        print(x, y, z, w, self.x, self.y, self.z, self.w)
-
         self.x = x
         self.y = y
         self.z = z
