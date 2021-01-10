@@ -40,9 +40,9 @@ The functions and classes are as following with their descriptions:
  ## *vec2*
  Stores an x and y position. Takes an input of x or x and y
  ## *vec3*
- Stores an x, y and z position. Takes an inout of x or x, y and z
+ Stores an x, y and z position. Takes an inout of x or x, y and z (you can also input a number and vec2 in any order)
  ## *vec4*
- Stores an x, y, z and w position. Takes an input of x or x and y or x, y, z, and w
+ Stores an x, y, z and w position. Takes an input of x or x and y or x, y, z, and w (you can also input two vec2s or numbers and vec2s or a number and a vec3 all in any order)
  ## *cos*
  Returns the cosine of a vector. Takes an input of a vector
  ## *sin*
@@ -174,5 +174,16 @@ returns a filled in array that can be constant, random int, random float or perl
    > creates a png from a 2D list of rgb values (a vec3). Takes in a 2d list of vec3's (or vec4's) and an image name (with .png at the end)
    > ## *getArray*
    > returns an array of vec4's (rgba) from a png image. Takes in an image (with .png)
+## *vector*
+turns a list into a vector
+## *copy*
+returns a new vector that identical to the inputed one
+## *txt*
+   > ## *read*
+   > returns a list of the text on each line of the text file. Takes in a file
+   > ## *delete*
+   > deletes a line in a text file. Takes an input of a file then line
+   > ## *write*
+   > adds a line to a text file. Takes in a file, line, and the text you want there
 
-More will be coming to this package even possibly a vec5 type. I'm also working on making it as quick and easy to write and complie/run. For more information, go to [repl.it](https://repl.it/talk/share/Vector-Types-in-Python3/83032) to see an example of PyVectors in use and how to use it. Just note that the example dose not have all the new functions and classes.
+More will be coming to this package. I'm also working on making it as quick and easy to write and complie/run. For more information, go to [repl.it](https://repl.it/talk/share/Vector-Types-in-Python3/83032) to see an example of PyVectors in use and how to use it. Just note that the example dose not have all the new functions and classes but's a grate example of the usage of the features in PyVectors.
