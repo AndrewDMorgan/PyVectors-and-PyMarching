@@ -1,6 +1,6 @@
 import numpy as np
 from PIL import Image as im
-import math as Math  # imports the math library to add cos, sin, sqrt, ect...
+import math as Math  # importing the math library to add cos, sin, sqrt, ect...
 import random, pygame
 
 
@@ -91,7 +91,13 @@ class vec4:  # this class stores and operates an a tuple/list containing four it
                     except TypeError:
                         self.z = z
                         self.w = w
-        
+            x = self.x
+            y = self.y
+            z = self.z
+            w = self.w
+
+        print(x, y, z, w, self.x, self.y, self.z, self.w)
+
         self.x = x
         self.y = y
         self.z = z
@@ -254,6 +260,9 @@ class vec3:  # this class stores and operates an a tuple/list containing three i
                 except TypeError:
                     self.y = y
                     self.z = z
+            x = self.x
+            y = self.y
+            z = self.z
         
         self.x = x
         self.y = y
