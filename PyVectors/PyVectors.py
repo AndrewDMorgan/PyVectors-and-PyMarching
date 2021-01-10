@@ -3,6 +3,14 @@ from PIL import Image as im
 import math as Math  # imports the math library to add cos, sin, sqrt, ect...
 import random, pygame
 
+
+"""
+To Do
+
+    Add a way to remove files
+"""
+
+
 small_num = 0.00000000000000001  # an incredibly small number
 
 
@@ -17,21 +25,73 @@ def divideT(value1, value2):  # to divide using the try;except method
         return 0
 
 
-class vec4:  # this function stores and operates an a tuple/list containing four items (class functions gone over in the Vec2 class)
+class vec4:  # this class stores and operates an a tuple/list containing four items (class functions gone over in the Vec2 class)
     def __init__(self, x=None, y=None, z=None, w=None):
-        if None in [x, y, z, w]:
-            if y == None:
-                y = x
-                z = x
-                w = x
-            elif z == None:
-                z = x
-                w = y
-            else:
-                if x == None:
-                    raise SyntaxError("Position is undefined, please put an x or an x and y or an x, y, z, and w")
+        try:
+            if None in [x, y, z, w]:
+                if y == None:
+                    y = x
+                    z = x
+                    w = x
+                elif z == None:
+                    z = x
+                    w = y
                 else:
-                    raise SyntaxError("Requires more information, please put an x or an x and y or an x, y, z, and w")
+                    if x == None:
+                        raise SyntaxError("Position is undefined, please put an x or an x and y or an x, y, z, and w")
+                    else:
+                        raise SyntaxError("Requires more information, please put an x or an x and y or an x, y, z, and w")
+        except AttributeError:  # filling it in with the other vectors components
+            try:
+                length = len(x)
+                if length == 2:
+                    self.x = x.x
+                    self.y = x.y
+                    
+                    try:
+                        length = len(y)
+                        if length == 2:
+                            self.z = y.x
+                            self.w = y.y
+                        else:
+                            raise TypeError("Vector Is To Long")
+                    except TypeError:
+                        self.z = y
+                        self.w = z
+                elif length == 3:
+                    self.x = x.x
+                    self.y = x.y
+                    self.z = x.z
+                    self.w = y
+                else:
+                    raise TypeError("Vector Is To Long")
+            except TypeError:
+                self.x = x
+                try:
+                    length = len(y)
+                    if length == 2:
+                        self.y = y.x
+                        self.z = y.y
+                        self.w = z
+                    elif length == 3:
+                        self.y = y.x
+                        self.z = y.y
+                        self.w = y.z
+                    else:
+                        raise TypeError("Vector Is To Long")
+                except TypeError:
+                    self.y = y
+                    try:
+                        length = len(z)
+                        if length == 2:
+                            self.z = z.x
+                            self.w = z.y
+                        else:
+                            raise TypeError("Vector Is To Long")
+                    except TypeError:
+                        self.z = z
+                        self.w = w
+        
         self.x = x
         self.y = y
         self.z = z
@@ -161,17 +221,40 @@ class vec4:  # this function stores and operates an a tuple/list containing four
         return Vec4(round(self.x), round(self.y), round(self.z), round(self.w))
 
 
-class vec3:  # this function stores and operates an a tuple/list containing three items (class functions gone over in the Vec2 class)
+class vec3:  # this class stores and operates an a tuple/list containing three items (class functions gone over in the Vec2 class except for .cross)
     def __init__(self, x=None, y=None, z=None):
-        if None in [x, y, z]:
-            if y == None:
-                y = x
-                z = x
-            else:
-                if x == None:
-                    raise SyntaxError("Position is undefined, please put an x or an x, y and z")
+        try:
+            if None in [x, y, z]:
+                if y == None:
+                    y = x
+                    z = x
                 else:
-                    SyntaxError("Requires more information, please put an x or an x, y and z")
+                    if x == None:
+                        raise SyntaxError("Position is undefined, please put an x or an x, y and z")
+                    else:
+                        SyntaxError("Requires more information, please put an x or an x, y and z")
+        except AttributeError:
+            try:
+                length = len(x)
+                if length == 2:
+                    self.x = x.x
+                    self.y = x.y
+                    self.z = y
+                else:
+                    raise TypeError("Vectors Is To Long")
+            except TypeError:
+                self.x = x
+                try:
+                    length = len(y)
+                    if length == 2:
+                        self.y = y.x
+                        self.z = y.y
+                    else:
+                        raise TypeError("Vectors Is To Long")
+                except TypeError:
+                    self.y = y
+                    self.z = z
+        
         self.x = x
         self.y = y
         self.z = z
@@ -233,7 +316,7 @@ class vec3:  # this function stores and operates an a tuple/list containing thre
             return True
         else:
             return False
-    def __eq__(self, other):  # idk but this may not be working correctly
+    def __eq__(self, other):
         if self.x == other.x and self.y == other.y and self.z == other.z:
             return True
         else:
@@ -302,13 +385,14 @@ class vec3:  # this function stores and operates an a tuple/list containing thre
         return Vec3(round(self.x), round(self.y), round(self.z))
 
 
-class vec2:  # this function stores and operates an a tuple/list containing two items
+class vec2:  # this class stores and operates on a tuple/list containing two items
     def __init__(self, x=None, y=None):  # initializing the tuple/list
-        if None in [x, y]:  # filling in the empty places of the Vector
+        if None in [x, y]:  # filling in the empty places of the Vector (i like to call this smart fill so you can do things like vec2(0) == vec2(0, 0))
             if y == None:
                 y = x
             else:
                 raise SyntaxError("Position is undefined, please put an x or an x and y")
+        
         # defining the values of the Vector
         self.x = x
         self.y = y
@@ -370,8 +454,8 @@ class vec2:  # this function stores and operates an a tuple/list containing two 
             return True
         else:
             return False
-    def __ne__(self, other):
-        if self.x != other.x and self.y != other.y:  # checks if the Vectors are not equal like Vector1 != Vector2
+    def __ne__(self, other):  # checks if the Vectors are not equal like Vector1 != Vector2
+        if self.x != other.x and self.y != other.y:
             return True
         else:
             return False
@@ -421,15 +505,15 @@ class vec2:  # this function stores and operates an a tuple/list containing two 
         return Vec2(math.fract(self.x), math.fract(self.y))
     def __len__(self):  # returns the length of the Vector when you use the len() function
         return 2
-    def __getitem__(self, key):
+    def __getitem__(self, key):  # gets the item at an index
         return self.xy[key]
-    def dot(self, other):
+    def dot(self, other):  # returns the dot product of tow vectors
         return (self.x * other.x + self.y * other.y)
-    def __round__(self):
+    def __round__(self):  # rounds the vector
         return Vec2(round(self.x), round(self.y))
 
 
-class Vec4:  # this class dosent use the smart fill in making it slightly faster
+class Vec4:  # this class dosent use the smart fill making it slightly faster (what i mean by slighty faster is a 0.00000000001% speed increase but when doing things like ray tracing this version of this class will cause a noticable speed up)
     def __init__(self, x, y, z, w):
         self.x = x
         self.y = y
@@ -561,7 +645,7 @@ class Vec4:  # this class dosent use the smart fill in making it slightly faster
         return Vec4(round(self.x), round(self.y), round(self.z), round(self.w))
 
 
-class Vec3:  # this class dosent use the smart fill in making it slightly faster
+class Vec3:  # this class dosent use the smart fill making it slightly faster (what i mean by slighty faster is a 0.00000000001% speed increase but when doing things like ray tracing this version of this class will cause a noticable speed up)
     def __init__(self, x, y, z):
         self.x = x
         self.y = y
@@ -693,7 +777,7 @@ class Vec3:  # this class dosent use the smart fill in making it slightly faster
         return Vec3(round(self.x), round(self.y), round(self.z))
 
 
-class Vec2:  # this class dosent use the smart fill in making it slightly faster
+class Vec2:  # this class dosent use the smart fill making it slightly faster (what i mean by slighty faster is a 0.00000000001% speed increase but when doing things like ray tracing this version of this class will cause a noticable speed up)
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -885,7 +969,7 @@ class math:
         return min(max(val, min_), max_)
     def sqrt(value):  # square root
         return Math.sqrt(value)
-    def map1D(list, fromMin, fromMax, toMin = None, toMax = None):  # scales a list of data aka stretching and shifting the data set to change its range
+    def map1D(list, fromMin, fromMax, toMin = None, toMax = None):  # changes the range of a 1d array of data (while keeping the detail of the numbers)
         if None in [toMin, toMax]:
             if toMin == None and toMax == None:
                 toMin = fromMin
@@ -903,7 +987,7 @@ class math:
             list[x] += toMin
         
         return list
-    def map2D(list, fromMin, fromMax, toMin = None, toMax = None):
+    def map2D(list, fromMin, fromMax, toMin = None, toMax = None):  # changes the range of a 2d array of data (while keeping the detail of the numbers)
         if None in [toMin, toMax]:
             if toMin == None and toMax == None:
                 toMin = fromMin
@@ -926,7 +1010,7 @@ class math:
                 list[x][y] += toMin
         
         return list
-    def map3D(list, fromMin, fromMax, toMin = None, toMax = None):
+    def map3D(list, fromMin, fromMax, toMin = None, toMax = None):  # changes the range of a 3d array of data (while keeping the detail of the numbers)
         if None in [toMin, toMax]:
             if toMin == None and toMax == None:
                 toMin = fromMin
@@ -957,7 +1041,7 @@ class math:
                     list[x][y][z] += toMin
         
         return list
-    def map4D(list, fromMin, fromMax, toMin = None, toMax = None):
+    def map4D(list, fromMin, fromMax, toMin = None, toMax = None):  # changes the range of a 4d array of data (while keeping the detail of the numbers)
         if None in [toMin, toMax]:
             if toMin == None and toMax == None:
                 toMin = fromMin
@@ -1109,12 +1193,12 @@ class math:
         return math.spline1D([ty1, ty2, ty3, ty4], (nx - i) * h + h, h)
     def min1D(list):  # gets the min of a list thats dimetion is stated
         return min(list)
-    def min2D(list):
+    def min2D(list):  # gets the min of a 2d array
         layers = []
         for x in list:
             layers.append(min(x))
         return min(layers)
-    def min3D(list):
+    def min3D(list):  # gets the min of a 3d array
         layers = []
         for x in list:
             newLayer = []
@@ -1122,7 +1206,7 @@ class math:
                 newLayer.append(min(y))
             layers.append(min(newLayer))
         return min(layers)
-    def min4D(list):
+    def min4D(list):  # gets the min of a 4d array
         layers = []
         for x in list:
             newLayer = []
@@ -1135,12 +1219,12 @@ class math:
         return min(layers)
     def max1D(list):  # gets the max of a list thats dimetion is stated
         return max(list)
-    def max2D(list):
+    def max2D(list):  # gets the max of a 2d array
         layers = []
         for x in list:
             layers.append(max(x))
         return max(layers)
-    def max3D(list):
+    def max3D(list):  # gets the max of a 3d array
         layers = []
         for x in list:
             newLayer = []
@@ -1148,7 +1232,7 @@ class math:
                 newLayer.append(max(y))
             layers.append(max(newLayer))
         return max(layers)
-    def max4D(list):
+    def max4D(list):  # gets the max of a 4d array
         layers = []
         for x in list:
             newLayer = []
@@ -1159,7 +1243,7 @@ class math:
                 newLayer.append(max(layers2))
             layers.append(max(newLayer))
         return max(layers)
-    def RGBtoKCMY(color):  # converts rgb to kcmy(paint colors format)
+    def RGBtoKCMY(color):  # converts rgb to kcmy(paint color format)
         """
         R' = R/255
         G' = G/255
@@ -1194,7 +1278,7 @@ class dists:  # multipl distance functions for different shapes
         return length(pos - point_pos)
 
 
-class gradient:
+class gradient:  # a way to make gradients that specifies what they are being used for
     def color(maxGap = 50):
         return colorGradient(maxGap)
     def number(maxGap = 50):
@@ -1203,7 +1287,7 @@ class gradient:
         return colorGradient(maxGap)
 
 
-class numberGradient:  # test this
+class numberGradient:  # a gradient for numbers
     def __init__(self, maxGap = 50):
         self.points = {}
         self.maxGap = maxGap
@@ -1281,7 +1365,7 @@ class colorGradient:  # you can add points (only works in 1D) and then sample at
 
 class noise:  # contains perlin noise functions that take in a list of random numbers thats the same dimention as the function, than the x, y, z, and w (only put the one that belong there for the demention of the function) and finaly the distance between points
     def perlin1D(randNoise, h, x):  # perlin noise at the dimention stated
-        return math.spline(randNoise, x, h)
+        return math.spline1D(randNoise, x, h)
     def perlin2D(randNoise, h, x, y):
         return math.spline2D(randNoise, x, y, h)
     def perlin3D(randNoise, h, x, y, z):
@@ -1289,7 +1373,7 @@ class noise:  # contains perlin noise functions that take in a list of random nu
     def perlin4D(randNoise, h, x, y, z, w):
         return math.spline4D(randNoise, x, y, z, w, h)
     def ridge1D(randNoise, h, x):  # ridge noise aka perlin noise with abrupt ridges
-        noise = math.spline(randNoise, x, h)
+        noise = math.spline1D(randNoise, x, h)
         noise = abs(noise)
         noise *= -1
         return noise
@@ -1588,8 +1672,8 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
             raise TypeError("Invalid Fill Type. Please use \"constant\", \"random int\", \"random float\", \"perlin\" or \"ridge\"")
 
 
-class png:
-    def fromArray(list, name):
+class png:  # a tool to create and read png images
+    def fromArray(list, name):  # converts a 2d array of colors into a png image
         img_w, img_h = [len(list), len(list[0])]
         data = np.zeros((img_h, img_w, 3), dtype=np.uint8)
         data[100, 100] = [255, 0, 0]  # dont know if this line is needed
@@ -1608,7 +1692,7 @@ class png:
         img.save(name)
         
         return img
-    def getArray(imageFile):
+    def getArray(imageFile):  # creates a 2d array of the pixel colors of a png
         surf = pygame.Surface(Vec2(5000, 3000))
         image = surf.blit(pygame.image.load(imageFile), Vec2(0, 0))
         size = Vec2(image.size[0], image.size[1])
@@ -1618,4 +1702,59 @@ class png:
                 newList[x][y] = surf.get_at((x, y))
                 newList[x][y] = Vec4(newList[x][y][0], newList[x][y][1], newList[x][y][2], newList[x][y][3])
         return newList
+
+
+def vector(list):  # converts a list/tuple into a vectors
+    if len(list) == 2:
+        return Vec2(vector[0], vector[1])
+    elif len(list) == 3:
+        return Vec3(vector[0], vector[1], vector[2])
+    elif len(list) == 4:
+        return Vec4(vector[0], vector[1], vector[2], vector[3])
+    else:
+        raise TypeError("List Is To Long")
+
+
+def copy(vector):  # copys a vector (returns a new vector with the same data as the old/current vector)
+    if len(vector) == 2:
+        return Vec2(vector.x, vector.y)
+    elif len(vector) == 3:
+        return Vec3(vector.x, vector.y, vector.z)
+    elif len(vector) == 4:
+        return Vec4(vector.x, vector.y, vector.z, vector.w)
+
+
+class txt:  # a text file ateration tool
+    def read(file):  # returns a list of each line in a file
+        return open(file).read().split('\n')
+    def delete(file, line):  # deltes a line for a file
+        text = open(file).read().split('\n')
+        del text[line]
+        newData = ''
+        text2 = []
+
+        for t in text:
+            text2.append([t, '\n'])
+        
+        for i in range(len(text2) - 1):
+            newData += text2[i][0] + text2[i][1]
+        newData += text2[len(text2) - 1][0]
+
+        with open(file, 'w') as out:
+            out.write(newData)
+    def write(file, line, Text):  # writes a new line onto a file
+        text = open(file).read().split('\n')
+        text.insert(line, Text)
+        text2 = []
+        newData = ''
+        
+        for t in text:
+            text2.append([t, '\n'])
+        
+        for i in range(len(text2) - 1):
+            newData += text2[i][0] + text2[i][1]
+        newData += text2[len(text2) - 1][0]
+
+        with open(file, 'w') as out:
+            out.write(newData)
 
