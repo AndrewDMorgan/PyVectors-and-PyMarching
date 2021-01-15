@@ -14,7 +14,7 @@ It also works a list and can be used in pygame instead of using lists. An exampl
 
     point = vec2(1, 5)
     size = vec2(5)
-    pygame.draw.rect(displaySurface, vec3(255, 255, 0), vec4(point.x, point.y, size.x, size.y))
+    pygame.draw.rect(displaySurface, vec3(255, 255, 0), vec4(point, size))
 
 instead of:
 
@@ -49,6 +49,8 @@ The functions and classes are as following with their descriptions:
  Returns the sin of a vector. Takes an input of a vector
  ## *tan*
  Returns the tangent of a vector. Takes an input of a vector
+ ## *ceil*
+ Rounds the vector up. Takes in a vector
  ## *clamp*
  Clamps a vector between a minimum and maximum. Takes an input of a vector, minimum and maximum
  ## *normalize*
@@ -65,11 +67,40 @@ The functions and classes are as following with their descriptions:
  Returns the dot product of a vector. Takes an input of two vectors
  ## *length*
  Returns the length/distance of a vector. Takes an input of a vector
- ## *math.*
+ ## *lists*
+   > ## *add (1D - 4D)*
+   > Adds two lists. Takes in two lists
+   > ## *sub (1D - 4D)*
+   > Subtracts two lists. Takes in two lists
+   > ## *div (1D - 4D)*
+   > Divides two lists. Takes in two lists
+   > ## *mult (1D - 4D)*
+   > Multiples two lists. Takes in two lists
+   > ## *pow (1D - 4D)*
+   > Puts one list to the power of the other list. Takes in two lists
+   > ## *floor_div (1D - 4D)*
+   > Floor divides two lists. Takes in two lists
+   > ## *mod (1D - 4D)*
+   > Mods two lists. Takes in two lists
+   > ## *int (1D - 4D)*
+   > Intergerises a list. Takes in two lists
+   > ## *round (1D - 4D)*
+   > Rounds a list. Takes in two lists
+   > ## *floor (1D - 4D)*
+   > Floors a list. Takes in two lists
+   > ## *ceil (1D - 4D)*
+   > Gets the ceil of a list. Takes in two lists
+   > ## *abs (1D - 4D)*
+   > Gets the absulute of a list. Takes in two lists
+   > ## *fract (1D - 4D)*
+   > Gets the fract a list. Takes in two lists
+ ## *math*
    > ## *cos*
    > Returns te cosine of a number. Takes an input of a number
    > ## *sin*
    > Returns the sin of a number. Takes an input of a number
+   > ## *ceil*
+   > Returns the ceil of a number. Takes in a number
    > ## *tan*
    > Returns the tangent of a number. Takes an input of a number
    > ## *mix*
@@ -95,95 +126,95 @@ The functions and classes are as following with their descriptions:
    > ## *map4D*
    > Scales/streches a 4D list of numbers to a new range of numbers. Takes an input of a list, min of list, max of list, new min, new max
    > ## *smooth*
-   > makes the numebrs in a list more uniform/smooth and less spiky. Takes an input of a list and the number of soothing itterations
+   > Makes the numebrs in a list more uniform/smooth and less spiky. Takes an input of a list and the number of soothing itterations
    > ## *interplate2*
-   > linearly interplates between two points based on a point inbetween. takes and input of the distance between points (a single number), the position inbetween numbers and a list of the two points
+   > Linearly interplates between two points based on a point inbetween. takes and input of the distance between points (a single number), the position inbetween numbers and a list of the two points
    > ## *interplate3*
-   > non linearly interplates between three points. Takes an input of the distance between points, the position in between points and the points (the points list can be infinitly long and it will hash for the two points around the given point)
+   > Non linearly interplates between three points. Takes an input of the distance between points, the position in between points and the points (the points list can be infinitly long and it will hash for the two points around the given point)
    > ## *interplate5*
-   > non linearly interplates between five points. Takes an input of the distance between points, the position in between points and the points (the points list can be infinitly long and it will hash for the two points around the given point)
+   > Non linearly interplates between five points. Takes an input of the distance between points, the position in between points and the points (the points list can be infinitly long and it will hash for the two points around the given point)
    > ## *smoothstep*
-   > smoothly steps from 0 - 1. Takes an input of the position between points, point1 and point2
+   > Smoothly steps from 0 - 1. Takes an input of the position between points, point1 and point2
    > ## *spline1D*
-   > splines on a 1D level between two points in a list that surround the given position. Takes an input of a list of values to spline, the position between points (x) and the distance between points
+   > Splines on a 1D level between two points in a list that surround the given position. Takes an input of a list of values to spline, the position between points (x) and the distance between points
    > ## *spline2D*
-   > splines on a 2D level between two points in a list that surround the given position. Takes an input of a list of values to spline, the position between points (x, y) and the distance between points
+   > Splines on a 2D level between two points in a list that surround the given position. Takes an input of a list of values to spline, the position between points (x, y) and the distance between points
    > ## *spline3D*
-   > splines on a 3D level between two points in a list that surround the given position. Takes an input of a list of values to spline, the position between points (x, y, z) and the distance between points
+   > Splines on a 3D level between two points in a list that surround the given position. Takes an input of a list of values to spline, the position between points (x, y, z) and the distance between points
    > ## *spline4D*
-   > splines on a 4D level between two points in a list that surround the given position. Takes an input of a list of values to spline, the position between points (x, y, z, w) and the distance between points
+   > Splines on a 4D level between two points in a list that surround the given position. Takes an input of a list of values to spline, the position between points (x, y, z, w) and the distance between points
    > ## *min1D*
-   > gets the min of a 1D array. Takes in a list
+   > Gets the min of a 1D array. Takes in a list
    > ## *min2D*
-   > gets the min of a 2D array. Takes in a list
+   > Gets the min of a 2D array. Takes in a list
    > ## *min3D*
-   > gets the min of a 3D array. Takes in a list
+   > Gets the min of a 3D array. Takes in a list
    > ## *min4D*
-   > gets the min of a 4D array. Takes in a list
+   > Gets the min of a 4D array. Takes in a list
    > ## *max1D*
-   > gets the max of a 1D array. Takes in a list
+   > Gets the max of a 1D array. Takes in a list
    > ## *max2D*
-   > gets the max of a 2D array. Takes in a list
+   > Gets the max of a 2D array. Takes in a list
    > ## *max3D*
-   > gets the max of a 3D array. Takes in a list
+   > Gets the max of a 3D array. Takes in a list
    > ## *max4D*
-   > gets the max of a 4D array. Takes in a list
- ## *dists.*
+   > Gets the max of a 4D array. Takes in a list
+ ## *dists*
    > ## *distToCircularPoint*
    > Returns the distance to a circle/sphere/hypersphere. Takes an input of two vectors and a radius
    > ## *distToPoint*
    > Returns the distance to a point. Takes an input of two vectors
 ## *gradient*
    > ## *color*
-   > returns a color gradient. Can take ina max gap (the defult is 50)
+   > Returns a color gradient. Can take ina max gap (the defult is 50)
    > ## *number*
-   > returns a number gradient. Can take ina max gap (the defult is 50)
+   > Returns a number gradient. Can take ina max gap (the defult is 50)
    > ## *vector*
-   > returns a vector gradient. Can take ina max gap (the defult is 50)
+   > Returns a vector gradient. Can take ina max gap (the defult is 50)
 ## *numberGradient*
    > ## *add*
-   > adds a point to the gradient. Takes in a point and number
+   > Adds a point to the gradient. Takes in a point and number
    > ## *grade*
-   > returns the value at the inputed position. Takes in a point
+   > Returns the value at the inputed position. Takes in a point
 ## *colorGradient*
    > ## *add*
-   > adds a point of color to the gradient. Takes in a point and color
+   > Adds a point of color to the gradient. Takes in a point and color
    > ## *grade*
-   > returns the color at a position (not working perfectly yet). Takes in a position in the gradient
+   > Returns the color at a position (not working perfectly yet). Takes in a position in the gradient
 ## *noise*
    > ## *perlin1D*
-   > gives a height based on a 1D list of noise and based on a position. Takes and input of random noise, distance between points and the x position
+   > Gives a height based on a 1D list of noise and based on a position. Takes and input of random noise, distance between points and the x position
    > ## *perlin2D*
-   > gives a height based on a 2D list of noise and based on a position. Takes and input of random noise, distance between points and the x, y position
+   > Gives a height based on a 2D list of noise and based on a position. Takes and input of random noise, distance between points and the x, y position
    > ## *perlin3D*
-   > gives a height based on a 3D list of noise and based on a position. Takes and input of random noise, distance between points and the x, y, z position
+   > Gives a height based on a 3D list of noise and based on a position. Takes and input of random noise, distance between points and the x, y, z position
    > ## *perlin4D*
-   > gives a height based on a 4D list of noise and based on a position (The 4D noise hasnt been tested but should work). Takes and input of random noise, distance between points and the x, y, z, w position
+   > Gives a height based on a 4D list of noise and based on a position (The 4D noise hasnt been tested but should work). Takes and input of random noise, distance between points and the x, y, z, w position
    > ## *ridge1D*
-   > gives a height based on a 1D list of noise and based on a position and generates with noticable ridges. Takes and input of random noise, distance between points and the x position
+   > Gives a height based on a 1D list of noise and based on a position and generates with noticable ridges. Takes and input of random noise, distance between points and the x position
    > ## *ridge2D*
-   > gives a height based on a 2D list of noise and based on a position and generates with noticable ridges. Takes and input of random noise, distance between points and the x, y position
+   > Gives a height based on a 2D list of noise and based on a position and generates with noticable ridges. Takes and input of random noise, distance between points and the x, y position
    > ## *ridge3D*
-   > gives a height based on a 3D list of noise and based on a position and generates with noticable ridges. Takes and input of random noise, distance between points and the x, y, z position
+   > Gives a height based on a 3D list of noise and based on a position and generates with noticable ridges. Takes and input of random noise, distance between points and the x, y, z position
    > ## *ridge4D*
-   > gives a height based on a 4D list of noise and based on a position and generates with noticable ridges (The 4D noise hasnt been tested but should work). Takes and input of random noise, distance between points and the x, y, z, w position
+   > Gives a height based on a 4D list of noise and based on a position and generates with noticable ridges (The 4D noise hasnt been tested but should work). Takes and input of random noise, distance between points and the x, y, z, w position
 ## *array*
-returns a filled in array that can be constant, random int, random float or perlin. Takes in a size (vec2, vec3, vec4, tuple and lists work), the type of fill (constant, random int, random float or perlin) and the data for the type in a list, vector or tuple (constant; number (not in list), random int; min, max, random float; min, max, perlin; list of octaves (min 1 octave max inf octaves) each being the following; min, max, distance between points, type (add, sub or mix), if using mix then add the percentage (0 - 1) to mix by, ridge; same as perlin but is ridge noise meaning theres a buch of ridges but still veriation (abs(perlin noise) * -1 = ridge noise))
+Returns a filled in array that can be constant, random int, random float or perlin. Takes in a size (vec2, vec3, vec4, tuple and lists work), the type of fill (constant, random int, random float or perlin) and the data for the type in a list, vector or tuple (constant; number (not in list), random int; min, max, random float; min, max, perlin; list of octaves (min 1 octave max inf octaves) each being the following; min, max, distance between points, type (add, sub or mix), if using mix then add the percentage (0 - 1) to mix by, ridge; same as perlin but is ridge noise meaning theres a buch of ridges but still veriation (abs(perlin noise) * -1 = ridge noise))
 ## *png*
    > ## *fromArray*
-   > creates a png from a 2D list of rgb values (a vec3). Takes in a 2d list of vec3's (or vec4's) and an image name (with .png at the end)
+   > Creates a png from a 2D list of rgb values (a vec3). Takes in a 2d list of vec3's (or vec4's) and an image name (with .png at the end)
    > ## *getArray*
-   > returns an array of vec4's (rgba) from a png image. Takes in an image (with .png)
+   > Returns an array of vec4's (rgba) from a png image. Takes in an image (with .png)
 ## *vector*
-turns a list into a vector
+Turns a list into a vector
 ## *copy*
-returns a new vector that identical to the inputed one
+Returns a new vector that identical to the inputed one
 ## *txt*
    > ## *read*
-   > returns a list of the text on each line of the text file. Takes in a file
+   > Returns a list of the text on each line of the text file. Takes in a file
    > ## *delete*
-   > deletes a line in a text file. Takes an input of a file then line
+   > Deletes a line in a text file. Takes an input of a file then line
    > ## *write*
-   > adds a line to a text file. Takes in a file, line, and the text you want there
+   > Adds a line to a text file. Takes in a file, line, and the text you want there
 
-More will be coming to this package. I'm also working on making it as quick and easy to write and complie/run. For more information, go to [repl.it](https://repl.it/talk/share/Vector-Types-in-Python3/83032) to see an example of PyVectors in use and how to use it. Just note that the example dose not have all the new functions and classes but's a grate example of the usage of the features in PyVectors.
+This package is far from completion and keeps growing line by line day by day. I wont stop adding to it till I've added everything I could ever add. For more information, go to [repl.it](https://repl.it/talk/share/Vector-Types-in-Python3/83032) to see an example of PyVectors in use and how to use it. Just note that its using an older version (it will still be compatable) and therfore will not be using some of the newer shortcuts.
