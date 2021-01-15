@@ -1,13 +1,15 @@
-import numpy as np
-from PIL import Image as im
+import numpy as np  # importing numpy to create png's
+from PIL import Image as im  # importing PIL to create png's
 import math as Math  # importing the math library to add cos, sin, sqrt, ect...
-import random, pygame
+import random, pygame  # importing random for perlim noise and more and importing pygame to get the colors of a png
 
 
 """
 To Do
 
     Add a way to remove files
+    Add some functions to the math class to add, subtract, divide, multiply, mix, floor divide, abs, int, ect... list of 1d, 2d, 3d and 4d
+    Make it so perlin noise dosent generate extra random numbers
 """
 
 
@@ -210,7 +212,7 @@ class vec4:  # this class stores and operates an a tuple/list containing four it
     def cos(self):
         return Vec4(math.cos(self.x), math.cos(self.y), math.cos(self.z), math.cos(self.w))
     def length(self):
-        return math.lengthOfList(self.xyzw)
+        return math.math.length(self.xyzw)
     def floor(self):
         return Vec4(math.floor(self.x), math.floor(self.y), math.floor(self.z), math.floor(self.w))
     def fract(self):
@@ -377,7 +379,7 @@ class vec3:  # this class stores and operates an a tuple/list containing three i
     def cos(self):
         return Vec3(math.cos(self.x), math.cos(self.y), math.cos(self.z))
     def length(self):
-        return math.lengthOfList(self.xyz)
+        return math.math.length(self.xyz)
     def floor(self):
         return Vec3(math.floor(self.x), math.floor(self.y), math.floor(self.z))
     def fract(self):
@@ -505,7 +507,7 @@ class vec2:  # this class stores and operates on a tuple/list containing two ite
     def cos(self):  # returns the cosine of the Vector
         return Vec2(math.cos(self.x), math.cos(self.y))
     def length(self):  # gets the length of the Vector (length(Vector) also works)
-        return math.lengthOfList(self.xy)
+        return math.math.length(self.xy)
     def floor(self):  # gets the floor of the Vector
         return Vec2(math.floor(self.x), math.floor(self.y))
     def fract(self):  # gets the decimal value of the number
@@ -637,7 +639,7 @@ class Vec4:  # this class dosent use the smart fill making it slightly faster (w
     def cos(self):
         return Vec4(math.cos(self.x), math.cos(self.y), math.cos(self.z), math.cos(self.w))
     def length(self):
-        return math.lengthOfList(self.xyzw)
+        return math.math.length(self.xyzw)
     def floor(self):
         return Vec4(math.floor(self.x), math.floor(self.y), math.floor(self.z), math.floor(self.w))
     def fract(self):
@@ -769,7 +771,7 @@ class Vec3:  # this class dosent use the smart fill making it slightly faster (w
     def cos(self):
         return Vec3(math.cos(self.x), math.cos(self.y), math.cos(self.z))
     def length(self):
-        return math.lengthOfList(self.xyz)
+        return math.math.length(self.xyz)
     def floor(self):
         return Vec3(math.floor(self.x), math.floor(self.y), math.floor(self.z))
     def fract(self):
@@ -890,7 +892,7 @@ class Vec2:  # this class dosent use the smart fill making it slightly faster (w
     def cos(self):
         return Vec2(math.cos(self.x), math.cos(self.y))
     def length(self):
-        return math.lengthOfList(self.xy)
+        return math.math.length(self.xy)
     def floor(self):
         return Vec2(math.floor(self.x), math.floor(self.y))
     def fract(self):
@@ -1010,7 +1012,7 @@ class math:
             maxOfList.append(max(list[x]))
         
         maxOfList = max(maxOfList)
-        scaler = (toMax - toMin) / maxOfList
+        scaler = divideT((toMax - toMin), maxOfList)
         for x in range(len(list)):
             for y in range(len(list[x])):
                 list[x][y] *= scaler
@@ -1145,13 +1147,13 @@ class math:
     def smoothstep(x, e0 = 1, e1 = 1, e2 = 0):  # a function to smoothly step between 0 and 1
         X = math.clamp((x - e0) / (e1 - e2), 0, 1)
         return X * X * (3 - 2 * X)
-    def lengthOfList(poses):  # gets the distance of the imputed values (using the pythagorean theorem)
+    def length(poses):  # gets the distance of the imputed values (using the pythagorean theorem)
         dist = poses[0]
         for Vector in poses:
             dist = math.sqrt((dist * dist) + (Vector * Vector))
         return dist
-    def normalizeList(values):  # normalizes a list of values (for this function you need to put in the .xyz value of the Vector, the functions above do this for you)
-        mag = lengthOfList(values)  # gets the magnitude
+    def normalize(values):  # normalizes a list of values (for this function you need to put in the .xyz value of the Vector, the functions above do this for you)
+        mag = math.length(values)  # gets the magnitude
         new_values = []
         for old_value in values:
             new_values.append(divide(old_value, mag))  # changes the values by the magnitude
@@ -1712,11 +1714,12 @@ class png:  # a tool to create and read png images
 
 
 def vector(list):  # converts a list/tuple into a vectors
-    if len(list) == 2:
+    length = len(list)
+    if length == 2:
         return Vec2(vector[0], vector[1])
-    elif len(list) == 3:
+    elif length == 3:
         return Vec3(vector[0], vector[1], vector[2])
-    elif len(list) == 4:
+    elif length == 4:
         return Vec4(vector[0], vector[1], vector[2], vector[3])
     else:
         raise TypeError("List Is To Long")
