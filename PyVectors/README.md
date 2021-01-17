@@ -1,30 +1,32 @@
 # Vector Types in Python3 + More
 
-## PyVectors allows for vec2, vec3 and vec4 types in python3. It also overloads the math operators to allow you to easily do math with vectors show as the following:
+# *General Features:*
+
+### PyVectors allows for vec2, vec3 and vec4 types in python3. It also overloads the math operators to allow you to easily do math with vectors show as the following:
 
     vector1,vector2,vector3 = vec3(1, 3, 5),vec3(2, 8, 3),vec3(1, 5, 3)
     vector1 += vector2 / vector3
 
-## Instead of:
+### Instead of:
 
     vector1,vector2,vector3 = [1, 3, 5],[2, 8, 3],[1, 5, 3]
     vector1 = [vector1[0] + (vector2[0] / vector3[0]), vector1[1] + (vector2[1] / vector3[1]), vector1[2] + (vector2[2] / vector3[2])]
 
-## It also works a list and can be used in pygame instead of using lists. An example of this is the following:
+### It also works a list and can be used in pygame instead of using lists. An example of this is the following:
 
     point = vec2(1, 5)
     size = vec2(5)
     pygame.draw.rect(displaySurface, vec3(255, 255, 0), vec4(point, size))
 
-## instead of:
+### instead of:
 
     point = [1, 5]
     size = [5, 5]
     pygame.draw.rect(displaySurface, [255, 255, 0], [point[0], point[1], size[0], size[1]])
 
-## This example lickely will work in other packages as the vector is treated as if its a list. The len() function returns the length of the tupple it represents and the vectors also suport the use of brakets to get at an index. The vectors were designed to be like this so existing code will work using it as if its a list but still allowing for easy use of math on the vectors.
+### This example lickely will work in other packages as the vector is treated as if its a list. The len() function returns the length of the tupple it represents and the vectors also suport the use of brakets to get at an index. The vectors were designed to be like this so existing code will work using it as if its a list but still allowing for easy use of math on the vectors.
 
-## PyVectors also allows math to be done with combinations of vector type shown as the following (all the vector types can do this with any of the other vector types):
+### PyVectors also allows math to be done with combinations of vector type shown as the following (all the vector types can do this with any of the other vector types):
 
     v1 = vec2(5)
     v2 = vec4(2)
@@ -35,16 +37,16 @@ To import and use this package, you want to do the following (to do this, have t
 
     from PyVectors import *
 
-# Planned Features:
+# *Planned Features:*
 
  ## *A Way To Delete txt And png Files*
   > This function will be under the txt and png class named as remove taking in a file name (with .png or .txt)
  ## *Have The Perlin Noise Generator Under The Array Class Not Generate Extra Numbers*
   > This will not affect the perlin noise, it will just make it run quicker as it dosent have to generate unused random numbers (there are thousands of extra numbers and generating and creating random numbers in mass amounts in very slow)
 
-# New Features:
+# *New Features:*
 
- ## "Newest Commit"
+ ## *Newest Commit*
   > More documentation in the PyVectors file
   
   > A mix function under the lists class
@@ -62,7 +64,7 @@ To import and use this package, you want to do the following (to do this, have t
    
    > A ceil function (for vectors used like the other functions for vectors)
 
-# Info On All The Functions/Classes:
+# *Info On All The Functions/Classes:*
 
  ## *vec2*
  Stores an x and y position. Takes an input of x or x and y
