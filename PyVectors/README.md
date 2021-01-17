@@ -24,16 +24,14 @@
     size = [5, 5]
     pygame.draw.rect(displaySurface, [255, 255, 0], [point[0], point[1], size[0], size[1]])
 
-### This example lickely will work in other packages as the vector is treated as if its a list. The len() function returns the length of the tupple it represents and the vectors also suport the use of brakets to get at an index. The vectors were designed to be like this so existing code will work using it as if its a list but still allowing for easy use of math on the vectors.
-
-### PyVectors also allows math to be done with combinations of vector type shown as the following (all the vector types can do this with any of the other vector types):
+### PyVectors also allows math to be done with different types of vectors. This is shown as the following (all the vector types can do this with any of the other vector types):
 
     v1 = vec2(5)
     v2 = vec4(2)
     v3 = v2 + v1  # creates a vec4 of v2.xyzw + vec4(v1.x, v1.y, 0, 0)  (Note that the code after the "#" will not work but is shown as an example of what it dose)
     v4 = v1 + v2  # creates a vec2 of v1.xy + v2.xy  (Note that the code after the "#" will not work but is shown as an example of what it dose)
 
-To import and use this package, you want to do the following (to do this, have the PyVectors python file in the same directory as the current script your using is):
+### To import and use this package, you want to do the following (to do this, have the PyVectors python file in the same directory as the current script your using is):
 
     from PyVectors import *
 
