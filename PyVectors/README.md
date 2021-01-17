@@ -12,7 +12,7 @@
     vector1,vector2,vector3 = [1, 3, 5],[2, 8, 3],[1, 5, 3]
     vector1 = [vector1[0] + (vector2[0] / vector3[0]), vector1[1] + (vector2[1] / vector3[1]), vector1[2] + (vector2[2] / vector3[2])]
 
-### It also works a list and can be used in pygame instead of using lists. An example of this is the following:
+### It also works a list and can be used in pygame (and other librarys) instead of using lists. An example of this is the following:
 
     point = vec2(1, 5)
     size = vec2(5)
