@@ -40,7 +40,7 @@ To import and use this package, you want to do the following (to do this, have t
  ## *A Way To Delete txt And png Files*
   > This function will be under the txt and png class named as remove taking in a file name (with .png or .txt)
  ## *Have The Perlin Noise Generator Under The Array Class Not Generate Extra Numbers*
-  > This will not affect the perlin nois, it will just make it run quicker as it dosent have to generate unused random numbers (there can be thousands of extra numbers and generating random numbers is slow when created in mass amounts)\
+  > This will not affect the perlin noise, it will just make it run quicker as it dosent have to generate unused random numbers (there are thousands of extra numbers and generating and creating random numbers in mass amounts in very slow)
 
 # New Features:
 
