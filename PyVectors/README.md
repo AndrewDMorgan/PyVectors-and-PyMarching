@@ -46,9 +46,13 @@ To import and use this package, you want to do the following (to do this, have t
 
  ## "Newest Commit"
   > More documentation in the PyVectors file
-   > A mix function under the lists class
+  
+  > A mix function under the lists class
+  
   > A str function under the lists class
-   > The Planned Features Info under the README.md file
+  
+  > The Planned Features Info under the README.md file
+  
   > The New Features Info under the README.md file (so you know whats been added or change so you can use it soonner)
  ## *Second Newest Commit*
    > The lists class for doing math such as adding/multipling or change the type the list is such as changing it to a list of ints or strings (didn't change any of the functions under the math class)
