@@ -4,22 +4,14 @@ import math as Math  # importing the math library to add cos, sin, sqrt, ect... 
 import random, pygame  # importing random for perlin noise (noise.perlin or noise.ridge) and more and importing pygame to get the colors of a png (png.getArray)
 
 
-"""
-To Do
-
-    Add a way to remove files (in the png and txt classes)
-    Make it so perlin noise dosent generate extra random numbers (when generating list of random do the following for the size (the following may need changing to work) ceil(Vec4(size, size, size, size) / sizeOfArray))
-"""
-
-
-small_num = 0.00000000000000001  # an incredibly small number
+small_num = 0.00000000000000001  # an incredibly small number (used in the divide function)
 
 
 def divide(value1, value2):  # divides and avoids divition by zero errors
     return (value1 + small_num) / (value2 + small_num)
 
 
-def divideT(value1, value2):  # to divide using the try;except method
+def divideT(value1, value2):  # divides two numbers but on divtion by zero returns 0
     try:
         return value1 / value2
     except ZeroDivisionError:
@@ -523,7 +515,7 @@ class vec2:  # this class stores and operates on a tuple/list containing two ite
         return (self.x * other.x + self.y * other.y)
     def __round__(self):  # rounds the vector
         return Vec2(round(self.x), round(self.y))
-    def ceil(self):
+    def ceil(self):  # gets the ceiling of a vector
         return Vec2(math.ceil(self.x), math.ceil(self.y))
 
 
@@ -918,7 +910,7 @@ class Vec2:  # this class dosent use the smart fill making it slightly faster (w
         return Vec2(math.ceil(self.x), math.ceil(self.y))
 
 
-def ceil(vector):
+def ceil(vector):  # gets the ceiling of a vector
     return vector.ceil()
 
 
@@ -962,7 +954,7 @@ def dot(vector1, vector2):  # gets the dot product of two vectors
     return vector1.dot(vector2)
 
 
-def cross(vector1, vector2):  # gets the cross product of two vectors
+def cross(vector1, vector2):  # gets the cross product of two vectors (only works a vec3 types)
     return vector1.cross(vector2)
 
 
@@ -971,291 +963,335 @@ def normalize(Vector):  # normalizes a vector
     return Vector / Vec4(mag, mag, mag, mag)
 
 
-def length(Vector):  # gets the length of a Vector (using the pythagorean theorem)
+def length(Vector):  # gets the length of a Vector (using the pythagorean theorem  a^2 + b^2 = c^2)
     return Vector.length()
 
 
-class lists:
-    def floor_div1D(list1, list2):
+class lists:  # a class do do math operations across an entire list at the same time
+    def mix1D(list1, list2, list3):  # mixes 3 lists together
+        for x in range(len(list1)):
+            list1[x] = math.mix(list1[x], list2[x], list3[x])
+        return list1
+    def mix2D(list1, list2, list3):  # mixes 3 lists together
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                list1[x][y] = math.mix(list1[x][y], list2[x][y], list3[x][y])
+        return list1
+    def mix3D(list1, list2, list3):  # mixes 3 lists together
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                for z in range(len(list1[x][y])):
+                    list1[x][y][z] = math.mix(list1[x][y][z], list2[x][y][z], list3[x][y][z])
+        return list1
+    def mix4D(list1, list2, list3):  # mixes 3 lists together
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                for z in range(len(list1[x][y])):
+                    for w in range(len(list1[x][y][z])):
+                        list1[x][y][z][w] = math.mix(list1[x][y][z][w], list2[x][y][z][w], list3[x][y][z][w])
+        return list1
+    def floor_div1D(list1, list2):  # floor divides two lists
         for x in range(len(list1)):
             list1[x] = list1[x] // list2[x]
         return [list1, list2]
-    def floor_div2D(list1, list2):
+    def floor_div2D(list1, list2):  # floor divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = list1[x][y] // list2[x][y]
         return [list1, list2]
-    def floor_div3D(list1, list2):
+    def floor_div3D(list1, list2):  # floor divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = list1[x][y][z] // list2[x][y][z]
         return [list1, list2]
-    def floor_div4D(list1, list2):
+    def floor_div4D(list1, list2):  # floor divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = list1[x][y][z][w] // list2[x][y][z][w]
         return [list1, list2]
-    def mod1D(list1, list2):
+    def mod1D(list1, list2):  # mods two lists
         for x in range(len(list1)):
             list1[x] = list1[x] % list2[x]
         return [list1, list2]
-    def mod2D(list1, list2):
+    def mod2D(list1, list2):  # mods two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = list1[x][y] % list2[x][y]
         return [list1, list2]
-    def mod3D(list1, list2):
+    def mod3D(list1, list2):  # mods two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = list1[x][y][z] % list2[x][y][z]
         return [list1, list2]
-    def mod4D(list1, list2):
+    def mod4D(list1, list2):  # mods two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = list1[x][y][z][w] % list2[x][y][z][w]
         return [list1, list2]
-    def pow1D(list1, list2):
+    def pow1D(list1, list2):  # gets the power of two lists
         for x in range(len(list1)):
             list1[x] = list1[x] ** list2[x]
         return [list1, list2]
-    def pow2D(list1, list2):
+    def pow2D(list1, list2):  # gets the power of two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = list1[x][y] ** list2[x][y]
         return [list1, list2]
-    def pow3D(list1, list2):
+    def pow3D(list1, list2):  # gets the power of two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = list1[x][y][z] ** list2[x][y][z]
         return [list1, list2]
-    def pow4D(list1, list2):
+    def pow4D(list1, list2):  # gets the power of two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = list1[x][y][z][w] ** list2[x][y][z][w]
         return [list1, list2]
-    def round1D(list1):
+    def round1D(list1):  # rounds a list
         for x in range(len(list1)):
             list1[x] = round(list1[x])
         return list1
-    def round2D(list1):
+    def round2D(list1):  # rounds a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = round(list1[x][y])
         return list1
-    def round3D(list1):
+    def round3D(list1):  # rounds a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = round(list1[x][y][z])
         return list1
-    def round4D(list1):
+    def round4D(list1):  # rounds a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = round(list1[x][y][z][w])
         return list1
-    def int1D(list1):
+    def str1D(list1):  # casts a list to a string type
+        for x in range(len(list1)):
+            list1[x] = str(list1[x])
+        return list1
+    def str2D(list1):  # casts a list to a string type
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                list1[x][y] = str(list1[x][y])
+        return list1
+    def str3D(list1):  # casts a list to a string type
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                for z in range(len(list1[x][y])):
+                    list1[x][y][z] = str(list1[x][y][z])
+        return list1
+    def str4D(list1):  # casts a list to a string type
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                for z in range(len(list1[x][y])):
+                    for w in range(len(list1[x][y][z])):
+                        list1[x][y][z][w] = str(list1[x][y][z][w])
+        return list1
+    def int1D(list1):  # casts a list to a int type
         for x in range(len(list1)):
             list1[x] = int(list1[x])
         return list1
-    def int2D(list1):
+    def int2D(list1):  # casts a list to a int type
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = int(list1[x][y])
         return list1
-    def int3D(list1):
+    def int3D(list1):  # casts a list to a int type
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = int(list1[x][y][z])
         return list1
-    def int4D(list1):
+    def int4D(list1):  # casts a list to a int type
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = int(list1[x][y][z][w])
         return list1
-    def fract1D(list1):
+    def fract1D(list1):  # gets the fract of a list
         for x in range(len(list1)):
             list1[x] = math.fract(list1[x])
         return list1
-    def fract2D(list1):
+    def fract2D(list1):  # gets the fract of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = math.floor(fract[x][y])
         return list1
-    def fract3D(list1):
+    def fract3D(list1):  # gets the fract of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = math.fract(list1[x][y][z])
         return list1
-    def fract4D(list1):
+    def fract4D(list1):  # gets the fract of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = math.fract(list1[x][y][z][w])
         return list1
-    def ceil1D(list1):
+    def ceil1D(list1):  # gets the ceil of a list
         for x in range(len(list1)):
             list1[x] = math.ceil(list1[x])
         return list1
-    def ceil2D(list1):
+    def ceil2D(list1):  # gets the ceil of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = math.ceil(list1[x][y])
         return list1
-    def ceil3D(list1):
+    def ceil3D(list1):  # gets the ceil of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = math.ceil(list1[x][y][z])
         return list1
-    def ceil4D(list1):
+    def ceil4D(list1):  # gets the ceil of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = math.ceil(list1[x][y][z][w])
         return list1
-    def floor1D(list1):
+    def floor1D(list1):  # gets the floor of a list
         for x in range(len(list1)):
             list1[x] = math.floor(list1[x])
         return list1
-    def floor2D(list1):
+    def floor2D(list1):  # gets the floor of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = math.floor(list1[x][y])
         return list1
-    def floor3D(list1):
+    def floor3D(list1):  # gets the floor of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = math.floor(list1[x][y][z])
         return list1
-    def floor4D(list1):
+    def floor4D(list1):  # gets the floor of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = math.floor(list1[x][y][z][w])
         return list1
-    def abs1D(list1):
+    def abs1D(list1):  # gets the absulute value of a list
         for x in range(len(list1)):
             list1[x] = abs(list1[x])
         return list1
-    def abs2D(list1):
+    def abs2D(list1):  # gets the absulute value of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = abs(list1[x][y])
         return list1
-    def abs3D(list1):
+    def abs3D(list1):  # gets the absulute value of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = abs(list1[x][y][z])
         return list1
-    def abs4D(list1):
+    def abs4D(list1):  # gets the absulute value of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = abs(list1[x][y][z][w])
         return list1
-    def mult1D(list1, list2):
+    def mult1D(list1, list2):  # multiplies two list
         for x in range(len(list1)):
             list1[x] *= list2[x]
         return [list1, list2]
-    def mult2D(list1, list2):
+    def mult2D(list1, list2):  # multiplies two list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] *= list2[x][y]
         return [list1, list2]
-    def mult3D(list1, list2):
+    def mult3D(list1, list2):  # multiplies two list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] *= list2[x][y][z]
         return [list1, list2]
-    def mult4D(list1, list2):
+    def mult4D(list1, list2):  # multiplies two list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] *= list2[x][y][z][w]
         return [list1, list2]
-    def div1D(list1, list2):
+    def div1D(list1, list2):  # divides two lists
         for x in range(len(list1)):
             list1[x] /= list2[x]
         return [list1, list2]
-    def div2D(list1, list2):
+    def div2D(list1, list2):  # divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] /= list2[x][y]
         return [list1, list2]
-    def div3D(list1, list2):
+    def div3D(list1, list2):  # divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] /= list2[x][y][z]
         return [list1, list2]
-    def div4D(list1, list2):
+    def div4D(list1, list2):  # divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] /= list2[x][y][z][w]
         return [list1, list2]
-    def sub1D(list1, list2):
+    def sub1D(list1, list2):  # subtracts two lists
         for x in range(len(list1)):
             list1[x] -= list2[x]
         return [list1, list2]
-    def sub2D(list1, list2):
+    def sub2D(list1, list2):  # subtracts two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] -= list2[x][y]
         return [list1, list2]
-    def sub3D(list1, list2):
+    def sub3D(list1, list2):  # subtracts two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] -= list2[x][y][z]
         return [list1, list2]
-    def sub4D(list1, list2):
+    def sub4D(list1, list2):  # subtracts two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] -= list2[x][y][z][w]
         return [list1, list2]
-    def add1D(list1, list2):
+    def add1D(list1, list2):  # adds two lists
         for x in range(len(list1)):
             list1[x] += list2[x]
         return [list1, list2]
-    def add2D(list1, list2):
+    def add2D(list1, list2):  # adds two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] += list2[x][y]
         return [list1, list2]
-    def add3D(list1, list2):
+    def add3D(list1, list2):  # adds two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] += list2[x][y][z]
         return [list1, list2]
-    def add4D(list1, list2):
+    def add4D(list1, list2):  # adds two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
@@ -1264,8 +1300,8 @@ class lists:
         return [list1, list2]
 
 
-class math:
-    def ceil(value):
+class math:  # math operations for non vectors (includes some functions from the math library but also new ones like fract, mix, map 1D-4D, ect...)
+    def ceil(value):  # returns the ceiling of a number
         return Math.ceil(value)
     def mix(value1, value2, percentage):  # mixes two numbers based on a number ranging from 1 - 0
         percentage = math.clamp(percentage, 0, 1)
@@ -1594,11 +1630,11 @@ class dists:  # multipl distance functions for different shapes
 
 
 class gradient:  # a way to make gradients that specifies what they are being used for
-    def color(maxGap = 50):
+    def color(maxGap = 50):  # gives you a color gradient
         return colorGradient(maxGap)
-    def number(maxGap = 50):
+    def number(maxGap = 50):  # gives you a number gradient
         return numberGradient(maxGap)
-    def vector(maxGap = 50):
+    def vector(maxGap = 50):  # gives you a vector gradient
         return colorGradient(maxGap)
 
 
@@ -1606,9 +1642,9 @@ class numberGradient:  # a gradient for numbers
     def __init__(self, maxGap = 50):
         self.points = {}
         self.maxGap = maxGap
-    def add(self, point, number):
+    def add(self, point, number):  # adds a point to the gradient
         self.points[str(point)] = number
-    def grade(self, point):
+    def grade(self, point):  # gets the number at point on the gradient
         point = int(point)
         p = point
         for x in range(self.maxGap):
@@ -1644,9 +1680,9 @@ class colorGradient:  # you can add points (only works in 1D) and then sample at
     def __init__(self, maxGap = 50):
         self.points = {}
         self.maxGap = maxGap
-    def add(self, point, color):
+    def add(self, point, color):  # adds a point to the gradient
         self.points[str(point)] = color
-    def grade(self, point):
+    def grade(self, point):  # gets the color/vector a point in space
         point = int(point)
         p = point
         for x in range(self.maxGap):
