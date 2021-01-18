@@ -41,14 +41,20 @@
   > This function will be under the txt and png class named as remove taking in a file name (with .png or .txt)
  ## *Have The Perlin Noise Generator Under The Array Class Not Generate Extra Numbers*
   > This will not affect the perlin noise, it will just make it run quicker as it dosent have to generate unused random numbers (there are thousands of extra numbers and generating and creating random numbers in mass amounts in very slow)
- ## *Fixing The Lists Class*
-  > Currently the lists class returns to much info
- ## *A Copy Function For Lists*
-  > This will be under the lists or math classes and will copy a list
 
 # *New Features:*
 
  ## *Newest Commit*
+  > A copy function under the lists class to copy a list
+  
+  > Fixed the lists class so it only returns the new list
+  
+  > Added a max (1D - 4D) function to the lists class
+  
+  > Added a min (1D - 4D) function to the lists class
+  
+  > Added a clamp (1D - 4D) function to the lists class
+ ## *Second Newest Commit*
   > More documentation in the PyVectors file
   
   > A mix function under the lists class
@@ -60,13 +66,6 @@
   > The new features info under the README.md file (so you know whats been added or change so you can use it soonner)
   
   > Some stylistic changes to the README.md file
- ## *Second Newest Commit*
-   > The lists class for doing math such as adding/multipling or change the type the list is such as changing it to a list of ints or strings (didn't change any of the functions under the math class)
-   > A ceil function under the math class
-   
-   > A ceil function under each of the vector classes
-   
-   > A ceil function (for vectors used like the other functions for vectors)
 
 # *Info On All The Functions/Classes:*
 
