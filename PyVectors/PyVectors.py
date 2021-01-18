@@ -968,6 +968,102 @@ def length(Vector):  # gets the length of a Vector (using the pythagorean theore
 
 
 class lists:  # a class do do math operations across an entire list at the same time
+    def copy1D(list2):  # copys a list
+        size = len(list2)
+        list1 = array([size], 'constant', None)
+        for x in range(len(list1)):
+            list1[x] = list2[x]
+        return list1
+    def copy2D(list2):  # copys a list
+        size = Vec2(len(list2), len(list2[0]))
+        array(size, 'constant', None)
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                list1[x][y] = list2[x][y]
+        return list1
+    def copy3D(list2):  # copys a list
+        size = Vec3(len(list2), len(list2[0]), len(list2[0][0]))
+        array(size, 'constant', None)
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                for z in range(len(list1[x][y])):
+                    list1[x][y][z] = list2[x][y][z]
+        return list1
+    def copy4D(list2):  # copys a list
+        size = Vec4(len(list2), len(list2[0]), len(list2[0][0]), len(list2[0][0][0]))
+        array(size, 'constant', None)
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                for z in range(len(list1[x][y])):
+                    for w in range(len(list1[x][y][z])):
+                        list1[x][y][z][w] = list2[x][y][z][w]
+        return list1
+    def clamp1D(list1, list2, list3):  # clamps a list
+        for x in range(len(list1)):
+            list1[x] = math.clamp(list1[x], list2[x], list3[x])
+        return list1
+    def clamp2D(list1, list2, list3):  # clamps a list
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                list1[x][y] = math.clamp(list1[x][y], list2[x][y], list3[x][y])
+        return list1
+    def clamp3D(list1, list2, list3):  # clamps a list
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                for z in range(len(list1[x][y])):
+                    list1[x][y][z] = math.clamp(list1[x][y][z], list2[x][y][z], list3[x][y][z])
+        return list1
+    def clamp4D(list1, list2, list3):  # clamps a list
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                for z in range(len(list1[x][y])):
+                    for w in range(len(list1[x][y][z])):
+                        list1[x][y][z][w] = math.clamp(list1[x][y][z][w], list2[x][y][z][w], list3[x][y][z][w])
+        return list1
+    def min1D(list1, list2):  # sets the min of a list
+        for x in range(len(list1)):
+            list1[x] = min(list1[x], list2[x])
+        return list1
+    def min2D(list1, list2):  # sets the min of a list
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                list1[x][y] = min(list1[x][y], list2[x][y])
+        return list1
+    def min3D(list1, list2):  # sets the min of a list
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                for z in range(len(list1[x][y])):
+                    list1[x][y][z] = min(list1[x][y][z], list2[x][y][z])
+        return list1
+    def min4D(list1, list2):  # sets the min of a list
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                for z in range(len(list1[x][y])):
+                    for w in range(len(list1[x][y][z])):
+                        list1[x][y][z][w] = min(list1[x][y][z][w], list2[x][y][z][w])
+        return list1
+    def max1D(list1, list2):  # sets the max of a list
+        for x in range(len(list1)):
+            list1[x] = max(list1[x], list2[x])
+        return list1
+    def max2D(list1, list2):  # sets the max of a list
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                list1[x][y] = max(list1[x][y], list2[x][y])
+        return list1
+    def max3D(list1, list2):  # sets the max of a list
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                for z in range(len(list1[x][y])):
+                    list1[x][y][z] = max(list1[x][y][z], list2[x][y][z])
+        return list1
+    def max4D(list1, list2):  # sets the max of a list
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                for z in range(len(list1[x][y])):
+                    for w in range(len(list1[x][y][z])):
+                        list1[x][y][z][w] = max(list1[x][y][z][w], list2[x][y][z][w])
+        return list1
     def mix1D(list1, list2, list3):  # mixes 3 lists together
         for x in range(len(list1)):
             list1[x] = math.mix(list1[x], list2[x], list3[x])
@@ -993,69 +1089,69 @@ class lists:  # a class do do math operations across an entire list at the same 
     def floor_div1D(list1, list2):  # floor divides two lists
         for x in range(len(list1)):
             list1[x] = list1[x] // list2[x]
-        return [list1, list2]
+        return list1
     def floor_div2D(list1, list2):  # floor divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = list1[x][y] // list2[x][y]
-        return [list1, list2]
+        return list1
     def floor_div3D(list1, list2):  # floor divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = list1[x][y][z] // list2[x][y][z]
-        return [list1, list2]
+        return list1
     def floor_div4D(list1, list2):  # floor divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = list1[x][y][z][w] // list2[x][y][z][w]
-        return [list1, list2]
+        return list1
     def mod1D(list1, list2):  # mods two lists
         for x in range(len(list1)):
             list1[x] = list1[x] % list2[x]
-        return [list1, list2]
+        return list1
     def mod2D(list1, list2):  # mods two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = list1[x][y] % list2[x][y]
-        return [list1, list2]
+        return list1
     def mod3D(list1, list2):  # mods two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = list1[x][y][z] % list2[x][y][z]
-        return [list1, list2]
+        return list1
     def mod4D(list1, list2):  # mods two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = list1[x][y][z][w] % list2[x][y][z][w]
-        return [list1, list2]
+        return list1
     def pow1D(list1, list2):  # gets the power of two lists
         for x in range(len(list1)):
             list1[x] = list1[x] ** list2[x]
-        return [list1, list2]
+        return list1
     def pow2D(list1, list2):  # gets the power of two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = list1[x][y] ** list2[x][y]
-        return [list1, list2]
+        return list1
     def pow3D(list1, list2):  # gets the power of two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = list1[x][y][z] ** list2[x][y][z]
-        return [list1, list2]
+        return list1
     def pow4D(list1, list2):  # gets the power of two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = list1[x][y][z][w] ** list2[x][y][z][w]
-        return [list1, list2]
+        return list1
     def round1D(list1):  # rounds a list
         for x in range(len(list1)):
             list1[x] = round(list1[x])
@@ -1213,91 +1309,91 @@ class lists:  # a class do do math operations across an entire list at the same 
     def mult1D(list1, list2):  # multiplies two list
         for x in range(len(list1)):
             list1[x] *= list2[x]
-        return [list1, list2]
+        return list1
     def mult2D(list1, list2):  # multiplies two list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] *= list2[x][y]
-        return [list1, list2]
+        return list1
     def mult3D(list1, list2):  # multiplies two list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] *= list2[x][y][z]
-        return [list1, list2]
+        return list1
     def mult4D(list1, list2):  # multiplies two list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] *= list2[x][y][z][w]
-        return [list1, list2]
+        return list1
     def div1D(list1, list2):  # divides two lists
         for x in range(len(list1)):
             list1[x] /= list2[x]
-        return [list1, list2]
+        return list1
     def div2D(list1, list2):  # divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] /= list2[x][y]
-        return [list1, list2]
+        return list1
     def div3D(list1, list2):  # divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] /= list2[x][y][z]
-        return [list1, list2]
+        return list1
     def div4D(list1, list2):  # divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] /= list2[x][y][z][w]
-        return [list1, list2]
+        return list1
     def sub1D(list1, list2):  # subtracts two lists
         for x in range(len(list1)):
             list1[x] -= list2[x]
-        return [list1, list2]
+        return list1
     def sub2D(list1, list2):  # subtracts two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] -= list2[x][y]
-        return [list1, list2]
+        return list1
     def sub3D(list1, list2):  # subtracts two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] -= list2[x][y][z]
-        return [list1, list2]
+        return list1
     def sub4D(list1, list2):  # subtracts two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] -= list2[x][y][z][w]
-        return [list1, list2]
+        return list1
     def add1D(list1, list2):  # adds two lists
         for x in range(len(list1)):
             list1[x] += list2[x]
-        return [list1, list2]
+        return list1
     def add2D(list1, list2):  # adds two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] += list2[x][y]
-        return [list1, list2]
+        return list1
     def add3D(list1, list2):  # adds two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] += list2[x][y][z]
-        return [list1, list2]
+        return list1
     def add4D(list1, list2):  # adds two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] += list2[x][y][z][w]
-        return [list1, list2]
+        return list1
 
 
 class math:  # math operations for non vectors (includes some functions from the math library but also new ones like fract, mix, map 1D-4D, ect...)
