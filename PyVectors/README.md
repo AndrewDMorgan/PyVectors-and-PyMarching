@@ -45,6 +45,17 @@
 # *New Features:*
 
  ## *Newest Commit*
+  > Fixed the length function
+  
+  > Added a map function under the math class taking in a number, min val, max val, new min, new max
+  
+  > Fixed the vectorize function
+  
+  > Fixed the clamp, min and max (1D - 4D) functions under the lists class. They now take in one list and the rest intagers/floats
+  
+  > Fixed the smoothstep function under the math class
+
+ ## *Second Newest Commit*
   > A copy function under the lists class to copy a list
   
   > Fixed the lists class so it only returns the new list
@@ -54,18 +65,6 @@
   > Added a min (1D - 4D) function to the lists class
   
   > Added a clamp (1D - 4D) function to the lists class
- ## *Second Newest Commit*
-  > More documentation in the PyVectors file
-  
-  > A mix function under the lists class
-  
-  > A str function under the lists class
-  
-  > The planned features info under the README.md file
-  
-  > The new features info under the README.md file (so you know whats been added or change so you can use it soonner)
-  
-  > Some stylistic changes to the README.md file
 
 # *Info On All The Functions/Classes:*
 
@@ -100,10 +99,16 @@
  ## *length*
  Returns the length/distance of a vector. Takes an input of a vector
  ## *lists*
+   > ## *clamp (1D - 4D)*
+   > Clamps a list, takes in a list and two numbers
+   > ## *min (1D - 4D)*
+   > Sets the min of a list. Takes in a list and number
+   > ## *max (1D - 4D)*
+   > Sets the max of a list. Takes in a list and number
    > ## *str (1D - 4D)*
-   > casts a list to a string types. Takes in a list
+   > Casts a list to a string types. Takes in a list
    > ## *mix (1D - 4D)*
-   > mixes two lists by a third list. Takes in three lists with the last one ranging from 0 - 1
+   > Mixes two lists by a third list. Takes in three lists with the last one ranging from 0 - 1
    > ## *add (1D - 4D)*
    > Adds two lists. Takes in two lists
    > ## *sub (1D - 4D)*
@@ -149,10 +154,12 @@
    > Returns the floor of a number. Takes an input of a number
    > ## *sqrt*
    > Returns the square root of a number. Takes an input of a number
-   > ## *lengthOfList*
+   > ## *length*
    > Returns the length/dist of a list. Takes an input of a list
    > ## *normalizeList*
    > Normalizes a list. Takes an input of a list
+   > ## *map*
+   > Maps a number based on a min, max, new min and new max.
    > ## *map1D*
    > Scales/streches a 1D list of numbers to a new range of numbers. Takes an input of a list, min of list, max of list, new min, new max
    > ## *map2D*
