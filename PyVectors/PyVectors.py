@@ -984,71 +984,71 @@ class lists:  # a class do do math operations across an entire list at the same 
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = list2[x][y][z][w]
         return list1
-    def clamp1D(list1, list2, list3):  # clamps a list
+    def clamp1D(list1, nMin, nMax):  # clamps a list
         for x in range(len(list1)):
-            list1[x] = math.clamp(list1[x], list2[x], list3[x])
+            list1[x] = math.clamp(list1[x], nMin, nMax)
         return list1
-    def clamp2D(list1, list2, list3):  # clamps a list
-        for x in range(len(list1)):
-            for y in range(len(list1[x])):
-                list1[x][y] = math.clamp(list1[x][y], list2[x][y], list3[x][y])
-        return list1
-    def clamp3D(list1, list2, list3):  # clamps a list
+    def clamp2D(list1, nMin, nMax):  # clamps a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
-                for z in range(len(list1[x][y])):
-                    list1[x][y][z] = math.clamp(list1[x][y][z], list2[x][y][z], list3[x][y][z])
+                list1[x][y] = math.clamp(list1[x][y], nMin, nMax)
         return list1
-    def clamp4D(list1, list2, list3):  # clamps a list
+    def clamp3D(list1, nMin, nMax):  # clamps a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
-                    for w in range(len(list1[x][y][z])):
-                        list1[x][y][z][w] = math.clamp(list1[x][y][z][w], list2[x][y][z][w], list3[x][y][z][w])
+                    list1[x][y][z] = math.clamp(list1[x][y][z], nMin, nMax)
         return list1
-    def min1D(list1, list2):  # sets the min of a list
-        for x in range(len(list1)):
-            list1[x] = min(list1[x], list2[x])
-        return list1
-    def min2D(list1, list2):  # sets the min of a list
-        for x in range(len(list1)):
-            for y in range(len(list1[x])):
-                list1[x][y] = min(list1[x][y], list2[x][y])
-        return list1
-    def min3D(list1, list2):  # sets the min of a list
-        for x in range(len(list1)):
-            for y in range(len(list1[x])):
-                for z in range(len(list1[x][y])):
-                    list1[x][y][z] = min(list1[x][y][z], list2[x][y][z])
-        return list1
-    def min4D(list1, list2):  # sets the min of a list
+    def clamp4D(list1, nMin, nMax):  # clamps a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
-                        list1[x][y][z][w] = min(list1[x][y][z][w], list2[x][y][z][w])
+                        list1[x][y][z][w] = math.clamp(list1[x][y][z][w], nMin, nMax)
         return list1
-    def max1D(list1, list2):  # sets the max of a list
+    def min1D(list1, nMin):  # sets the min of a list
         for x in range(len(list1)):
-            list1[x] = max(list1[x], list2[x])
+            list1[x] = min(list1[x], nMin)
         return list1
-    def max2D(list1, list2):  # sets the max of a list
+    def min2D(list1, nMin):  # sets the min of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
-                list1[x][y] = max(list1[x][y], list2[x][y])
+                list1[x][y] = min(list1[x][y], nMin)
         return list1
-    def max3D(list1, list2):  # sets the max of a list
+    def min3D(list1, nMin):  # sets the min of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
-                    list1[x][y][z] = max(list1[x][y][z], list2[x][y][z])
+                    list1[x][y][z] = min(list1[x][y][z], nMin)
         return list1
-    def max4D(list1, list2):  # sets the max of a list
+    def min4D(list1, nMin):  # sets the min of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
-                        list1[x][y][z][w] = max(list1[x][y][z][w], list2[x][y][z][w])
+                        list1[x][y][z][w] = min(list1[x][y][z][w], nMin)
+        return list1
+    def max1D(list1, nMax):  # sets the max of a list
+        for x in range(len(list1)):
+            list1[x] = max(list1[x], nMax)
+        return list1
+    def max2D(list1, nMax):  # sets the max of a list
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                list1[x][y] = max(list1[x][y], nMax)
+        return list1
+    def max3D(list1, nMax):  # sets the max of a list
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                for z in range(len(list1[x][y])):
+                    list1[x][y][z] = max(list1[x][y][z], nMax)
+        return list1
+    def max4D(list1, nMax):  # sets the max of a list
+        for x in range(len(list1)):
+            for y in range(len(list1[x])):
+                for z in range(len(list1[x][y])):
+                    for w in range(len(list1[x][y][z])):
+                        list1[x][y][z][w] = max(list1[x][y][z][w], nMax)
         return list1
     def mix1D(list1, list2, list3):  # mixes 3 lists together
         for x in range(len(list1)):
