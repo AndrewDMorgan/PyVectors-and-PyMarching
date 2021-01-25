@@ -4,20 +4,6 @@ import math as Math  # importing the math library to add cos, sin, sqrt, ect... 
 import random, pygame  # importing random for perlin noise (noise.perlin or noise.ridge) and more and importing pygame to get the colors of a png (png.getArray)
 
 
-small_num = 0.00000000000000001  # an incredibly small number (used in the divide function)
-
-
-def divide(value1, value2):  # divides and avoids divition by zero errors
-    return (value1 + small_num) / (value2 + small_num)
-
-
-def divideT(value1, value2):  # divides two numbers but on divtion by zero returns 0
-    try:
-        return value1 / value2
-    except ZeroDivisionError:
-        return 0
-
-
 class vec4:  # this class stores and operates an a tuple/list containing four items (class functions gone over in the Vec2 class)
     def __init__(self, x=None, y=None, z=None, w=None):
         try:
@@ -34,7 +20,7 @@ class vec4:  # this class stores and operates an a tuple/list containing four it
                         raise SyntaxError("Position is undefined, please put an x or an x and y or an x, y, z, and w")
                     else:
                         raise SyntaxError("Requires more information, please put an x or an x and y or an x, y, z, and w")
-        except AttributeError:  # filling it in with the other vectors components
+        except AttributeError:  # filling it in with the other vectors components (when the input contains a vector)
             try:
                 length = len(x)
                 if length == 2:
@@ -115,7 +101,7 @@ class vec4:  # this class stores and operates an a tuple/list containing four it
     def __mul__(self, other):
         return Vec4(self.x * other.x, self.y * other.y, self.z * other.z, self.w * other.w)
     def __truediv__(self, other):
-        return Vec4(divide(self.x, other.x), divide(self.y, other.y), divide(self.z, other.z), divide(self.w, other.w))
+        return Vec4(math.divideT(self.x, other.x), math.divideT(self.y, other.y), math.divideT(self.z, other.z), math.divideT(self.w, other.w))
     def __floordiv__(self, other):
         return Vec4(self.x//other.x, self.y//other.y, self.z//other.z, self.w//other.w)
     def __mod__(self, other):
@@ -171,7 +157,7 @@ class vec4:  # this class stores and operates an a tuple/list containing four it
     def __imult__(self, other):
         return Vec4(self.x * other.x, self.y * other.y, self.z * other.z, self.w * other.w)
     def __idiv__(self, other):
-        return Vec4(divide(self.x, other.x), divide(self.y, other.y), divide(self.z, other.z), divide(self.w, other.w))
+        return Vec4(math.divideT(self.x, other.x), math.divideT(self.y, other.y), math.divideT(self.z, other.z), math.divideT(self.w, other.w))
     def __ifloordiv__(self, other):
         return Vec4(self.x//other.x, self.y//other.y, self.z//other.z, self.w//other.w)
     def __imod__(self, other):
@@ -203,7 +189,7 @@ class vec4:  # this class stores and operates an a tuple/list containing four it
     def cos(self):
         return Vec4(math.cos(self.x), math.cos(self.y), math.cos(self.z), math.cos(self.w))
     def length(self):
-        return math.math.length(self.xyzw)
+        return math.length(self.xyzw)
     def floor(self):
         return Vec4(math.floor(self.x), math.floor(self.y), math.floor(self.z), math.floor(self.w))
     def fract(self):
@@ -279,7 +265,7 @@ class vec3:  # this class stores and operates an a tuple/list containing three i
     def __mul__(self, other):
         return Vec3(self.x * other.x, self.y * other.y, self.z * other.z)
     def __truediv__(self, other):
-        return Vec3(divide(self.x, other.x), divide(self.y, other.y), divide(self.z, other.z))
+        return Vec3(math.divideT(self.x, other.x), math.divideT(self.y, other.y), math.divideT(self.z, other.z))
     def __floordiv__(self, other):
         return Vec3(self.x//other.x, self.y//other.y, self.z//other.z)
     def __mod__(self, other):
@@ -335,7 +321,7 @@ class vec3:  # this class stores and operates an a tuple/list containing three i
     def __imult__(self, other):
         return Vec3(self.x * other.x, self.y * other.y, self.z * other.z)
     def __idiv__(self, other):
-        return Vec3(divide(self.x, other.x), divide(self.y, other.y), divide(self.z, other.z))
+        return Vec3(math.divideT(self.x, other.x), math.divideT(self.y, other.y), math.divideT(self.z, other.z))
     def __ifloordiv__(self, other):
         return Vec3(self.x//other.x, self.y//other.y, self.z//other.z)
     def __imod__(self, other):
@@ -372,7 +358,7 @@ class vec3:  # this class stores and operates an a tuple/list containing three i
     def cos(self):
         return Vec3(math.cos(self.x), math.cos(self.y), math.cos(self.z))
     def length(self):
-        return math.math.length(self.xyz)
+        return math.length(self.xyz)
     def floor(self):
         return Vec3(math.floor(self.x), math.floor(self.y), math.floor(self.z))
     def fract(self):
@@ -414,7 +400,7 @@ class vec2:  # this class stores and operates on a tuple/list containing two ite
     def __mul__(self, other):  # multiplying two Vectors like Vector1 * Vector2
         return Vec2(self.x * other.x, self.y * other.y)
     def __truediv__(self, other):  # divides two Vectors like Vector1 / Vector2
-        return Vec2(divide(self.x, other.x), divide(self.y, other.y))
+        return Vec2(math.divideT(self.x, other.x), math.divideT(self.y, other.y))
     def __floordiv__(self, other):  # divides two Vectors and returns the int of the division like Vector1 // Vector2
         return Vec2(self.x//other.x, self.y//other.y)
     def __mod__(self, other):  # gets the mod of two Vectors like Vector1 % Vector2
@@ -470,7 +456,7 @@ class vec2:  # this class stores and operates on a tuple/list containing two ite
     def __imult__(self, other):  # multiples the Vector by another Vector by putting Vector1 *= Vector2
         return Vec2(self.x * other.x, self.y * other.y)
     def __idiv__(self, other):  # returns the Vector divided by another Vector by puting Vector1 /= Vector2
-        return Vec2(divide(self.x, other.x), divide(self.y, other.y))
+        return Vec2(math.divideT(self.x, other.x), math.divideT(self.y, other.y))
     def __ifloordiv__(self, other):  # gets the int of the divided product by using Vector1 //= Vector2
         return Vec2(self.x//other.x, self.y//other.y)
     def __imod__(self, other):  # gets the mod of the Vector and another Vector using Vector1 %= Vector2
@@ -502,7 +488,7 @@ class vec2:  # this class stores and operates on a tuple/list containing two ite
     def cos(self):  # returns the cosine of the Vector
         return Vec2(math.cos(self.x), math.cos(self.y))
     def length(self):  # gets the length of the Vector (length(Vector) also works)
-        return math.math.length(self.xy)
+        return math.length(self.xy)
     def floor(self):  # gets the floor of the Vector
         return Vec2(math.floor(self.x), math.floor(self.y))
     def fract(self):  # gets the decimal value of the number
@@ -548,7 +534,7 @@ class Vec4:  # this class dosent use the smart fill making it slightly faster (w
     def __mul__(self, other):
         return Vec4(self.x * other.x, self.y * other.y, self.z * other.z, self.w * other.w)
     def __truediv__(self, other):
-        return Vec4(divide(self.x, other.x), divide(self.y, other.y), divide(self.z, other.z), divide(self.w, other.w))
+        return Vec4(math.divideT(self.x, other.x), math.divideT(self.y, other.y), math.divideT(self.z, other.z), math.divideT(self.w, other.w))
     def __floordiv__(self, other):
         return Vec4(self.x//other.x, self.y//other.y, self.z//other.z, self.w//other.w)
     def __mod__(self, other):
@@ -604,7 +590,7 @@ class Vec4:  # this class dosent use the smart fill making it slightly faster (w
     def __imult__(self, other):
         return Vec4(self.x * other.x, self.y * other.y, self.z * other.z, self.w * other.w)
     def __idiv__(self, other):
-        return Vec4(divide(self.x, other.x), divide(self.y, other.y), divide(self.z, other.z), divide(self.w, other.w))
+        return Vec4(math.divideT(self.x, other.x), math.divideT(self.y, other.y), math.divideT(self.z, other.z), math.divideT(self.w, other.w))
     def __ifloordiv__(self, other):
         return Vec4(self.x//other.x, self.y//other.y, self.z//other.z, self.w//other.w)
     def __imod__(self, other):
@@ -636,7 +622,7 @@ class Vec4:  # this class dosent use the smart fill making it slightly faster (w
     def cos(self):
         return Vec4(math.cos(self.x), math.cos(self.y), math.cos(self.z), math.cos(self.w))
     def length(self):
-        return math.math.length(self.xyzw)
+        return math.length(self.xyzw)
     def floor(self):
         return Vec4(math.floor(self.x), math.floor(self.y), math.floor(self.z), math.floor(self.w))
     def fract(self):
@@ -677,7 +663,7 @@ class Vec3:  # this class dosent use the smart fill making it slightly faster (w
     def __mul__(self, other):
         return Vec3(self.x * other.x, self.y * other.y, self.z * other.z)
     def __truediv__(self, other):
-        return Vec3(divide(self.x, other.x), divide(self.y, other.y), divide(self.z, other.z))
+        return Vec3(math.divideT(self.x, other.x), math.divideT(self.y, other.y), math.divideT(self.z, other.z))
     def __floordiv__(self, other):
         return Vec3(self.x//other.x, self.y//other.y, self.z//other.z)
     def __mod__(self, other):
@@ -733,7 +719,7 @@ class Vec3:  # this class dosent use the smart fill making it slightly faster (w
     def __imult__(self, other):
         return Vec3(self.x * other.x, self.y * other.y, self.z * other.z)
     def __idiv__(self, other):
-        return Vec3(divide(self.x, other.x), divide(self.y, other.y), divide(self.z, other.z))
+        return Vec3(math.divideT(self.x, other.x), math.divideT(self.y, other.y), math.divideT(self.z, other.z))
     def __ifloordiv__(self, other):
         return Vec3(self.x//other.x, self.y//other.y, self.z//other.z)
     def __imod__(self, other):
@@ -770,7 +756,7 @@ class Vec3:  # this class dosent use the smart fill making it slightly faster (w
     def cos(self):
         return Vec3(math.cos(self.x), math.cos(self.y), math.cos(self.z))
     def length(self):
-        return math.math.length(self.xyz)
+        return math.length(self.xyz)
     def floor(self):
         return Vec3(math.floor(self.x), math.floor(self.y), math.floor(self.z))
     def fract(self):
@@ -805,7 +791,7 @@ class Vec2:  # this class dosent use the smart fill making it slightly faster (w
     def __mul__(self, other):
         return Vec2(self.x * other.x, self.y * other.y)
     def __truediv__(self, other):
-        return Vec2(divide(self.x, other.x), divide(self.y, other.y))
+        return Vec2(math.divideT(self.x, other.x), math.divideT(self.y, other.y))
     def __floordiv__(self, other):
         return Vec2(self.x//other.x, self.y//other.y)
     def __mod__(self, other):
@@ -861,7 +847,7 @@ class Vec2:  # this class dosent use the smart fill making it slightly faster (w
     def __imult__(self, other):
         return Vec2(self.x * other.x, self.y * other.y)
     def __idiv__(self, other):
-        return Vec2(divide(self.x, other.x), divide(self.y, other.y))
+        return Vec2(math.divideT(self.x, other.x), math.divideT(self.y, other.y))
     def __ifloordiv__(self, other):
         return Vec2(self.x//other.x, self.y//other.y)
     def __imod__(self, other):
@@ -893,7 +879,7 @@ class Vec2:  # this class dosent use the smart fill making it slightly faster (w
     def cos(self):
         return Vec2(math.cos(self.x), math.cos(self.y))
     def length(self):
-        return math.math.length(self.xy)
+        return math.length(self.xy)
     def floor(self):
         return Vec2(math.floor(self.x), math.floor(self.y))
     def fract(self):
@@ -1397,6 +1383,14 @@ class lists:  # a class do do math operations across an entire list at the same 
 
 
 class math:  # math operations for non vectors (includes some functions from the math library but also new ones like fract, mix, map 1D-4D, ect...)
+    def divideT(value1, value2):  # divides and avoids divition by zero errors (when dividing by zero, returns numbers near infity)
+        small_num = 0.00000000000000001
+        return (value1 + small_num) / (value2 + small_num)
+    def divide0(value1, value2):  # divides two numbers but on divtion by zero returns 0 (the divide0 function will return numbers near to infinity this one wont)
+        try:
+            return value1 / value2
+        except ZeroDivisionError:
+            return 0
     def ceil(value):  # returns the ceiling of a number
         return Math.ceil(value)
     def mix(value1, value2, percentage):  # mixes two numbers based on a number ranging from 1 - 0
@@ -1428,7 +1422,7 @@ class math:  # math operations for non vectors (includes some functions from the
         for x in range(len(list)):
             list[x] -= fromMin
         
-        scaler = divideT((toMax - toMin), max(list))
+        scaler = math.divide0((toMax - toMin), max(list))
         for x in range(len(list)):
             list[x] *= scaler
             list[x] += toMin
@@ -1450,7 +1444,7 @@ class math:  # math operations for non vectors (includes some functions from the
             maxOfList.append(max(list[x]))
         
         maxOfList = max(maxOfList)
-        scaler = divideT((toMax - toMin), maxOfList)
+        scaler = math.divide0((toMax - toMin), maxOfList)
         for x in range(len(list)):
             for y in range(len(list[x])):
                 list[x][y] *= scaler
@@ -1480,7 +1474,7 @@ class math:  # math operations for non vectors (includes some functions from the
             maxOfList.append(max(layer))
         maxOfList = max(maxOfList)
         
-        scaler = scaler = divideT((toMax - toMin), maxOfList)
+        scaler = scaler = math.divide0((toMax - toMin), maxOfList)
         for x in range(len(list)):
             for y in range(len(list[x])):
                 for z in range(len(list[x][y])):
@@ -1515,7 +1509,7 @@ class math:  # math operations for non vectors (includes some functions from the
             maxOfList.append(max(layer))
         maxOfList = max(maxOfList)
         
-        scaler = divideT((toMax - toMin), maxOfList)
+        scaler = math.divide0((toMax - toMin), maxOfList)
         for x in range(len(list)):
             for y in range(len(list[x])):
                 for z in range(len(list[x][y])):
@@ -1524,6 +1518,11 @@ class math:  # math operations for non vectors (includes some functions from the
                         list[x][y][z][w] += toMin
         
         return list
+    def map(val, cMin, cMax, nMin, nMax):
+        nVal = val - cMin
+        nVal *= math.divide0((nMax - nMin), (cMax - cMin))
+        nVal += nMin
+        return nVal
     def smooth1D(heights, smoothing = 100):  # smooths a list of numbers making them more uniform/reducing spikes in numbers
         for s in range(smoothing):
             for i in range(len(heights)):
@@ -1582,19 +1581,19 @@ class math:  # math operations for non vectors (includes some functions from the
         height = a0 + a1 * (x - x3) + a2 * (x - x3) ** 2 + a3 * (x - x3) ** 3
         
         return height
-    def smoothstep(x, e0 = 1, e1 = 1, e2 = 0):  # a function to smoothly step between 0 and 1
-        X = math.clamp((x - e0) / (e1 - e2), 0, 1)
-        return X * X * (3 - 2 * X)
+    def smoothstep(x):  # a function to smoothly step between 0 and 1
+        k = math.clamp(x, 0, 1)
+        return k ** 2 * (3 - 2 * k)
     def length(poses):  # gets the distance of the imputed values (using the pythagorean theorem)
-        dist = poses[0]
-        for Vector in poses:
-            dist = math.sqrt((dist * dist) + (Vector * Vector))
-        return dist
+        squared = 0
+        for point in poses:
+            squared += point * point
+        return math.sqrt(squared)
     def normalize(values):  # normalizes a list of values (for this function you need to put in the .xyz value of the Vector, the functions above do this for you)
         mag = math.length(values)  # gets the magnitude
         new_values = []
         for old_value in values:
-            new_values.append(divide(old_value, mag))  # changes the values by the magnitude
+            new_values.append(math.divideT(old_value, mag))  # changes the values by the magnitude
         return new_values
     def spline1D(noise, x, h):  # smoothly interpolates at a point between other points on a 1D list
         nx = x / h
@@ -1691,29 +1690,15 @@ class math:  # math operations for non vectors (includes some functions from the
             layers.append(max(newLayer))
         return max(layers)
     def RGBtoKCMY(color):  # converts rgb to kcmy(paint color format)
-        """
-        R' = R/255
-        G' = G/255
-        B' = B/255
-        The black key (K) color is calculated from the red (R'), green (G') and blue (B') colors:
-        K = 1-max(R', G', B')
-        The cyan color (C) is calculated from the red (R') and black (K) colors:
-        C = (1-R'-K) / (1-K)
-        The magenta color (M) is calculated from the green (G') and black (K) colors:
-        M = (1-G'-K) / (1-K)
-        The yellow color (Y) is calculated from the blue (B') and black (K) colors:
-        Y = (1-B'-K) / (1-K)
-        
-        https://www.rapidtables.com/convert/color/rgb-to-cmyk.html
-        """
-        R = divideT(color.r, 255)
-        G = divideT(color.g, 255)
-        B = divideT(color.b, 255)
+        # Conversoin formula from: https://www.rapidtables.com/convert/color/rgb-to-cmyk.html
+        G = math.divide0(color.g, 255)
+        B = math.divide0(color.b, 255)
+        R = math.divide0(color.r, 255)
         
         k = 1 - max([R, G, B])
-        c = divideT((1 - R - k), (1 - k))
-        m = divideT((1 - G - k), (1 - k))
-        y = divideT((1 - B - k), (1 - k))
+        c = math.divide0((1 - R - k), (1 - k))
+        m = math.divide0((1 - G - k), (1 - k))
+        y = math.divide0((1 - B - k), (1 - k))
         
         return Vec4(k, c, m, y)
 
@@ -1769,11 +1754,13 @@ class numberGradient:  # a gradient for numbers
         
         distBetweenPoints += abs(point - p2)
         
-        return math.mix(color1, color2, divideT((point - p), distBetweenPoints))
+        pointInSpace = math.smoothstep(math.divide0((point - p), distBetweenPoints))
+
+        return math.mix(color1, color2, pointInSpace)  # try using a smoothstep funciton to create a smoother change in gradient
 
 
 class colorGradient:  # you can add points (only works in 1D) and then sample at points to craete a smooth color transition with multiple colors each with different distances apart
-    def __init__(self, maxGap = 50):
+    def __init__(self, maxGap = 50):  # make it so if color1 dosent hit anything it raises and invalid position
         self.points = {}
         self.maxGap = maxGap
     def add(self, point, color):  # adds a point to the gradient
@@ -1807,7 +1794,9 @@ class colorGradient:  # you can add points (only works in 1D) and then sample at
         
         distBetweenPoints += abs(point - p2)
         
-        return mix(color1, color2, divideT((point - p), distBetweenPoints))
+        pointInSpace = math.smoothstep(math.divide0((point - p), distBetweenPoints))
+
+        return mix(color1, color2, pointInSpace)
 
 
 class noise:  # contains perlin noise functions that take in a list of random numbers thats the same dimention as the function, than the x, y, z, and w (only put the one that belong there for the demention of the function) and finaly the distance between points
@@ -2140,6 +2129,7 @@ class png:  # a tool to create and read png images
         
         return img
     def getArray(imageFile):  # creates a 2d array of the pixel colors of a png
+        pygame.init()
         surf = pygame.Surface(Vec2(5000, 3000))
         image = surf.blit(pygame.image.load(imageFile), Vec2(0, 0))
         size = Vec2(image.size[0], image.size[1])
@@ -2148,17 +2138,18 @@ class png:  # a tool to create and read png images
             for y in range(size.y):
                 newList[x][y] = surf.get_at((x, y))
                 newList[x][y] = Vec4(newList[x][y][0], newList[x][y][1], newList[x][y][2], newList[x][y][3])
+        pygame.quit()
         return newList
 
 
-def vector(list):  # converts a list/tuple into a vectors
+def vectorize(list):  # converts a list/tuple into a vector
     length = len(list)
     if length == 2:
-        return Vec2(vector[0], vector[1])
+        return Vec2(list[0], list[1])
     elif length == 3:
-        return Vec3(vector[0], vector[1], vector[2])
+        return Vec3(list[0], list[1], list[2])
     elif length == 4:
-        return Vec4(vector[0], vector[1], vector[2], vector[3])
+        return Vec4(list[0], list[1], list[2], list[3])
     else:
         raise TypeError("List Is To Long")
 
