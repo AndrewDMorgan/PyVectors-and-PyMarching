@@ -1757,6 +1757,38 @@ class numberGradient:  # a gradient for numbers
         pointInSpace = math.smoothstep(math.divide0((point - p), distBetweenPoints))
 
         return math.mix(color1, color2, pointInSpace)  # try using a smoothstep funciton to create a smoother change in gradient
+    def gradeL(self, point):  # gets the number at point on the gradient
+        point = int(point)
+        p = point
+        for x in range(self.maxGap):
+            try:
+                color1 = self.points[str(p)]
+                break
+            except KeyError:
+                p -= 1
+        
+        if abs(point - p) == self.maxGap - 1:
+            raise SyntaxError("Invalid Postion")
+        
+        distBetweenPoints = abs(point - p)
+        
+        color2 = None
+        p2 = point
+        for x in range(self.maxGap):
+            try:
+                color2 = self.points[str(p2)]
+                break
+            except KeyError:
+                p2 += 1
+        
+        if color2 == None:
+            raise SyntaxError("Invalid Postion")
+        
+        distBetweenPoints += abs(point - p2)
+        
+        pointInSpace = (math.divide0((point - p), distBetweenPoints))
+
+        return math.mix(color1, color2, pointInSpace)  # try using a smoothstep funciton to create a smoother change in gradient
 
 
 class colorGradient:  # you can add points (only works in 1D) and then sample at points to craete a smooth color transition with multiple colors each with different distances apart
@@ -1795,6 +1827,38 @@ class colorGradient:  # you can add points (only works in 1D) and then sample at
         distBetweenPoints += abs(point - p2)
         
         pointInSpace = math.smoothstep(math.divide0((point - p), distBetweenPoints))
+
+        return mix(color1, color2, pointInSpace)
+    def gradeL(self, point):  # gets the color/vector a point in space
+        point = int(point)
+        p = point
+        for x in range(self.maxGap):
+            try:
+                color1 = self.points[str(p)]
+                break
+            except KeyError:
+                p -= 1
+        
+        if abs(point - p) == self.maxGap - 1:
+            raise SyntaxError("Invalid Postion")
+        
+        distBetweenPoints = abs(point - p)
+        
+        color2 = Vec4(None, None, None, None)
+        p2 = point
+        for x in range(self.maxGap):
+            try:
+                color2 = self.points[str(p2)]
+                break
+            except KeyError:
+                p2 += 1
+        
+        if color2 == Vec4(None, None, None, None):
+            raise SyntaxError("Invalid Postion")
+        
+        distBetweenPoints += abs(point - p2)
+        
+        pointInSpace = (math.divide0((point - p), distBetweenPoints))
 
         return mix(color1, color2, pointInSpace)
 
