@@ -54,6 +54,10 @@
   > Fixed the clamp, min and max (1D - 4D) functions under the lists class. They now take in one list and the rest intagers/floats
   
   > Fixed the smoothstep function under the math class
+  
+  > Added a gradeL function to the number, vector and color gradient classes (liniearly interplates instead of using a smoothstep for curvature)
+  
+  > Changed the grade function for number, vector and color gradients to use non linear interpolation.
 
  ## *Second Newest Commit*
   > A copy function under the lists class to copy a list
@@ -218,12 +222,15 @@
    > ## *add*
    > Adds a point to the gradient. Takes in a point and number
    > ## *grade*
-   > Returns the value at the inputed position. Takes in a point
+   > Returns the value at the inputed position (uses non linear interpolation). Takes in a point
+   > ## *gradeL*
+   > Same as the grade function but uses linear interpolation
 ## *colorGradient*
    > ## *add*
    > Adds a point of color to the gradient. Takes in a point and color
-   > ## *grade*
-   > Returns the color at a position (not working perfectly yet). Takes in a position in the gradient
+   > Returns the value at the inputed position (uses non linear interpolation). Takes in a point
+   > ## *gradeL*
+   > Same as the grade function but uses linear interpolation
 ## *noise*
    > ## *perlin1D*
    > Gives a height based on a 1D list of noise and based on a position. Takes and input of random noise, distance between points and the x position
