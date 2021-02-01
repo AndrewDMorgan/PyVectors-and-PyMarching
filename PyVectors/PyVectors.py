@@ -962,14 +962,14 @@ class lists:  # a class do do math operations across an entire list at the same 
         return list1
     def copy2D(list2):  # copys a list
         size = Vec2(len(list2), len(list2[0]))
-        array(size, 'constant', None)
+        list1 = array(size, 'constant', None)
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = list2[x][y]
         return list1
     def copy3D(list2):  # copys a list
         size = Vec3(len(list2), len(list2[0]), len(list2[0][0]))
-        array(size, 'constant', None)
+        list1 = array(size, 'constant', None)
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
@@ -977,7 +977,7 @@ class lists:  # a class do do math operations across an entire list at the same 
         return list1
     def copy4D(list2):  # copys a list
         size = Vec4(len(list2), len(list2[0]), len(list2[0][0]), len(list2[0][0][0]))
-        array(size, 'constant', None)
+        list1 = array(size, 'constant', None)
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
