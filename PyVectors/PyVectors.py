@@ -74,7 +74,7 @@ class vec4:  # this class stores and operates an a tuple/list containing four it
             y = self.y
             z = self.z
             w = self.w
-
+        
         self.x = x
         self.y = y
         self.z = z
