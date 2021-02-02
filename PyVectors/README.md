@@ -39,8 +39,10 @@
 
  ## *A Way To Delete txt And png Files*
   > This function will be under the txt and png class named as remove taking in a file name (with .png or .txt)
- ## *Have The Perlin Noise Generator Under The Array Class Not Generate Extra Numbers*
+ ## *Have The Perlin Noise Generator Under The Array Class Not Generate Extra Numbers (a bug fix)*
   > This will not affect the perlin noise, it will just make it run quicker as it dosent have to generate unused random numbers (there are thousands of extra numbers and generating and creating random numbers in mass amounts in very slow)
+ ## *A faster version of perlin noise*
+  > This new version of perlin noise is in the works and will use the math.mix function and the math.smoothstep function to create smooth veriating terrain with less computaional complexity/intensity.
 
 # *New Features:*
 
