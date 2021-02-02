@@ -44,7 +44,7 @@
 
 # *New Features:*
 
- ## *Newest Commit*
+ ## *Current Commit*
   > Fixed the length function
   
   > Added a map function under the math class taking in a number, min val, max val, new min, new max
@@ -59,7 +59,7 @@
   
   > Changed the grade function for number, vector and color gradients to use non linear interpolation.
 
- ## *Second Newest Commit*
+ ## *Last Commit*
   > A copy function under the lists class to copy a list
   
   > Fixed the lists class so it only returns the new list
