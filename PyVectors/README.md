@@ -45,6 +45,8 @@
   > This new version of perlin noise is in the works and will use the math.mix function and the math.smoothstep function to create smooth veriating terrain with less computaional complexity/intensity.
  ## *Smooth min and max functions*
   > This will smoothly get the min/max of two values or a list
+ ## *3D and 4D worly and cystal noise*
+  > I am planning to add 3D and maybe 4D cystal and worly noise. 1D would be the same as linear interpolation and 4D is very complex.
 
 # *New Features:*
 
