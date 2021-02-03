@@ -1383,6 +1383,41 @@ class lists:  # a class do do math operations across an entire list at the same 
 
 
 class math:  # math operations for non vectors (includes some functions from the math library but also new ones like fract, mix, map 1D-4D, ect...)
+    def worly(grid, scale, x, y):
+        cellPos = (x / scale.x, y / scale.y)
+        currentCell = (math.floor(cellPos[0]), math.floor(cellPos[1]))
+        cells = Vec2(len(grid), len(grid[0]))
+        dists = []
+        for X in range(-1, 2):
+            for Y in range(-1, 2):
+                NX = X + currentCell[0]
+                NY = Y + currentCell[1]
+                if NX >= 0 and NX < cells.x + 1 and NY >= 0 and NY < cells.y + 1:
+                    PointPos = grid[NX][NY]
+                    nx = (X * scale.x) + PointPos[0] + currentCell[0] * scale.x
+                    ny = (Y * scale.y) + PointPos[1] + currentCell[1] * scale.y
+                    distX = (nx - x) ** 2
+                    distY = (ny - y) ** 2
+                    dists.append(distX + distY)
+        return math.sqrt(min(dists))
+    def crystal(grid, scale, x, y):
+        cellPos = (x / scale.x, y / scale.y)
+        currentCell = (math.floor(cellPos[0]), math.floor(cellPos[1]))
+        cells = Vec2(len(grid), len(grid[0]))
+        dists = []
+        for X in range(-1, 2):
+            for Y in range(-1, 2):
+                NX = X + currentCell[0]
+                NY = Y + currentCell[1]
+                if NX >= 0 and NX < cells.x + 1 and NY >= 0 and NY < cells.y + 1:
+                    PointPos = grid[NX][NY]
+                    nx = (X * scale.x) + PointPos[0] + currentCell[0] * scale.x
+                    ny = (Y * scale.y) + PointPos[1] + currentCell[1] * scale.y
+                    distX = (nx - x) ** 2
+                    distY = (ny - y) ** 2
+                    dists.append(distX + distY)
+        del dists[dists.index(min(dists))]
+        return math.sqrt(min(dists))
     def divideT(value1, value2):  # divides and avoids divition by zero errors (when dividing by zero, returns numbers near infity)
         small_num = 0.00000000000000001
         return (value1 + small_num) / (value2 + small_num)
