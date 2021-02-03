@@ -1896,7 +1896,7 @@ class noise:  # contains perlin noise functions that take in a list of random nu
         noise = abs(noise)
         noise *= -1
         return noise
-    def crystalNoise2D(size, scale, minHeight = -1, maxHeight = 1):
+    def crystal2D(size, scale, minHeight = -1, maxHeight = 1):
         scale = Vec2(scale, scale)
         cells = ceil(size / scale)
         grid = []
@@ -1928,7 +1928,7 @@ class noise:  # contains perlin noise functions that take in a list of random nu
             worlyNoise.append(layer)
         worlyNoise = math.map2D(worlyNoise, minHeight, maxHeight)
         return worlyNoise
-    def worlyNoise2D(size, scale, minHeight = -1, maxHeight = 1):
+    def worly2D(size, scale, minHeight = -1, maxHeight = 1):
         scale = Vec2(scale, scale)
         cells = ceil(size / scale)
         grid = []
