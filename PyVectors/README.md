@@ -54,6 +54,10 @@
   > Added crystal noise 2D (worly noise where the take the second smallest distance) under the noise class (crystal2D). This new noise type has been fully optimised.
   
   > Added worly noise 2D under the noise class (worly2D). This new noise type has been fully optimised.
+  
+  > Added worly noise under the math class. It calculates worly noise at a single position based on the inputs
+  
+  > Added crystal noise under the math class. It calculates crystal noise at a single position based on the inputs
 
  ## *Last Commit*
   > Fixed the length function
@@ -140,6 +144,10 @@
    > ## *fract (1D - 4D)*
    > Gets the fract a list. Takes in two lists
  ## *math*
+   > ## *worly*
+   > Generates worly noise at a position in space. Takes in a 2D grid/list (of numbers ranging from 0 to scale), the scale, the x and the y.
+   > ## *crystal*
+   > Generates crystal noise at a position in space. Takes in a 2D grid/list (of numbers ranging from 0 to scale), the scale, the x and the y.
    > ## *cos*
    > Returns te cosine of a number. Takes an input of a number
    > ## *sin*
