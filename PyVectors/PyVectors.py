@@ -74,7 +74,7 @@ class vec4:  # this class stores and operates an a tuple/list containing four it
             y = self.y
             z = self.z
             w = self.w
-        
+
         self.x = x
         self.y = y
         self.z = z
@@ -1728,6 +1728,7 @@ class numberGradient:  # a gradient for numbers
     def grade(self, point):  # gets the number at point on the gradient
         point = int(point)
         p = point
+        color1 = None
         for x in range(self.maxGap):
             try:
                 color1 = self.points[str(p)]
@@ -1735,7 +1736,7 @@ class numberGradient:  # a gradient for numbers
             except KeyError:
                 p -= 1
         
-        if abs(point - p) == self.maxGap - 1:
+        if abs(point - p) == self.maxGap - 1 or color1 == None:
             raise SyntaxError("Invalid Postion")
         
         distBetweenPoints = abs(point - p)
@@ -1760,6 +1761,7 @@ class numberGradient:  # a gradient for numbers
     def gradeL(self, point):  # gets the number at point on the gradient
         point = int(point)
         p = point
+        color1 = None
         for x in range(self.maxGap):
             try:
                 color1 = self.points[str(p)]
@@ -1767,7 +1769,7 @@ class numberGradient:  # a gradient for numbers
             except KeyError:
                 p -= 1
         
-        if abs(point - p) == self.maxGap - 1:
+        if abs(point - p) == self.maxGap - 1 or color1 == None:
             raise SyntaxError("Invalid Postion")
         
         distBetweenPoints = abs(point - p)
@@ -1800,6 +1802,7 @@ class colorGradient:  # you can add points (only works in 1D) and then sample at
     def grade(self, point):  # gets the color/vector a point in space
         point = int(point)
         p = point
+        color1 = Vec4(None, None, None, None)
         for x in range(self.maxGap):
             try:
                 color1 = self.points[str(p)]
@@ -1807,7 +1810,7 @@ class colorGradient:  # you can add points (only works in 1D) and then sample at
             except KeyError:
                 p -= 1
         
-        if abs(point - p) == self.maxGap - 1:
+        if abs(point - p) == self.maxGap - 1 or color1 == Vec4(None, None, None, None):
             raise SyntaxError("Invalid Postion")
         
         distBetweenPoints = abs(point - p)
@@ -1832,6 +1835,7 @@ class colorGradient:  # you can add points (only works in 1D) and then sample at
     def gradeL(self, point):  # gets the color/vector a point in space
         point = int(point)
         p = point
+        color1 = Vec4(None, None, None, None)
         for x in range(self.maxGap):
             try:
                 color1 = self.points[str(p)]
@@ -1839,7 +1843,7 @@ class colorGradient:  # you can add points (only works in 1D) and then sample at
             except KeyError:
                 p -= 1
         
-        if abs(point - p) == self.maxGap - 1:
+        if abs(point - p) == self.maxGap - 1 or color1 == Vec4(None, None, None, None):
             raise SyntaxError("Invalid Postion")
         
         distBetweenPoints = abs(point - p)
@@ -1892,6 +1896,69 @@ class noise:  # contains perlin noise functions that take in a list of random nu
         noise = abs(noise)
         noise *= -1
         return noise
+    def crystalNoise2D(size, scale, minHeight = -1, maxHeight = 1):
+        scale = Vec2(scale, scale)
+        cells = ceil(size / scale)
+        grid = []
+        for x in range(cells.x + 1):
+            layer = []
+            for y in range(cells.y + 1):
+                layer.append((random.randint(0, scale.x), random.randint(0, scale.y)))
+            grid.append(layer)
+        worlyNoise = []
+        for x in range(size.x):
+            layer = []
+            for y in range(size.y):
+                cellPos = (x / scale.x, y / scale.y)
+                currentCell = (math.floor(cellPos[0]), math.floor(cellPos[1]))
+                dists = []
+                for X in range(-1, 2):
+                    for Y in range(-1, 2):
+                        NX = X + currentCell[0]
+                        NY = Y + currentCell[1]
+                        if NX >= 0 and NX < cells.x + 1 and NY >= 0 and NY < cells.y + 1:
+                            PointPos = grid[NX][NY]
+                            nx = (X * scale.x) + PointPos[0] + currentCell[0] * scale.x
+                            ny = (Y * scale.y) + PointPos[1] + currentCell[1] * scale.y
+                            distX = (nx - x) ** 2
+                            distY = (ny - y) ** 2
+                            dists.append(distX + distY)
+                del dists[dists.index(min(dists))]
+                layer.append(math.sqrt(min(dists)))
+            worlyNoise.append(layer)
+        worlyNoise = math.map2D(worlyNoise, minHeight, maxHeight)
+        return worlyNoise
+    def worlyNoise2D(size, scale, minHeight = -1, maxHeight = 1):
+        scale = Vec2(scale, scale)
+        cells = ceil(size / scale)
+        grid = []
+        for x in range(cells.x + 1):
+            layer = []
+            for y in range(cells.y + 1):
+                layer.append((random.randint(0, scale.x), random.randint(0, scale.y)))
+            grid.append(layer)
+        worlyNoise = []
+        for x in range(size.x):
+            layer = []
+            for y in range(size.y):
+                cellPos = (x / scale.x, y / scale.y)
+                currentCell = (math.floor(cellPos[0]), math.floor(cellPos[1]))
+                dists = []
+                for X in range(-1, 2):
+                    for Y in range(-1, 2):
+                        NX = X + currentCell[0]
+                        NY = Y + currentCell[1]
+                        if NX >= 0 and NX < cells.x + 1 and NY >= 0 and NY < cells.y + 1:
+                            PointPos = grid[NX][NY]
+                            nx = (X * scale.x) + PointPos[0] + currentCell[0] * scale.x
+                            ny = (Y * scale.y) + PointPos[1] + currentCell[1] * scale.y
+                            distX = (nx - x) ** 2
+                            distY = (ny - y) ** 2
+                            dists.append(distX + distY)
+                layer.append(math.sqrt(min(dists)))
+            worlyNoise.append(layer)
+        worlyNoise = math.map2D(worlyNoise, minHeight, maxHeight)
+        return worlyNoise
 
 
 def array(size, type, number):  # atomticaly fills in and array with numbers, the types are as following with the next input in brackets: constant (number), random int ([min number, max number]), random float ([min number, max number]), perlin ([[min height, max height, distance between points, height alteration method, (this paramiter is only if using mix) percentage (0 - 1)], more octaves that are same as last])   the demention of the array is determind by the len of size which can be a list or vector type.
