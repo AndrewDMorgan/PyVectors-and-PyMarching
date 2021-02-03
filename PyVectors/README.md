@@ -43,10 +43,17 @@
   > This will not affect the perlin noise, it will just make it run quicker as it dosent have to generate unused random numbers (there are thousands of extra numbers and generating and creating random numbers in mass amounts in very slow)
  ## *A faster version of perlin noise*
   > This new version of perlin noise is in the works and will use the math.mix function and the math.smoothstep function to create smooth veriating terrain with less computaional complexity/intensity.
+ ## *Smooth min and max functions*
+  > This will smoothly get the min/max of two values or a list
 
 # *New Features:*
 
  ## *Current Commit*
+  > Added crystal noise 2D (worly noise where the take the second smallest distance) under the noise class (crystal2D). This new noise type has been fully optimised.
+  
+  > Added worly noise 2D under the noise class (worly2D). This new noise type has been fully optimised.
+
+ ## *Last Commit*
   > Fixed the length function
   
   > Added a map function under the math class taking in a number, min val, max val, new min, new max
@@ -60,17 +67,6 @@
   > Added a gradeL function to the number, vector and color gradient classes (liniearly interplates instead of using a smoothstep for curvature)
   
   > Changed the grade function for number, vector and color gradients to use non linear interpolation.
-
- ## *Last Commit*
-  > A copy function under the lists class to copy a list
-  
-  > Fixed the lists class so it only returns the new list
-  
-  > Added a max (1D - 4D) function to the lists class
-  
-  > Added a min (1D - 4D) function to the lists class
-  
-  > Added a clamp (1D - 4D) function to the lists class
 
 # *Info On All The Functions/Classes:*
 
@@ -250,6 +246,10 @@
    > Gives a height based on a 3D list of noise and based on a position and generates with noticable ridges. Takes and input of random noise, distance between points and the x, y, z position
    > ## *ridge4D*
    > Gives a height based on a 4D list of noise and based on a position and generates with noticable ridges (The 4D noise hasnt been tested but should work). Takes and input of random noise, distance between points and the x, y, z, w position
+   > ## *crystal2D*
+   > Creates noise with a crystal look. Takes in a size (vec2), a scale, and optionaly a min and max size (the defualt is -1 - 1)
+   > ## *worly2D*
+   > Creates noise with a worly look. Takes in a size (vec2), a scale, and optionaly a min and max size (the defualt is -1 - 1)
 ## *array*
 Returns a filled in array that can be constant, random int, random float or perlin. Takes in a size (vec2, vec3, vec4, tuple and lists work), the type of fill (constant, random int, random float or perlin) and the data for the type in a list, vector or tuple (constant; number (not in list), random int; min, max, random float; min, max, perlin; list of octaves (min 1 octave max inf octaves) each being the following; min, max, distance between points, type (add, sub or mix), if using mix then add the percentage (0 - 1) to mix by, ridge; same as perlin but is ridge noise meaning theres a buch of ridges but still veriation (abs(perlin noise) * -1 = ridge noise))
 ## *png*
