@@ -1384,6 +1384,7 @@ class lists:  # a class do do math operations across an entire list at the same 
 
 class math:  # math operations for non vectors (includes some functions from the math library but also new ones like fract, mix, map 1D-4D, ect...)
     def worly(grid, scale, x, y):
+        scale = Vec2(scale, scale)
         cellPos = (x / scale.x, y / scale.y)
         currentCell = (math.floor(cellPos[0]), math.floor(cellPos[1]))
         cells = Vec2(len(grid), len(grid[0]))
@@ -1401,6 +1402,7 @@ class math:  # math operations for non vectors (includes some functions from the
                     dists.append(distX + distY)
         return math.sqrt(min(dists))
     def crystal(grid, scale, x, y):
+        scale = Vec2(scale, scale)
         cellPos = (x / scale.x, y / scale.y)
         currentCell = (math.floor(cellPos[0]), math.floor(cellPos[1]))
         cells = Vec2(len(grid), len(grid[0]))
