@@ -954,20 +954,20 @@ def length(Vector):  # gets the length of a Vector (using the pythagorean theore
 
 
 class lists:  # a class do do math operations across an entire list at the same time
-    def copy1D(list2):  # copys a list
+    def copy1D(list2: list) -> list:  # copys a list
         size = len(list2)
         list1 = array([size], 'constant', None)
         for x in range(len(list1)):
             list1[x] = list2[x]
         return list1
-    def copy2D(list2):  # copys a list
+    def copy2D(list2: list) -> list:  # copys a list
         size = Vec2(len(list2), len(list2[0]))
         list1 = array(size, 'constant', None)
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = list2[x][y]
         return list1
-    def copy3D(list2):  # copys a list
+    def copy3D(list2: list) -> list:  # copys a list
         size = Vec3(len(list2), len(list2[0]), len(list2[0][0]))
         list1 = array(size, 'constant', None)
         for x in range(len(list1)):
@@ -975,7 +975,7 @@ class lists:  # a class do do math operations across an entire list at the same 
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = list2[x][y][z]
         return list1
-    def copy4D(list2):  # copys a list
+    def copy4D(list2: list) -> list:  # copys a list
         size = Vec4(len(list2), len(list2[0]), len(list2[0][0]), len(list2[0][0][0]))
         list1 = array(size, 'constant', None)
         for x in range(len(list1)):
@@ -984,396 +984,396 @@ class lists:  # a class do do math operations across an entire list at the same 
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = list2[x][y][z][w]
         return list1
-    def clamp1D(list1, nMin, nMax):  # clamps a list
+    def clamp1D(list1: list, nMin: float, nMax: float) -> list:  # clamps a list
         for x in range(len(list1)):
             list1[x] = math.clamp(list1[x], nMin, nMax)
         return list1
-    def clamp2D(list1, nMin, nMax):  # clamps a list
+    def clamp2D(list1: list, nMin: float, nMax: float) -> list:  # clamps a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = math.clamp(list1[x][y], nMin, nMax)
         return list1
-    def clamp3D(list1, nMin, nMax):  # clamps a list
+    def clamp3D(list1: list, nMin: float, nMax: float) -> list:  # clamps a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = math.clamp(list1[x][y][z], nMin, nMax)
         return list1
-    def clamp4D(list1, nMin, nMax):  # clamps a list
+    def clamp4D(list1: list, nMin: float, nMax: float) -> list:  # clamps a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = math.clamp(list1[x][y][z][w], nMin, nMax)
         return list1
-    def min1D(list1, nMin):  # sets the min of a list
+    def min1D(list1: list, nMin: float) -> list:  # sets the min of a list
         for x in range(len(list1)):
             list1[x] = min(list1[x], nMin)
         return list1
-    def min2D(list1, nMin):  # sets the min of a list
+    def min2D(list1: list, nMin: float) -> list:  # sets the min of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = min(list1[x][y], nMin)
         return list1
-    def min3D(list1, nMin):  # sets the min of a list
+    def min3D(list1: list, nMin: float) -> list:  # sets the min of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = min(list1[x][y][z], nMin)
         return list1
-    def min4D(list1, nMin):  # sets the min of a list
+    def min4D(list1: list, nMin: float) -> list:  # sets the min of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = min(list1[x][y][z][w], nMin)
         return list1
-    def max1D(list1, nMax):  # sets the max of a list
+    def max1D(list1: list, nMax: float) -> list:  # sets the max of a list
         for x in range(len(list1)):
             list1[x] = max(list1[x], nMax)
         return list1
-    def max2D(list1, nMax):  # sets the max of a list
+    def max2D(list1: list, nMax: float) -> list:  # sets the max of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = max(list1[x][y], nMax)
         return list1
-    def max3D(list1, nMax):  # sets the max of a list
+    def max3D(list1: list, nMax: float) -> list:  # sets the max of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = max(list1[x][y][z], nMax)
         return list1
-    def max4D(list1, nMax):  # sets the max of a list
+    def max4D(list1: list, nMax: float) -> list:  # sets the max of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = max(list1[x][y][z][w], nMax)
         return list1
-    def mix1D(list1, list2, list3):  # mixes 3 lists together
+    def mix1D(list1: list, list2: list, list3: list) -> list:  # mixes 3 lists together
         for x in range(len(list1)):
             list1[x] = math.mix(list1[x], list2[x], list3[x])
         return list1
-    def mix2D(list1, list2, list3):  # mixes 3 lists together
+    def mix2D(list1: list, list2: list, list3: list) -> list:  # mixes 3 lists together
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = math.mix(list1[x][y], list2[x][y], list3[x][y])
         return list1
-    def mix3D(list1, list2, list3):  # mixes 3 lists together
+    def mix3D(list1: list, list2: list, list3: list) -> list:  # mixes 3 lists together
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = math.mix(list1[x][y][z], list2[x][y][z], list3[x][y][z])
         return list1
-    def mix4D(list1, list2, list3):  # mixes 3 lists together
+    def mix4D(list1: list, list2: list, list3: list) -> list:  # mixes 3 lists together
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = math.mix(list1[x][y][z][w], list2[x][y][z][w], list3[x][y][z][w])
         return list1
-    def floor_div1D(list1, list2):  # floor divides two lists
+    def floor_div1D(list1: list, list2: list) -> list:  # floor divides two lists
         for x in range(len(list1)):
             list1[x] = list1[x] // list2[x]
         return list1
-    def floor_div2D(list1, list2):  # floor divides two lists
+    def floor_div2D(list1: list, list2: list) -> list:  # floor divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = list1[x][y] // list2[x][y]
         return list1
-    def floor_div3D(list1, list2):  # floor divides two lists
+    def floor_div3D(list1: list, list2: list) -> list:  # floor divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = list1[x][y][z] // list2[x][y][z]
         return list1
-    def floor_div4D(list1, list2):  # floor divides two lists
+    def floor_div4D(list1: list, list2: list) -> list:  # floor divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = list1[x][y][z][w] // list2[x][y][z][w]
         return list1
-    def mod1D(list1, list2):  # mods two lists
+    def mod1D(list1: list, list2: list) -> list:  # mods two lists
         for x in range(len(list1)):
             list1[x] = list1[x] % list2[x]
         return list1
-    def mod2D(list1, list2):  # mods two lists
+    def mod2D(list1: list, list2: list) -> list:  # mods two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = list1[x][y] % list2[x][y]
         return list1
-    def mod3D(list1, list2):  # mods two lists
+    def mod3D(list1: list, list2: list) -> list:  # mods two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = list1[x][y][z] % list2[x][y][z]
         return list1
-    def mod4D(list1, list2):  # mods two lists
+    def mod4D(list1: list, list2: list) -> list:  # mods two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = list1[x][y][z][w] % list2[x][y][z][w]
         return list1
-    def pow1D(list1, list2):  # gets the power of two lists
+    def pow1D(list1: list, list2: list) -> list:  # gets the power of two lists
         for x in range(len(list1)):
             list1[x] = list1[x] ** list2[x]
         return list1
-    def pow2D(list1, list2):  # gets the power of two lists
+    def pow2D(list1: list, list2: list) -> list:  # gets the power of two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = list1[x][y] ** list2[x][y]
         return list1
-    def pow3D(list1, list2):  # gets the power of two lists
+    def pow3D(list1: list, list2: list) -> list:  # gets the power of two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = list1[x][y][z] ** list2[x][y][z]
         return list1
-    def pow4D(list1, list2):  # gets the power of two lists
+    def pow4D(list1: list, list2: list) -> list:  # gets the power of two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = list1[x][y][z][w] ** list2[x][y][z][w]
         return list1
-    def round1D(list1):  # rounds a list
+    def round1D(list1: list) -> list:  # rounds a list
         for x in range(len(list1)):
             list1[x] = round(list1[x])
         return list1
-    def round2D(list1):  # rounds a list
+    def round2D(list1: list) -> list:  # rounds a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = round(list1[x][y])
         return list1
-    def round3D(list1):  # rounds a list
+    def round3D(list1: list) -> list:  # rounds a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = round(list1[x][y][z])
         return list1
-    def round4D(list1):  # rounds a list
+    def round4D(list1: list) -> list:  # rounds a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = round(list1[x][y][z][w])
         return list1
-    def str1D(list1):  # casts a list to a string type
+    def str1D(list1: list) -> list:  # casts a list to a string type
         for x in range(len(list1)):
             list1[x] = str(list1[x])
         return list1
-    def str2D(list1):  # casts a list to a string type
+    def str2D(list1: list) -> list:  # casts a list to a string type
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = str(list1[x][y])
         return list1
-    def str3D(list1):  # casts a list to a string type
+    def str3D(list1: list) -> list:  # casts a list to a string type
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = str(list1[x][y][z])
         return list1
-    def str4D(list1):  # casts a list to a string type
+    def str4D(list1: list) -> list:  # casts a list to a string type
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = str(list1[x][y][z][w])
         return list1
-    def int1D(list1):  # casts a list to a int type
+    def int1D(list1: list) -> list:  # casts a list to a int type
         for x in range(len(list1)):
             list1[x] = int(list1[x])
         return list1
-    def int2D(list1):  # casts a list to a int type
+    def int2D(list1: list) -> list:  # casts a list to a int type
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = int(list1[x][y])
         return list1
-    def int3D(list1):  # casts a list to a int type
+    def int3D(list1: list) -> list:  # casts a list to a int type
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = int(list1[x][y][z])
         return list1
-    def int4D(list1):  # casts a list to a int type
+    def int4D(list1: list) -> list:  # casts a list to a int type
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = int(list1[x][y][z][w])
         return list1
-    def fract1D(list1):  # gets the fract of a list
+    def fract1D(list1: list) -> list:  # gets the fract of a list
         for x in range(len(list1)):
             list1[x] = math.fract(list1[x])
         return list1
-    def fract2D(list1):  # gets the fract of a list
+    def fract2D(list1: list) -> list:  # gets the fract of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = math.floor(fract[x][y])
         return list1
-    def fract3D(list1):  # gets the fract of a list
+    def fract3D(list1: list) -> list:  # gets the fract of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = math.fract(list1[x][y][z])
         return list1
-    def fract4D(list1):  # gets the fract of a list
+    def fract4D(list1: list) -> list:  # gets the fract of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = math.fract(list1[x][y][z][w])
         return list1
-    def ceil1D(list1):  # gets the ceil of a list
+    def ceil1D(list1: list) -> list:  # gets the ceil of a list
         for x in range(len(list1)):
             list1[x] = math.ceil(list1[x])
         return list1
-    def ceil2D(list1):  # gets the ceil of a list
+    def ceil2D(list1: list) -> list:  # gets the ceil of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = math.ceil(list1[x][y])
         return list1
-    def ceil3D(list1):  # gets the ceil of a list
+    def ceil3D(list1: list) -> list:  # gets the ceil of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = math.ceil(list1[x][y][z])
         return list1
-    def ceil4D(list1):  # gets the ceil of a list
+    def ceil4D(list1: list) -> list:  # gets the ceil of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = math.ceil(list1[x][y][z][w])
         return list1
-    def floor1D(list1):  # gets the floor of a list
+    def floor1D(list1: list) -> list:  # gets the floor of a list
         for x in range(len(list1)):
             list1[x] = math.floor(list1[x])
         return list1
-    def floor2D(list1):  # gets the floor of a list
+    def floor2D(list1: list) -> list:  # gets the floor of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = math.floor(list1[x][y])
         return list1
-    def floor3D(list1):  # gets the floor of a list
+    def floor3D(list1: list) -> list:  # gets the floor of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = math.floor(list1[x][y][z])
         return list1
-    def floor4D(list1):  # gets the floor of a list
+    def floor4D(list1: list) -> list:  # gets the floor of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = math.floor(list1[x][y][z][w])
         return list1
-    def abs1D(list1):  # gets the absulute value of a list
+    def abs1D(list1: list) -> list:  # gets the absulute value of a list
         for x in range(len(list1)):
             list1[x] = abs(list1[x])
         return list1
-    def abs2D(list1):  # gets the absulute value of a list
+    def abs2D(list1: list) -> list:  # gets the absulute value of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] = abs(list1[x][y])
         return list1
-    def abs3D(list1):  # gets the absulute value of a list
+    def abs3D(list1: list) -> list:  # gets the absulute value of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] = abs(list1[x][y][z])
         return list1
-    def abs4D(list1):  # gets the absulute value of a list
+    def abs4D(list1: list) -> list:  # gets the absulute value of a list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] = abs(list1[x][y][z][w])
         return list1
-    def mult1D(list1, list2):  # multiplies two list
+    def mult1D(list1: list, list2: list) -> list:  # multiplies two list
         for x in range(len(list1)):
             list1[x] *= list2[x]
         return list1
-    def mult2D(list1, list2):  # multiplies two list
+    def mult2D(list1: list, list2: list) -> list:  # multiplies two list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] *= list2[x][y]
         return list1
-    def mult3D(list1, list2):  # multiplies two list
+    def mult3D(list1: list, list2: list) -> list:  # multiplies two list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] *= list2[x][y][z]
         return list1
-    def mult4D(list1, list2):  # multiplies two list
+    def mult4D(list1: list, list2: list) -> list:  # multiplies two list
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] *= list2[x][y][z][w]
         return list1
-    def div1D(list1, list2):  # divides two lists
+    def div1D(list1: list, list2: list) -> list:  # divides two lists
         for x in range(len(list1)):
             list1[x] /= list2[x]
         return list1
-    def div2D(list1, list2):  # divides two lists
+    def div2D(list1: list, list2: list) -> list:  # divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] /= list2[x][y]
         return list1
-    def div3D(list1, list2):  # divides two lists
+    def div3D(list1: list, list2: list) -> list:  # divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] /= list2[x][y][z]
         return list1
-    def div4D(list1, list2):  # divides two lists
+    def div4D(list1: list, list2: list) -> list:  # divides two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] /= list2[x][y][z][w]
         return list1
-    def sub1D(list1, list2):  # subtracts two lists
+    def sub1D(list1: list, list2: list) -> list:  # subtracts two lists
         for x in range(len(list1)):
             list1[x] -= list2[x]
         return list1
-    def sub2D(list1, list2):  # subtracts two lists
+    def sub2D(list1: list, list2: list) -> list:  # subtracts two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] -= list2[x][y]
         return list1
-    def sub3D(list1, list2):  # subtracts two lists
+    def sub3D(list1: list, list2: list) -> list:  # subtracts two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] -= list2[x][y][z]
         return list1
-    def sub4D(list1, list2):  # subtracts two lists
+    def sub4D(list1: list, list2: list) -> list:  # subtracts two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     for w in range(len(list1[x][y][z])):
                         list1[x][y][z][w] -= list2[x][y][z][w]
         return list1
-    def add1D(list1, list2):  # adds two lists
+    def add1D(list1: list, list2: list) -> list:  # adds two lists
         for x in range(len(list1)):
             list1[x] += list2[x]
         return list1
-    def add2D(list1, list2):  # adds two lists
+    def add2D(list1: list, list2: list) -> list:  # adds two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 list1[x][y] += list2[x][y]
         return list1
-    def add3D(list1, list2):  # adds two lists
+    def add3D(list1: list, list2: list) -> list:  # adds two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
                     list1[x][y][z] += list2[x][y][z]
         return list1
-    def add4D(list1, list2):  # adds two lists
+    def add4D(list1: list, list2: list) -> list:  # adds two lists
         for x in range(len(list1)):
             for y in range(len(list1[x])):
                 for z in range(len(list1[x][y])):
@@ -1383,7 +1383,7 @@ class lists:  # a class do do math operations across an entire list at the same 
 
 
 class math:  # math operations for non vectors (includes some functions from the math library but also new ones like fract, mix, map 1D-4D, ect...)
-    def worly(grid, scale, x, y):
+    def worly(grid: list, scale, x, y) -> float:
         scale = Vec2(scale, scale)
         cellPos = (x / scale.x, y / scale.y)
         currentCell = (math.floor(cellPos[0]), math.floor(cellPos[1]))
@@ -1401,7 +1401,7 @@ class math:  # math operations for non vectors (includes some functions from the
                     distY = (ny - y) ** 2
                     dists.append(distX + distY)
         return math.sqrt(min(dists))
-    def crystal(grid, scale, x, y):
+    def crystal(grid: list, scale, x, y) -> float:
         scale = Vec2(scale, scale)
         cellPos = (x / scale.x, y / scale.y)
         currentCell = (math.floor(cellPos[0]), math.floor(cellPos[1]))
@@ -1420,34 +1420,34 @@ class math:  # math operations for non vectors (includes some functions from the
                     dists.append(distX + distY)
         del dists[dists.index(min(dists))]
         return math.sqrt(min(dists))
-    def divideT(value1, value2):  # divides and avoids divition by zero errors (when dividing by zero, returns numbers near infity)
+    def divideT(value1, value2) -> float:  # divides and avoids divition by zero errors (when dividing by zero, returns numbers near infity)
         small_num = 0.00000000000000001
         return (value1 + small_num) / (value2 + small_num)
-    def divide0(value1, value2):  # divides two numbers but on divtion by zero returns 0 (the divide0 function will return numbers near to infinity this one wont)
+    def divide0(value1, value2) -> float:  # divides two numbers but on divtion by zero returns 0 (the divide0 function will return numbers near to infinity this one wont)
         try:
             return value1 / value2
         except ZeroDivisionError:
-            return 0
-    def ceil(value):  # returns the ceiling of a number
+            return 0.0
+    def ceil(value) -> int:  # returns the ceiling of a number
         return Math.ceil(value)
-    def mix(value1, value2, percentage):  # mixes two numbers based on a number ranging from 1 - 0
+    def mix(value1, value2, percentage: float) -> float:  # mixes two numbers based on a number ranging from 1 - 0
         percentage = math.clamp(percentage, 0, 1)
-        return (value1*(1 - percentage))+(value2*percentage)
-    def tan(value):  # returns the tangent of a number
+        return value1 * (1 - percentage) + value2 * percentage
+    def tan(value) -> float:  # returns the tangent of a number
         return Math.tan(value)
-    def sin(value):  # returns the sign of a number
+    def sin(value) -> float:  # returns the sign of a number
         return Math.sin(value)
-    def cos(value):  # returns the cosine of a number
+    def cos(value) -> float:  # returns the cosine of a number
         return Math.cos(value)
-    def fract(value):  # returns the decimal of the value
+    def fract(value) -> float:  # returns the decimal of the value
         return value - math.floor(value)
-    def floor(value):  # returns the floor of the value
+    def floor(value) -> int:  # returns the floor of the value
         return Math.floor(value)
     def clamp(val, min_, max_):  # sets the max and min of a number
         return min(max(val, min_), max_)
-    def sqrt(value):  # square root
+    def sqrt(value) -> float:  # square root
         return Math.sqrt(value)
-    def map1D(list, fromMin, fromMax, toMin = None, toMax = None):  # changes the range of a 1d array of data (while keeping the detail of the numbers)
+    def map1D(list: list, fromMin, fromMax, toMin = None, toMax = None) -> float:  # changes the range of a 1d array of data (while keeping the detail of the numbers)
         if None in [toMin, toMax]:
             if toMin == None and toMax == None:
                 toMin = fromMin
@@ -1465,7 +1465,7 @@ class math:  # math operations for non vectors (includes some functions from the
             list[x] += toMin
         
         return list
-    def map2D(list, fromMin, fromMax, toMin = None, toMax = None):  # changes the range of a 2d array of data (while keeping the detail of the numbers)
+    def map2D(list: list, fromMin, fromMax, toMin = None, toMax = None) -> float:  # changes the range of a 2d array of data (while keeping the detail of the numbers)
         if None in [toMin, toMax]:
             if toMin == None and toMax == None:
                 toMin = fromMin
@@ -1488,7 +1488,7 @@ class math:  # math operations for non vectors (includes some functions from the
                 list[x][y] += toMin
         
         return list
-    def map3D(list, fromMin, fromMax, toMin = None, toMax = None):  # changes the range of a 3d array of data (while keeping the detail of the numbers)
+    def map3D(list: list, fromMin, fromMax, toMin = None, toMax = None) -> float:  # changes the range of a 3d array of data (while keeping the detail of the numbers)
         if None in [toMin, toMax]:
             if toMin == None and toMax == None:
                 toMin = fromMin
@@ -1519,7 +1519,7 @@ class math:  # math operations for non vectors (includes some functions from the
                     list[x][y][z] += toMin
         
         return list
-    def map4D(list, fromMin, fromMax, toMin = None, toMax = None):  # changes the range of a 4d array of data (while keeping the detail of the numbers)
+    def map4D(list: list, fromMin, fromMax, toMin = None, toMax = None) -> float:  # changes the range of a 4d array of data (while keeping the detail of the numbers)
         if None in [toMin, toMax]:
             if toMin == None and toMax == None:
                 toMin = fromMin
@@ -1555,12 +1555,12 @@ class math:  # math operations for non vectors (includes some functions from the
                         list[x][y][z][w] += toMin
         
         return list
-    def map(val, cMin, cMax, nMin, nMax):
+    def map(val, cMin, cMax, nMin, nMax) -> float:
         nVal = val - cMin
         nVal *= math.divide0((nMax - nMin), (cMax - cMin))
         nVal += nMin
         return nVal
-    def smooth1D(heights, smoothing = 100):  # smooths a list of numbers making them more uniform/reducing spikes in numbers
+    def smooth1D(heights: list, smoothing = 100) -> list:  # smooths a list of numbers making them more uniform/reducing spikes in numbers
         for s in range(smoothing):
             for i in range(len(heights)):
                 if i not in [0, len(heights) - 1]:
@@ -1568,9 +1568,9 @@ class math:  # math operations for non vectors (includes some functions from the
                     height3 = heights[i + 1]
                     heights[i] = (heights[i] * 0.1) + (height1 * 0.45) + (height3 * 0.45)
         return heights
-    def interpalate2(h, x, points):  # interpolates linearly between 2 points (use the math.smooth function for further smoothing)
-        return ((list[1].y - list[0].y) / h) * x
-    def interpalate3(h, x, list):  # interpolates smoothly between 3 points (use the math.smooth function to fixs small glitches)
+    def interpalate2(h, x, points: list):  # interpolates linearly between 2 points (use the math.smooth function for further smoothing)
+        return ((points[1].y - points[0].y) / h) * x
+    def interpalate3(h, x, list: list):  # interpolates smoothly between 3 points (use the math.smooth function to fixs small glitches)
         index2 = int(x / h)
         index1 = index2 - 1
         index3 = index2 + 1
@@ -1590,7 +1590,7 @@ class math:  # math operations for non vectors (includes some functions from the
         height_out = a0 + a1 * (x - x2) + a2 * (x - x2) ** 2
         
         return height_out
-    def interpalate5(h, x, list):  # interpolates smoothly between 5 points (use the math.smooth function to fix glitches)
+    def interpalate5(h, x, list: list):  # interpolates smoothly between 5 points (use the math.smooth function to fix glitches)
         middle_index = int(x / h)  #int((x / (h * 5)) * 5)
         index1 = middle_index - 2
         index2 = middle_index - 1
@@ -1618,21 +1618,21 @@ class math:  # math operations for non vectors (includes some functions from the
         height = a0 + a1 * (x - x3) + a2 * (x - x3) ** 2 + a3 * (x - x3) ** 3
         
         return height
-    def smoothstep(x):  # a function to smoothly step between 0 and 1
+    def smoothstep(x: float) -> float:  # a function to smoothly step between 0 and 1
         k = math.clamp(x, 0, 1)
         return k ** 2 * (3 - 2 * k)
-    def length(poses):  # gets the distance of the imputed values (using the pythagorean theorem)
+    def length(poses: list) -> float:  # gets the distance of the imputed values (using the pythagorean theorem)
         squared = 0
         for point in poses:
             squared += point * point
         return math.sqrt(squared)
-    def normalize(values):  # normalizes a list of values (for this function you need to put in the .xyz value of the Vector, the functions above do this for you)
+    def normalize(values: list) -> list:  # normalizes a list of values (for this function you need to put in the .xyz value of the Vector, the functions above do this for you)
         mag = math.length(values)  # gets the magnitude
         new_values = []
         for old_value in values:
             new_values.append(math.divideT(old_value, mag))  # changes the values by the magnitude
         return new_values
-    def spline1D(noise, x, h):  # smoothly interpolates at a point between other points on a 1D list
+    def spline1D(noise: list, x, h) -> float:  # smoothly interpolates at a point between other points on a 1D list
         nx = x / h
         p1 = math.floor(nx)
         p2 = p1 + 1
@@ -1650,7 +1650,7 @@ class math:  # math operations for non vectors (includes some functions from the
         q4 = ttt - tt
         ty = 0.5 * (noise[p0] * q1 + noise[p1] * q2 + noise[p2] * q3 + noise[p3] * q4)
         return ty
-    def spline2D(noise, x, y, h):  # smoothly interpolates at a point between other points on a 2D list
+    def spline2D(noise: list, x, y, h) -> float:  # smoothly interpolates at a point between other points on a 2D list
         nx = x / h
         i = math.floor(nx)
         ty1 = math.spline1D(noise[i - 1], y, h)
@@ -1658,7 +1658,7 @@ class math:  # math operations for non vectors (includes some functions from the
         ty3 = math.spline1D(noise[i + 1], y, h)
         ty4 = math.spline1D(noise[i + 2], y, h)
         return math.spline1D([ty1, ty2, ty3, ty4], (nx - i) * h + h, h)
-    def spline3D(noise, x, y, z, h):  # smoothly interpolates at a point between other points on a 3D list
+    def spline3D(noise: list, x, y, z, h) -> float:  # smoothly interpolates at a point between other points on a 3D list
         nx = x / h
         i = math.floor(nx)
         ty1 = math.spline2D(noise[i - 1], y, z, h)
@@ -1666,7 +1666,7 @@ class math:  # math operations for non vectors (includes some functions from the
         ty3 = math.spline2D(noise[i + 1], y, z, h)
         ty4 = math.spline2D(noise[i + 2], y, z, h)
         return math.spline1D([ty1, ty2, ty3, ty4], (nx - i) * h + h, h)
-    def spline4D(noise, x, y, z, w, h):  # this is untested but should work and smoothly interpolates at a point between other points on a 4D list
+    def spline4D(noise: list, x, y, z, w, h) -> float:  # this is untested but should work and smoothly interpolates at a point between other points on a 4D list
         nx = x / h
         i = math.floor(nx)
         ty1 = math.spline3D(noise[i - 1], y, z, w, h)
@@ -1674,14 +1674,14 @@ class math:  # math operations for non vectors (includes some functions from the
         ty3 = math.spline3D(noise[i + 1], y, z, w, h)
         ty4 = math.spline3D(noise[i + 2], y, z, w, h)
         return math.spline1D([ty1, ty2, ty3, ty4], (nx - i) * h + h, h)
-    def min1D(list):  # gets the min of a list thats dimetion is stated
+    def min1D(list: list):  # gets the min of a list thats dimetion is stated
         return min(list)
-    def min2D(list):  # gets the min of a 2d array
+    def min2D(list: list):  # gets the min of a 2d array
         layers = []
         for x in list:
             layers.append(min(x))
         return min(layers)
-    def min3D(list):  # gets the min of a 3d array
+    def min3D(list: list):  # gets the min of a 3d array
         layers = []
         for x in list:
             newLayer = []
@@ -1689,7 +1689,7 @@ class math:  # math operations for non vectors (includes some functions from the
                 newLayer.append(min(y))
             layers.append(min(newLayer))
         return min(layers)
-    def min4D(list):  # gets the min of a 4d array
+    def min4D(list: list):  # gets the min of a 4d array
         layers = []
         for x in list:
             newLayer = []
@@ -1700,14 +1700,14 @@ class math:  # math operations for non vectors (includes some functions from the
                 newLayer.append(min(layers2))
             layers.append(min(newLayer))
         return min(layers)
-    def max1D(list):  # gets the max of a list thats dimetion is stated
+    def max1D(list: list):  # gets the max of a list thats dimetion is stated
         return max(list)
-    def max2D(list):  # gets the max of a 2d array
+    def max2D(list: list):  # gets the max of a 2d array
         layers = []
         for x in list:
             layers.append(max(x))
         return max(layers)
-    def max3D(list):  # gets the max of a 3d array
+    def max3D(list: list):  # gets the max of a 3d array
         layers = []
         for x in list:
             newLayer = []
@@ -1715,7 +1715,7 @@ class math:  # math operations for non vectors (includes some functions from the
                 newLayer.append(max(y))
             layers.append(max(newLayer))
         return max(layers)
-    def max4D(list):  # gets the max of a 4d array
+    def max4D(list: list):  # gets the max of a 4d array
         layers = []
         for x in list:
             newLayer = []
@@ -1726,7 +1726,7 @@ class math:  # math operations for non vectors (includes some functions from the
                 newLayer.append(max(layers2))
             layers.append(max(newLayer))
         return max(layers)
-    def RGBtoKCMY(color):  # converts rgb to kcmy(paint color format)
+    def RGBtoKCMY(color: vec3) -> vec4:  # converts rgb to kcmy(paint color format)
         # Conversoin formula from: https://www.rapidtables.com/convert/color/rgb-to-cmyk.html
         G = math.divide0(color.g, 255)
         B = math.divide0(color.b, 255)
@@ -1745,15 +1745,6 @@ class dists:  # multipl distance functions for different shapes
         return length(pos - center) - r
     def distToPoint(pos, point_pos):  # gets the distance to a point from a point
         return length(pos - point_pos)
-
-
-class gradient:  # a way to make gradients that specifies what they are being used for
-    def color(maxGap = 50):  # gives you a color gradient
-        return colorGradient(maxGap)
-    def number(maxGap = 50):  # gives you a number gradient
-        return numberGradient(maxGap)
-    def vector(maxGap = 50):  # gives you a vector gradient
-        return colorGradient(maxGap)
 
 
 class numberGradient:  # a gradient for numbers
@@ -1904,43 +1895,48 @@ class colorGradient:  # you can add points (only works in 1D) and then sample at
         return mix(color1, color2, pointInSpace)
 
 
+class gradient:  # a way to make gradients that specifies what they are being used for
+    def color(maxGap = 50) -> colorGradient:  # gives you a color gradient
+        return colorGradient(maxGap)
+    def number(maxGap = 50) -> numberGradient:  # gives you a number gradient
+        return numberGradient(maxGap)
+    def vector(maxGap = 50) -> colorGradient:  # gives you a vector gradient
+        return colorGradient(maxGap)
+
+
 class noise:  # contains perlin noise functions that take in a list of random numbers thats the same dimention as the function, than the x, y, z, and w (only put the one that belong there for the demention of the function) and finaly the distance between points
-    def perlin1D(randNoise, h, x):  # perlin noise at the dimention stated
+    def perlin1D(randNoise: list, h, x) -> float:  # perlin noise at the dimention stated
         return math.spline1D(randNoise, x, h)
-    def perlin2D(randNoise, h, x, y):
+    def perlin2D(randNoise: list, h, x, y) -> float:
         return math.spline2D(randNoise, x, y, h)
-    def perlin3D(randNoise, h, x, y, z):
+    def perlin3D(randNoise: list, h, x, y, z) -> float:
         return math.spline3D(randNoise, x, y, z, h)
-    def perlin4D(randNoise, h, x, y, z, w):
+    def perlin4D(randNoise: list, h, x, y, z, w) -> float:
         return math.spline4D(randNoise, x, y, z, w, h)
-    def ridge1D(randNoise, h, x):  # ridge noise aka perlin noise with abrupt ridges
+    def ridge1D(randNoise: list, h, x) -> float:  # ridge noise aka perlin noise with abrupt ridges (like that of mountains)
         noise = math.spline1D(randNoise, x, h)
-        noise = abs(noise)
-        noise *= -1
+        noise = -1 * abs(noise)
         return noise
-    def ridge2D(randNoise, h, x, y):  #
+    def ridge2D(randNoise: list, h, x, y) -> float:
         noise = math.spline2D(randNoise, x, y, h)
-        noise = abs(noise)
-        noise *= -1
+        noise = -1 * abs(noise)
         return noise
-    def ridge3D(randNoise, h, x, y, z):
+    def ridge3D(randNoise: list, h, x, y, z) -> float:
         noise = math.spline3D(randNoise, x, y, z, h)
-        noise = abs(noise)
-        noise *= -1
+        noise = -1 * abs(noise)
         return noise
-    def ridge4D(randNoise, h, x, y, z, w):
+    def ridge4D(randNoise: list, h, x, y, z, w) -> float:
         noise = math.spline4D(randNoise, x, y, z, w, h)
-        noise = abs(noise)
-        noise *= -1
+        noise = -1 * abs(noise)
         return noise
-    def crystal2D(size, scale, minHeight = -1, maxHeight = 1):
+    def crystal2D(size: Vec2, scale: float, minHeight: float = -1, maxHeight: float = 1) -> list:  # a crystaly noise pattern (generates hole list)
         scale = Vec2(scale, scale)
         cells = ceil(size / scale)
         grid = []
-        for x in range(cells.x + 1):
+        for x in range(cells.x + 2):
             layer = []
-            for y in range(cells.y + 1):
-                layer.append((random.randint(0, scale.x), random.randint(0, scale.y)))
+            for y in range(cells.y + 2):
+                layer.append((random.uniform(0, scale.x), random.uniform(0, scale.y)))
             grid.append(layer)
         worlyNoise = []
         for x in range(size.x):
@@ -1954,7 +1950,7 @@ class noise:  # contains perlin noise functions that take in a list of random nu
                         NX = X + currentCell[0]
                         NY = Y + currentCell[1]
                         if NX >= 0 and NX < cells.x + 1 and NY >= 0 and NY < cells.y + 1:
-                            PointPos = grid[NX][NY]
+                            PointPos = grid[NX + 1][NY + 1]
                             nx = (X * scale.x) + PointPos[0] + currentCell[0] * scale.x
                             ny = (Y * scale.y) + PointPos[1] + currentCell[1] * scale.y
                             distX = (nx - x) ** 2
@@ -1965,14 +1961,14 @@ class noise:  # contains perlin noise functions that take in a list of random nu
             worlyNoise.append(layer)
         worlyNoise = math.map2D(worlyNoise, minHeight, maxHeight)
         return worlyNoise
-    def worly2D(size, scale, minHeight = -1, maxHeight = 1):
+    def worly2D(size: Vec2, scale: float, minHeight: float = -1, maxHeight: float = 1) -> list:  # a worly noise pattern (generates hole list)
         scale = Vec2(scale, scale)
         cells = ceil(size / scale)
         grid = []
-        for x in range(cells.x + 1):
+        for x in range(cells.x + 2):
             layer = []
-            for y in range(cells.y + 1):
-                layer.append((random.randint(0, scale.x), random.randint(0, scale.y)))
+            for y in range(cells.y + 2):
+                layer.append((random.uniform(0, scale.x), random.uniform(0, scale.y)))
             grid.append(layer)
         worlyNoise = []
         for x in range(size.x):
@@ -1986,7 +1982,7 @@ class noise:  # contains perlin noise functions that take in a list of random nu
                         NX = X + currentCell[0]
                         NY = Y + currentCell[1]
                         if NX >= 0 and NX < cells.x + 1 and NY >= 0 and NY < cells.y + 1:
-                            PointPos = grid[NX][NY]
+                            PointPos = grid[NX + 1][NY + 1]
                             nx = (X * scale.x) + PointPos[0] + currentCell[0] * scale.x
                             ny = (Y * scale.y) + PointPos[1] + currentCell[1] * scale.y
                             distX = (nx - x) ** 2
@@ -1996,9 +1992,90 @@ class noise:  # contains perlin noise functions that take in a list of random nu
             worlyNoise.append(layer)
         worlyNoise = math.map2D(worlyNoise, minHeight, maxHeight)
         return worlyNoise
+    def crystal3D(size: Vec3, scale: float, minHeight: float = -1, maxHeight: float = 1) -> list:
+        scale = Vec3(scale, scale, scale)
+        cells = ceil(size / scale)
+        grid = []
+        for x in range(cells.x + 2):
+            layer = []
+            for y in range(cells.y + 2):
+                layer2 = []
+                for z in range(cells.z + 2):
+                    layer2.append((random.uniform(0, scale.x), random.uniform(0, scale.y), random.uniform(0, scale.z)))
+                layer.append(layer2)
+            grid.append(layer)
+        worlyNoise = []
+        for x in range(size.x):
+            layer = []
+            for y in range(size.y):
+                layer2 = []
+                for z in range(size.z):
+                    cellPos = (x / scale.x, y / scale.y, z / scale.z)
+                    currentCell = (math.floor(cellPos[0]), math.floor(cellPos[1]), math.floor(cellPos[2]))
+                    dists = []
+                    for X in range(-1, 2):
+                        for Y in range(-1, 2):
+                            for Z in range(-1, 2):
+                                NX = X + currentCell[0]
+                                NY = Y + currentCell[1]
+                                NZ = Z + currentCell[2]
+                                PointPos = grid[NX + 1][NY + 1][NZ + 1]
+                                nx = (X * scale.x) + PointPos[0] + currentCell[0] * scale.x
+                                ny = (Y * scale.y) + PointPos[1] + currentCell[1] * scale.y
+                                nz = (Z * scale.x) + PointPos[2] + currentCell[2] * scale.z
+                                distX = (nx - x) ** 2
+                                distY = (ny - y) ** 2
+                                distZ = (nz - z) ** 2
+                                dists.append(distX + distY + distZ)
+                    del dists[dists.index(min(dists))]
+                    layer2.append(math.sqrt(min(dists)))
+                layer.append(layer2)
+            worlyNoise.append(layer)
+        worlyNoise = math.map3D(worlyNoise, minHeight, maxHeight)
+        return worlyNoise
+    def worly3D(size: Vec3, scale: float, minHeight: float = -1, maxHeight: float = 1) -> list:
+        scale = Vec3(scale, scale, scale)
+        cells = ceil(size / scale)
+        grid = []
+        for x in range(cells.x + 2):
+            layer = []
+            for y in range(cells.y + 2):
+                layer2 = []
+                for z in range(cells.z + 2):
+                    layer2.append((random.uniform(0, scale.x), random.uniform(0, scale.y), random.uniform(0, scale.z)))
+                layer.append(layer2)
+            grid.append(layer)
+        worlyNoise = []
+        for x in range(size.x):
+            layer = []
+            for y in range(size.y):
+                layer2 = []
+                for z in range(size.z):
+                    cellPos = (x / scale.x, y / scale.y, z / scale.z)
+                    currentCell = (math.floor(cellPos[0]), math.floor(cellPos[1]), math.floor(cellPos[2]))
+                    dists = []
+                    for X in range(-1, 2):
+                        for Y in range(-1, 2):
+                            for Z in range(-1, 2):
+                                NX = X + currentCell[0]
+                                NY = Y + currentCell[1]
+                                NZ = Z + currentCell[2]
+                                PointPos = grid[NX + 1][NY + 1][NZ + 1]
+                                nx = (X * scale.x) + PointPos[0] + currentCell[0] * scale.x
+                                ny = (Y * scale.y) + PointPos[1] + currentCell[1] * scale.y
+                                nz = (Z * scale.x) + PointPos[2] + currentCell[2] * scale.z
+                                distX = (nx - x) ** 2
+                                distY = (ny - y) ** 2
+                                distZ = (nz - z) ** 2
+                                dists.append(distX + distY + distZ)
+                    layer2.append(math.sqrt(min(dists)))
+                layer.append(layer2)
+            worlyNoise.append(layer)
+        worlyNoise = math.map3D(worlyNoise, minHeight, maxHeight)
+        return worlyNoise
 
 
-def array(size, type, number):  # atomticaly fills in and array with numbers, the types are as following with the next input in brackets: constant (number), random int ([min number, max number]), random float ([min number, max number]), perlin ([[min height, max height, distance between points, height alteration method, (this paramiter is only if using mix) percentage (0 - 1)], more octaves that are same as last])   the demention of the array is determind by the len of size which can be a list or vector type.
+def array(size, type: str, number) -> list:  # atomticaly fills in and array with numbers, the types are as following with the next input in brackets: constant (number), random int ([min number, max number]), random float ([min number, max number]), perlin ([[min height, max height, distance between points, height alteration method, (this paramiter is only if using mix) percentage (0 - 1)], more octaves that are same as last])   the demention of the array is determind by the len of size which can be a list or vector type.
     dem = len(size)
     if dem == 1:
         if type == 'constant':
@@ -2019,21 +2096,21 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
         elif type == 'perlin':
             list = array(size, 'constant', 0)
             for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
-                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                rNoise = array(math.ceil(size[0] / octave[2]) + 2, 'random float', [octave[0], octave[1]])
                 if octave[3] == 'add':
                     for x in range(size[0]):
                         list[x] = noise.perlin1D(rNoise, octave[2], x) + list[x]
-                if octave[3] == 'sub':
+                elif octave[3] == 'sub':
                     for x in range(size[0]):
                         list[x] = noise.perlin1D(rNoise, octave[2], x) - list[x]
-                if octave[3] == 'mix':
+                elif octave[3] == 'mix':
                     for x in range(size[0]):
                         list[x] = math.mix(noise.perlin1D(rNoise, octave[2], x), list[x], octave[4])
             return list
         elif type == 'ridge':
             list = array(size, 'constant', 0)
             for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
-                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                rNoise = array(math.ceil(size[0] / octave[2]) + 2, 'random float', [octave[0], octave[1]])
                 if octave[3] == 'add':
                     for x in range(size[0]):
                         list[x] = noise.ridge1D(rNoise, octave[2], x) + list[x]
@@ -2072,9 +2149,10 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                 list.append(layer)
             return list
         elif type == 'perlin':
+            size = vectorize(size)
             list = array(size, 'constant', 0)
             for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
-                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                rNoise = array(ceil(size / Vec2(octave[2], octave[2])) + Vec2(2, 2), 'random float', [octave[0], octave[1]])
                 if octave[3] == 'add':
                     for x in range(size[0]):
                         for y in range(size[1]):
@@ -2089,9 +2167,10 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                             list[x][y] = math.mix(noise.perlin2D(rNoise, octave[2], x, y), list[x][y], octave[4])
             return list
         elif type == 'ridge':
+            size = vectorize(size)
             list = array(size, 'constant', 0)
             for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
-                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                rNoise = array(ceil(size / Vec2(octave[2], octave[2])) + Vec2(2, 2), 'random float', [octave[0], octave[1]])
                 if octave[3] == 'add':
                     for x in range(size[0]):
                         for y in range(size[1]):
@@ -2142,9 +2221,10 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                 list.append(layer)
             return list
         elif type == 'perlin':
+            size = vectorize(size)
             list = array(size, 'constant', 0)
             for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
-                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                rNoise = array(ceil(size / Vec3(octave[2], octave[2], octave[2])) + Vec3(2, 2, 2), 'random float', [octave[0], octave[1]])
                 if octave[3] == 'add':
                     for x in range(size[0]):
                         for y in range(size[1]):
@@ -2162,9 +2242,10 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                                 list[x][y][z] = math.mix(noise.perlin3D(rNoise, octave[2], x, y, z), list[x][y][z], octave[4])
             return list
         elif type == 'ridge':
+            size = vectorize(size)
             list = array(size, 'constant', 0)
             for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
-                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                rNoise = array(ceil(size / Vec3(octave[2], octave[2], octave[2])) + Vec3(2, 2, 2), 'random float', [octave[0], octave[1]])
                 if octave[3] == 'add':
                     for x in range(size[0]):
                         for y in range(size[1]):
@@ -2227,9 +2308,10 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                 list.append(layer)
             return list
         elif type == 'perlin':
+            size = vectorize(size)
             list = array(size, 'constant', 0)
             for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
-                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                rNoise = array(ceil(size / Vec4(octave[2], octave[2], octave[2], octave[2])) + Vec4(2, 2, 2, 2), 'random float', [octave[0], octave[1]])
                 if octave[3] == 'add':
                     for x in range(size[0]):
                         for y in range(size[1]):
@@ -2250,9 +2332,10 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
                                     list[x][y][z][w] = math.mix(noise.perlin4D(rNoise, octave[2], x, y, z, w), list[x][y][z][w], octave[4])
             return list
         elif type == 'ridge':
+            size = vectorize(size)
             list = array(size, 'constant', 0)
             for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
-                rNoise = array(size, 'random float', [octave[0], octave[1]])
+                rNoise = array(ceil(size / Vec4(octave[2], octave[2], octave[2], octave[2])) + Vec4(2, 2, 2, 2), 'random float', [octave[0], octave[1]])
                 if octave[3] == 'add':
                     for x in range(size[0]):
                         for y in range(size[1]):
@@ -2277,10 +2360,10 @@ def array(size, type, number):  # atomticaly fills in and array with numbers, th
 
 
 class png:  # a tool to create and read png images
-    def fromArray(list, name):  # converts a 2d array of colors into a png image
+    def fromArray(list: list, name: str) -> im.fromarray:  # converts a 2d array of colors into a png image
         img_w, img_h = [len(list), len(list[0])]
         data = np.zeros((img_h, img_w, 3), dtype=np.uint8)
-        data[100, 100] = [255, 0, 0]  # dont know if this line is needed
+        data[100, 100] = [255, 0, 0]
         
         try:
             list[0][0].rgb
@@ -2296,7 +2379,7 @@ class png:  # a tool to create and read png images
         img.save(name)
         
         return img
-    def getArray(imageFile):  # creates a 2d array of the pixel colors of a png
+    def getArray(imageFile: str) -> list:  # creates a 2d array of the pixel colors of a png
         pygame.init()
         surf = pygame.Surface(Vec2(5000, 3000))
         image = surf.blit(pygame.image.load(imageFile), Vec2(0, 0))
@@ -2310,7 +2393,7 @@ class png:  # a tool to create and read png images
         return newList
 
 
-def vectorize(list):  # converts a list/tuple into a vector
+def vectorize(list: list):  # converts a list/tuple into a vector
     length = len(list)
     if length == 2:
         return Vec2(list[0], list[1])
@@ -2332,9 +2415,9 @@ def copy(vector):  # copys a vector (returns a new vector with the same data as 
 
 
 class txt:  # a text file ateration tool
-    def read(file):  # returns a list of each line in a file
+    def read(file: str) -> None:  # returns a list of each line in a file
         return open(file).read().split('\n')
-    def delete(file, line):  # deltes a line for a file
+    def delete(file: str, line: int) -> None:  # deltes a line for a file
         text = open(file).read().split('\n')
         del text[line]
         newData = ''
@@ -2349,7 +2432,7 @@ class txt:  # a text file ateration tool
 
         with open(file, 'w') as out:
             out.write(newData)
-    def write(file, line, Text):  # writes a new line onto a file
+    def write(file: str, line: int, Text: str) -> None:  # writes a new line onto a file
         text = open(file).read().split('\n')
         text.insert(line, Text)
         text2 = []
