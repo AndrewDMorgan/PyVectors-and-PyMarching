@@ -39,18 +39,18 @@
 
  ## *A Way To Delete txt And png Files*
   > This function will be under the txt and png class named as remove taking in a file name (with .png or .txt)
- ## *Have The Perlin Noise Generator Under The Array Class Not Generate Extra Numbers (a bug fix)*
-  > This will not affect the perlin noise, it will just make it run quicker as it dosent have to generate unused random numbers (there are thousands of extra numbers and generating and creating random numbers in mass amounts in very slow)
- ## *A faster version of perlin noise*
-  > This new version of perlin noise is in the works and will use the math.mix function and the math.smoothstep function to create smooth veriating terrain with less computaional complexity/intensity.
  ## *Smooth min and max functions*
   > This will smoothly get the min/max of two values or a list
- ## *3D and 4D worly and cystal noise*
+ ## *4D worly and cystal noise*
   > I am planning to add 3D and maybe 4D cystal and worly noise. 1D would be the same as linear interpolation and 4D is very complex.
 
 # *New Features:*
 
  ## *Current Commit*
+  
+  > Added 3D crystal and worly noise under the noise class
+
+ ## *Last Commit*
   > Added crystal noise 2D (worly noise where the take the second smallest distance) under the noise class (crystal2D). This new noise type has been fully optimised.
   
   > Added worly noise 2D under the noise class (worly2D). This new noise type has been fully optimised.
@@ -58,21 +58,6 @@
   > Added worly noise under the math class. It calculates worly noise at a single position based on the inputs
   
   > Added crystal noise under the math class. It calculates crystal noise at a single position based on the inputs
-
- ## *Last Commit*
-  > Fixed the length function
-  
-  > Added a map function under the math class taking in a number, min val, max val, new min, new max
-  
-  > Fixed the vectorize function
-  
-  > Fixed the clamp, min and max (1D - 4D) functions under the lists class. They now take in one list and the rest intagers/floats
-  
-  > Fixed the smoothstep function under the math class
-  
-  > Added a gradeL function to the number, vector and color gradient classes (liniearly interplates instead of using a smoothstep for curvature)
-  
-  > Changed the grade function for number, vector and color gradients to use non linear interpolation.
 
 # *Info On All The Functions/Classes:*
 
@@ -260,6 +245,10 @@
    > Creates noise with a crystal look. Takes in a size (vec2), a scale, and optionaly a min and max size (the defualt is -1 - 1)
    > ## *worly2D*
    > Creates noise with a worly look. Takes in a size (vec2), a scale, and optionaly a min and max size (the defualt is -1 - 1)
+   > ## *crystal3D*
+   > Same as the 2D veriant but takes in a vec3 instead of vec2 for size
+   > ## *worly3D*
+   > Same as the 2D veriant but takes in a vec3 instead of vec2 for size
 ## *array*
 Returns a filled in array that can be constant, random int, random float or perlin. Takes in a size (vec2, vec3, vec4, tuple and lists work), the type of fill (constant, random int, random float or perlin) and the data for the type in a list, vector or tuple (constant; number (not in list), random int; min, max, random float; min, max, perlin; list of octaves (min 1 octave max inf octaves) each being the following; min, max, distance between points, type (add, sub or mix), if using mix then add the percentage (0 - 1) to mix by, ridge; same as perlin but is ridge noise meaning theres a buch of ridges but still veriation (abs(perlin noise) * -1 = ridge noise))
 ## *png*
