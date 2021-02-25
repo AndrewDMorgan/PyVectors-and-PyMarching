@@ -2096,7 +2096,7 @@ def array(size, type: str, number) -> list:  # atomticaly fills in and array wit
         elif type == 'perlin':
             list = array(size, 'constant', 0)
             for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
-                rNoise = array(math.ceil(size[0] / octave[2]) + 2, 'random float', [octave[0], octave[1]])
+                rNoise = array([math.ceil(size[0] / octave[2]) + 2], 'random float', [octave[0], octave[1]])
                 if octave[3] == 'add':
                     for x in range(size[0]):
                         list[x] = noise.perlin1D(rNoise, octave[2], x) + list[x]
@@ -2110,7 +2110,7 @@ def array(size, type: str, number) -> list:  # atomticaly fills in and array wit
         elif type == 'ridge':
             list = array(size, 'constant', 0)
             for octave in number:  # [[min, max, h, octave alteration method, (if using mix) mix amount (0 - 1)], nextOctaveSameAsLast]
-                rNoise = array(math.ceil(size[0] / octave[2]) + 2, 'random float', [octave[0], octave[1]])
+                rNoise = array([math.ceil(size[0] / octave[2]) + 2], 'random float', [octave[0], octave[1]])
                 if octave[3] == 'add':
                     for x in range(size[0]):
                         list[x] = noise.ridge1D(rNoise, octave[2], x) + list[x]
@@ -2380,7 +2380,6 @@ class png:  # a tool to create and read png images
         
         return img
     def getArray(imageFile: str) -> list:  # creates a 2d array of the pixel colors of a png
-        pygame.init()
         surf = pygame.Surface(Vec2(5000, 3000))
         image = surf.blit(pygame.image.load(imageFile), Vec2(0, 0))
         size = Vec2(image.size[0], image.size[1])
@@ -2389,7 +2388,6 @@ class png:  # a tool to create and read png images
             for y in range(size.y):
                 newList[x][y] = surf.get_at((x, y))
                 newList[x][y] = Vec4(newList[x][y][0], newList[x][y][1], newList[x][y][2], newList[x][y][3])
-        pygame.quit()
         return newList
 
 
@@ -2415,7 +2413,7 @@ def copy(vector):  # copys a vector (returns a new vector with the same data as 
 
 
 class txt:  # a text file ateration tool
-    def read(file: str) -> None:  # returns a list of each line in a file
+    def read(file: str) -> list:  # returns a list of each line in a file
         return open(file).read().split('\n')
     def delete(file: str, line: int) -> None:  # deltes a line for a file
         text = open(file).read().split('\n')
