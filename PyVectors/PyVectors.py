@@ -1979,7 +1979,7 @@ class gradient:  # a way to make gradients that specifies what they are being us
 #-----------------------------------------NOISE FUNCTOINS-----------------------------------------
 
 class noise:  # contains perlin noise functions that take in a list of random numbers thats the same dimention as the function, than the x, y, z, and w (only put the one that belong there for the demention of the function) and finaly the distance between points
-    def perlin1D(noise: list, x, h) -> float:  # smoothly interpolates at a point between other points on a 1D list
+    def perlin1D(noise: list, h, x) -> float:  # smoothly interpolates at a point between other points on a 1D list
         nx = x / h
         p1 = math.floor(nx)
         p2 = p1 + 1
@@ -1997,7 +1997,7 @@ class noise:  # contains perlin noise functions that take in a list of random nu
         q4 = ttt - tt
         ty = 0.5 * (noise[p0] * q1 + noise[p1] * q2 + noise[p2] * q3 + noise[p3] * q4)
         return ty
-    def perlin2D(self, noise: list, x, y, h) -> float:  # smoothly interpolates at a point between other points on a 2D list
+    def perlin2D(self, noise: list, h, x, y) -> float:  # smoothly interpolates at a point between other points on a 2D list
         nx = x / h
         i = math.floor(nx)
         ty1 = self.perlin1D(noise[i - 1], y, h)
@@ -2005,7 +2005,7 @@ class noise:  # contains perlin noise functions that take in a list of random nu
         ty3 = self.perlin1D(noise[i + 1], y, h)
         ty4 = self.perlin1D(noise[i + 2], y, h)
         return self.perlin1D([ty1, ty2, ty3, ty4], (nx - i) * h + h, h)
-    def perlin3D(self, noise: list, x, y, z, h) -> float:  # smoothly interpolates at a point between other points on a 3D list
+    def perlin3D(self, noise: list, h, x, y, z) -> float:  # smoothly interpolates at a point between other points on a 3D list
         nx = x / h
         i = math.floor(nx)
         ty1 = self.perlin2D(noise[i - 1], y, z, h)
@@ -2013,7 +2013,7 @@ class noise:  # contains perlin noise functions that take in a list of random nu
         ty3 = self.perlin2D(noise[i + 1], y, z, h)
         ty4 = self.perlin2D(noise[i + 2], y, z, h)
         return self.perlin1D([ty1, ty2, ty3, ty4], (nx - i) * h + h, h)
-    def perlin4D(self, noise: list, x, y, z, w, h) -> float:  # this is untested but should work and smoothly interpolates at a point between other points on a 4D list
+    def perlin4D(self, noise: list, h, x, y, z, w) -> float:  # this is untested but should work and smoothly interpolates at a point between other points on a 4D list
         nx = x / h
         i = math.floor(nx)
         ty1 = self.perlin3D(noise[i - 1], y, z, w, h)
