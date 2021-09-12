@@ -1,9 +1,7 @@
-from os import name
 from typing import Union, NewType, Tuple, List  # for creating/using types for better documentation
 import numpy as np  # importing numpy to allow creation of png's unsing PIL (png.fromArray)
 from PIL import Image as im  # importing PIL to create png's (png.fromArray)
-import random, pygame
-from numpy.lib.type_check import nan_to_num  # importing random for perlin noise (noise.perlin or noise.ridge) and more and importing pygame to get the colors of a png (png.getArray)
+import random, pygame  # importing random for perlin noise (noise.perlin or noise.ridge) and more and importing pygame to get the colors of a png (png.getArray)
 import threading  # for casting threads (for the pythreading disperse method)
 import math  # importing the pyMath library to add cos, sin, sqrt, ect... (pyMath.pyMathType)
 
