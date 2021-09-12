@@ -1,7 +1,9 @@
+from os import name
 from typing import Union, NewType, Tuple, List  # for creating/using types for better documentation
 import numpy as np  # importing numpy to allow creation of png's unsing PIL (png.fromArray)
 from PIL import Image as im  # importing PIL to create png's (png.fromArray)
-import random, pygame  # importing random for perlin noise (noise.perlin or noise.ridge) and more and importing pygame to get the colors of a png (png.getArray)
+import random, pygame
+from numpy.lib.type_check import nan_to_num  # importing random for perlin noise (noise.perlin or noise.ridge) and more and importing pygame to get the colors of a png (png.getArray)
 import threading  # for casting threads (for the pythreading disperse method)
 import math  # importing the pyMath library to add cos, sin, sqrt, ect... (pyMath.pyMathType)
 
@@ -1997,46 +1999,46 @@ class noise:  # contains perlin noise functions that take in a list of random nu
         q4 = ttt - tt
         ty = 0.5 * (noise[p0] * q1 + noise[p1] * q2 + noise[p2] * q3 + noise[p3] * q4)
         return ty
-    def perlin2D(self, noise: list, h, x, y) -> float:  # smoothly interpolates at a point between other points on a 2D list
+    def perlin2D(noise_array: list, h, x, y) -> float:  # smoothly interpolates at a point between other points on a 2D list
         nx = x / h
         i = math.floor(nx)
-        ty1 = self.perlin1D(noise[i - 1], y, h)
-        ty2 = self.perlin1D(noise[i    ], y, h)
-        ty3 = self.perlin1D(noise[i + 1], y, h)
-        ty4 = self.perlin1D(noise[i + 2], y, h)
-        return self.perlin1D([ty1, ty2, ty3, ty4], (nx - i) * h + h, h)
-    def perlin3D(self, noise: list, h, x, y, z) -> float:  # smoothly interpolates at a point between other points on a 3D list
+        ty1 = noise.perlin1D(noise_array[i - 1], h, y)
+        ty2 = noise.perlin1D(noise_array[i    ], h, y)
+        ty3 = noise.perlin1D(noise_array[i + 1], h, y)
+        ty4 = noise.perlin1D(noise_array[i + 2], h, y)
+        return noise.perlin1D([ty1, ty2, ty3, ty4], h, (nx - i) * h + h)
+    def perlin3D(noise_array: list, h, x, y, z) -> float:  # smoothly interpolates at a point between other points on a 3D list
         nx = x / h
         i = math.floor(nx)
-        ty1 = self.perlin2D(noise[i - 1], y, z, h)
-        ty2 = self.perlin2D(noise[i    ], y, z, h)
-        ty3 = self.perlin2D(noise[i + 1], y, z, h)
-        ty4 = self.perlin2D(noise[i + 2], y, z, h)
-        return self.perlin1D([ty1, ty2, ty3, ty4], (nx - i) * h + h, h)
-    def perlin4D(self, noise: list, h, x, y, z, w) -> float:  # this is untested but should work and smoothly interpolates at a point between other points on a 4D list
+        ty1 = noise.perlin2D(noise_array[i - 1], h, y, z)
+        ty2 = noise.perlin2D(noise_array[i    ], h, y, z)
+        ty3 = noise.perlin2D(noise_array[i + 1], h, y, z)
+        ty4 = noise.perlin2D(noise_array[i + 2], h, y, z)
+        return noise.perlin1D([ty1, ty2, ty3, ty4], h, (nx - i) * h + h)
+    def perlin4D(noise_array: list, h, x, y, z, w) -> float:  # this is untested but should work and smoothly interpolates at a point between other points on a 4D list
         nx = x / h
         i = math.floor(nx)
-        ty1 = self.perlin3D(noise[i - 1], y, z, w, h)
-        ty2 = self.perlin3D(noise[i    ], y, z, w, h)
-        ty3 = self.perlin3D(noise[i + 1], y, z, w, h)
-        ty4 = self.perlin3D(noise[i + 2], y, z, w, h)
-        return self.perlin1D([ty1, ty2, ty3, ty4], (nx - i) * h + h, h)
-    def ridge1D(self, randNoise: list, h, x) -> float:  # ridge noise aka perlin noise with abrupt ridges (like that of mountains)
-        noise = self.spline1D(randNoise, x, h)
-        noise = 1 - abs(noise)
-        return noise
-    def ridge2D(self, randNoise: list, h, x, y) -> float:
-        noise = self.spline2D(randNoise, x, y, h)
-        noise = 1 - abs(noise)
-        return noise
-    def ridge3D(self, randNoise: list, h, x, y, z) -> float:
-        noise = self.spline3D(randNoise, x, y, z, h)
-        noise = 1 - abs(noise)
-        return noise
-    def ridge4D(self, randNoise: list, h, x, y, z, w) -> float:
-        noise = self.spline4D(randNoise, x, y, z, w, h)
-        noise = 1 - abs(noise)
-        return noise
+        ty1 = noise.perlin3D(noise_array[i - 1], h, y, z, w)
+        ty2 = noise.perlin3D(noise_array[i    ], h, y, z, w)
+        ty3 = noise.perlin3D(noise_array[i + 1], h, y, z, w)
+        ty4 = noise.perlin3D(noise_array[i + 2], h, y, z, w)
+        return noise.perlin1D([ty1, ty2, ty3, ty4], h, (nx - i) * h + h)
+    def ridge1D(randNoise: list, h, x) -> float:  # ridge noise aka perlin noise with abrupt ridges (like that of mountains)
+        n = noise.perlin1D(randNoise, h, x)
+        n = 1 - abs(n)
+        return n
+    def ridge2D(randNoise: list, h, x, y) -> float:
+        n = noise.perlin2D(randNoise, h, x, y)
+        n = 1 - abs(n)
+        return n
+    def ridge3D(randNoise: list, h, x, y, z) -> float:
+        n = noise.perlin3D(randNoise, h, x, y, z)
+        n = 1 - abs(n)
+        return n
+    def ridge4D(randNoise: list, h, x, y, z, w) -> float:
+        n = noise.perlin4D(randNoise, h, x, y, z, w)
+        n = 1 - abs(n)
+        return n
     def crystal2D(size: Vec2, scale: float, minHeight: float = -1, maxHeight: float = 1) -> list:  # a crystaly noise pattern (generates hole list)
         scale = Vec2(scale, scale)
         cells = ceil(size / scale)
